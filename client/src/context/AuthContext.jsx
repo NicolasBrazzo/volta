@@ -1,7 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import api from "../api/client";
+import { showError } from "../utils/toast";
 
 const AuthContext = createContext(null);
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
@@ -11,8 +14,23 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  // Controllo adeguato al backend
   const checkAuth = async () => {
+    // 1. Controlla se c'è un token nella URL (ritorno da Google OAuth)
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromUrl = params.get("token");
+    const errorFromUrl = params.get("error");
+
+    if (errorFromUrl) {
+      showError("Autenticazione con Google fallita. Riprova.");
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+
+    if (tokenFromUrl) {
+      localStorage.setItem("token", tokenFromUrl);
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+
+    // 2. Controlla se c'è un token in localStorage
     const token = localStorage.getItem("token");
     if (!token) {
       setUser(null);
@@ -20,14 +38,12 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
-    // DA RIVEDERE
+    // 3. Verifica il token con il backend
     try {
       const res = await api.get("/auth/me");
-      console.log(res);
       if (res.data.user) {
         const u = res.data.user;
-        // Da modificare
-        setUser({ id: u.sub, email: u.email, isAdmin: u.isAdmin });
+        setUser({ id: u.sub, email: u.email, slug: u.slug });
       } else {
         localStorage.removeItem("token");
         setUser(null);
@@ -41,18 +57,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (credentials) => {
-    try {
-      const res = await api.post("/auth/login", credentials);
-      if (res.data.ok && res.data.token) {;
-        localStorage.setItem("token", res.data.token);
-        await checkAuth();
-        return { ok: true, message: "Login success" };
-      }
-      return { ok: false, message: res.data?.error || "Login failed" };
-    } catch (err) {
-      return { ok: false, message: err.message };
-    }
+  const loginWithGoogle = () => {
+    window.location.href = `${API_URL}/auth/google`;
   };
 
   const logout = async () => {
@@ -66,7 +72,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );

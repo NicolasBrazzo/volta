@@ -1,6 +1,6 @@
 const supabase = require("../config/db_connection");
 
-const TABLE = "BF_Services";
+const TABLE = "bf_services";
 
 // Lista servizi di un professionista
 const findByProfessionalId = async (professionalId) => {

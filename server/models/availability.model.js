@@ -1,6 +1,6 @@
 const supabase = require("../config/db_connection");
 
-const TABLE = "BF_Availability";
+const TABLE = "bf_availability";
 
 // Disponibilità settimanale di un professionista
 const findByProfessionalId = async (professionalId) => {

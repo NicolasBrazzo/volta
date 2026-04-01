@@ -1,4 +1,34 @@
 // Google Calendar API v3 integration
+
+const { createOAuth2Client } = require("../config/google");
+const Freelancer = require("../models/freelancer.model");
+
+// Crea un client OAuth2 autenticato con i token del freelancer.
+// Gestisce automaticamente il refresh del token.
+function getAuthenticatedClient(freelancer) {
+  const oauth2Client = createOAuth2Client();
+
+  oauth2Client.setCredentials({
+    access_token: freelancer.google_access_token,
+    refresh_token: freelancer.google_refresh_token,
+  });
+
+  // Quando Google rinnova automaticamente l'access_token, lo salviamo in DB
+  oauth2Client.on("tokens", async (tokens) => {
+    if (tokens.access_token) {
+      try {
+        await Freelancer.updateById(freelancer.id, {
+          google_access_token: tokens.access_token,
+        });
+      } catch (err) {
+        console.error("Failed to persist refreshed access token:", err);
+      }
+    }
+  });
+
+  return oauth2Client;
+}
+
 // TODO: implementare
 
 // createCalendarEvent(professional, booking, service)
@@ -16,6 +46,7 @@
 // - Usato per calcolare gli slot disponibili
 
 module.exports = {
+  getAuthenticatedClient,
   // createCalendarEvent,
   // deleteCalendarEvent,
   // getCalendarEvents,

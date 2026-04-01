@@ -1,6 +1,6 @@
 const supabase = require("../config/db_connection");
 
-const TABLE = "BF_Freelancers";
+const TABLE = "bf_freelancers";
 
 // Trova freelancer per email
 const findByEmail = async (email) => {
@@ -61,6 +61,13 @@ const updateById = async (id, updates) => {
 
   if (error) throw new Error("DB_UPDATE_FREELANCER_ERROR");
   return data;
+};
+
+// Elimina freelancer
+const deleteById = async (id) => {
+  const { error } = await supabase.from(TABLE).delete().eq("id", id);
+  if (error) throw new Error("DB_DELETE_FREELANCER_ERROR");
+  return true;
 };
 
 module.exports = {
