@@ -4,8 +4,6 @@ const supabase = require("../config/db_connection");
 const { google } = require("googleapis");
 
 const Freelancer = require("../models/freelancer.model");
-const Services = require("../models/services.model");
-const Availability = require("../models/availability.model");
 const protect = require("../middleware/auth");
 
 const { JWT_SECRET, JWT_EXPIRES_IN } = require("../config/jwt");
@@ -39,50 +37,6 @@ async function generateUniqueSlug(firstName, lastName) {
   return slug;
 }
 
-// ── Seed data per la prima registrazione ─────────────────────────
-async function seedDefaults(professionalId) {
-  const defaultServices = [
-    {
-      professional_id: professionalId,
-      name: "Consulenza base",
-      description: "Sessione introduttiva",
-      duration_minutes: 30,
-      price: 50,
-      color: "#3B82F6",
-      is_active: true,
-    },
-    {
-      professional_id: professionalId,
-      name: "Consulenza approfondita",
-      description: "Analisi dettagliata",
-      duration_minutes: 60,
-      price: 90,
-      color: "#8B5CF6",
-      is_active: true,
-    },
-    {
-      professional_id: professionalId,
-      name: "Sessione completa",
-      description: "Percorso completo",
-      duration_minutes: 90,
-      price: 120,
-      color: "#10B981",
-      is_active: true,
-    },
-  ];
-
-  const defaultAvailability = [0, 1, 2, 3, 4, 5, 6].map((day) => ({
-    professional_id: professionalId,
-    day_of_week: day,
-    start_time: "09:00",
-    end_time: "18:00",
-    is_active: day >= 1 && day <= 5,
-  }));
-
-  await Promise.all(defaultServices.map((s) => Services.create(s)));
-  await Availability.upsert(defaultAvailability);
-}
-
 // ── GET /auth/google — Redirect a Google OAuth ───────────────────
 router.get("/google", (req, res) => {
   const oauth2Client = createOAuth2Client();
@@ -109,7 +63,6 @@ router.get("/google/callback", async (req, res) => {
 
     // Scambia il codice per i token
     const { tokens } = await oauth2Client.getToken(code);
-    console.log("GOOGLE TOKENS:", tokens);
     oauth2Client.setCredentials(tokens);
 
     // Ottieni profilo utente da Google
@@ -164,8 +117,17 @@ router.get("/google/callback", async (req, res) => {
 });
 
 // ── GET /auth/me — Profilo autenticato ───────────────────────────
-router.get("/me", protect, (req, res) => {
-  return res.json({ ok: true, user: req.user });
+router.get("/me", protect, async (req, res) => {
+  try {
+    const freelancer = await Freelancer.findById(req.user.sub);
+    if (!freelancer) {
+      return res.status(404).json({ ok: false, error: "Utente non trovato" });
+    }
+    return res.json({ ok: true, user: freelancer });
+  } catch (err) {
+    console.error("GET PROFILE ERROR:", err);
+    res.status(500).json({ ok: false, error: "Errore recupero profilo" });
+  }
 });
 
 // ── POST /auth/logout ────────────────────────────────────────────
@@ -173,11 +135,25 @@ router.post("/logout", (req, res) => {
   return res.json({ ok: true });
 });
 
+// ── PUT /auth/profile — Aggiorna profilo freelancer ─────────────
+router.put("/profile", protect, async (req, res) => {
+  try {
+    const { business_name, description, business_type } = req.body;
+    const updated = await Freelancer.updateById(req.user.sub, {
+      business_name,
+      description,
+      business_type,
+    });
+    res.json({ ok: true, data: updated });
+  } catch (err) {
+    console.error("UPDATE PROFILE ERROR:", err);
+    res.status(500).json({ ok: false, error: "Errore aggiornamento profilo" });
+  }
+});
+
 router.get("/firstAccess", protect, async (req, res) => {
   try {
-    const freelancerId = req.user.id;
-    // const services = await Services.findByProfessionalId(freelancerId);
-    // const availability = await Availability.findByProfessionalId(freelancerId);
+    const freelancerId = req.user.sub;
 
     const { data: servicesData } = await supabase
       .from("bf_services")
@@ -185,16 +161,20 @@ router.get("/firstAccess", protect, async (req, res) => {
       .eq("professional_id", freelancerId)
       .order("created_at", { ascending: true });
 
-    const { data: availabilityData } =
-      await supabase
-        .from("bf_availability")
-        .select("*")
-        .eq("professional_id", freelancerId)
-        .order("day_of_week", { ascending: true });
+    const { data: freelanceData } = await supabase
+      .from("bf_freelancers")
+      .select("business_name, business_type, description")
+      .eq("id", freelancerId)
+      .maybeSingle();
 
-    const isFirstAccess =
-      (!servicesData || servicesData.length === 0) &&
-      (!availabilityData || availabilityData.length === 0);
+    const profileComplete =
+      freelanceData?.business_name &&
+      freelanceData?.business_type &&
+      freelanceData?.description;
+
+    const hasServices = servicesData && servicesData.length > 0;
+
+    const isFirstAccess = !profileComplete || !hasServices;
 
     res.json({ ok: true, firstAccess: isFirstAccess });
   } catch (err) {

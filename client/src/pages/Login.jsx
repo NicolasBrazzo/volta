@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Button } from "@/components/ui/button";
-import Loader from "../components/Loader";
+import { Loader } from "@/components/Loader";
 
 export const Login = () => {
   const { user, loading, loginWithGoogle } = useAuth();

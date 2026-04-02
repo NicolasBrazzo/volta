@@ -11,6 +11,7 @@ import { BookingPublic } from "./pages/BookingPublic.jsx";
 import { AppLayout } from "./layouts/AppLayout.jsx";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CreateFreelanceProfile } from "./pages/CreateFreelanceProfile.jsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route element={<AppLayout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/first-access" element={<CreateFreelanceProfile />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/availability" element={<Availability />} />
                   <Route path="/bookings" element={<Bookings />} />

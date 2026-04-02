@@ -1,4 +1,4 @@
-const Loader = ({ 
+export const Loader = ({ 
   size = 'medium', 
   color = '#3b82f6',
   text = '',
@@ -32,5 +32,3 @@ const Loader = ({
     </div>
   );
 };
-
-export default Loader;

@@ -18,6 +18,7 @@ create table BF_Freelancers (
   first_name           text not null,
   last_name            text not null,
   business_name        text,
+  business_type        text,
   description          text,
   profile_image        text,
   google_access_token  text,
