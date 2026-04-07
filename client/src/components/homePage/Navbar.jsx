@@ -1,28 +1,28 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Menu, Sun, Moon } from 'lucide-react'
-import logoWhite from '@/assets/logoWhite.png'
-import logoBlack from '@/assets/logoBlack.png'
-import { useDarkMode } from '@/hooks/useDarkMode'
-import { Button } from '@/components/ui/button'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, Sun, Moon } from "lucide-react";
+import logoWhite from "@/assets/logoWhite.png";
+import logoBlack from "@/assets/logoBlack.png";
+import { useDarkMode } from "@/hooks/useDarkMode";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet'
-import { cn } from '@/lib/utils'
+} from "@/components/ui/sheet";
+import { cn } from "@/utils/cnFunc";
 
 const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Come funziona', href: '#come-funziona' },
-  { label: 'Prezzi', href: '#prezzi' },
-]
+  { label: "Features", href: "#features" },
+  { label: "Come funziona", href: "#come-funziona" },
+  { label: "Prezzi", href: "#prezzi" },
+];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
-  const { isDark, toggle } = useDarkMode()
+  const [open, setOpen] = useState(false);
+  const { isDark, toggle } = useDarkMode();
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-neutral-900/80 border-b border-neutral-100 dark:border-neutral-800">
@@ -32,7 +32,11 @@ export default function Navbar() {
           href="#"
           className="flex items-center gap-2 font-bold text-xl text-neutral-900 dark:text-white hover:opacity-80 transition-opacity"
         >
-          <img src={isDark ? logoBlack : logoWhite} alt="Booking Freelance" className="h-10 w-auto" />
+          <img
+            src={isDark ? logoBlack : logoWhite}
+            alt="Booking Freelance"
+            className="h-10 w-auto"
+          />
           <span>Booking Freelance</span>
         </a>
 
@@ -53,10 +57,14 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <button
             onClick={toggle}
-            aria-label={isDark ? 'Attiva modalità chiara' : 'Attiva modalità scura'}
+            aria-label={
+              isDark ? "Attiva modalità chiara" : "Attiva modalità scura"
+            }
             className="p-2 rounded-md text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           >
-            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {isDark ?
+              <Sun className="w-4 h-4" />
+            : <Moon className="w-4 h-4" />}
           </button>
           <Button variant="ghost" size="sm" asChild>
             <Link to="/login">Accedi</Link>
@@ -70,10 +78,14 @@ export default function Navbar() {
         <div className="flex md:hidden items-center gap-2">
           <button
             onClick={toggle}
-            aria-label={isDark ? 'Attiva modalità chiara' : 'Attiva modalità scura'}
+            aria-label={
+              isDark ? "Attiva modalità chiara" : "Attiva modalità scura"
+            }
             className="p-2 rounded-md text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           >
-            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {isDark ?
+              <Sun className="w-4 h-4" />
+            : <Moon className="w-4 h-4" />}
           </button>
           <Button variant="ghost" size="sm" className="text-xs px-3" asChild>
             <Link to="/dashboard">Accedi</Link>
@@ -85,7 +97,7 @@ export default function Navbar() {
             <SheetTrigger asChild>
               <button
                 className={cn(
-                  'ml-1 p-2 rounded-md text-neutral-600 hover:bg-neutral-100 transition-colors',
+                  "ml-1 p-2 rounded-md text-neutral-600 hover:bg-neutral-100 transition-colors",
                 )}
                 aria-label="Apri menu"
               >
@@ -116,9 +128,9 @@ export default function Navbar() {
                 ))}
               </nav>
             </SheetContent>
-          </Sheet>  
+          </Sheet>
         </div>
       </div>
     </header>
-  )
+  );
 }

@@ -6,6 +6,7 @@ import { Dashboard } from "./pages/Dashboard.jsx";
 import { Services } from "./pages/Services.jsx";
 import { Availability } from "./pages/Availability.jsx";
 import { Bookings } from "./pages/Bookings.jsx";
+import { BookingDetails } from "./pages/BookingDetails.jsx";
 import { Settings } from "./pages/Settings.jsx";
 import { BookingPublic } from "./pages/BookingPublic.jsx";
 import { AppLayout } from "./layouts/AppLayout.jsx";
@@ -38,6 +39,7 @@ function App() {
                     <Route path="/services" element={<Services />} />
                     <Route path="/availability" element={<Availability />} />
                     <Route path="/bookings" element={<Bookings />} />
+                    <Route path="/bookings/:id" element={<BookingDetails />} />
                     <Route path="/settings" element={<Settings />} />
                   </Route>
                 </Route>

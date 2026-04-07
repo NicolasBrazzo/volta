@@ -82,5 +82,8 @@ export const useCreateFreelanceProfile = () => {
     }
   };
 
-  return { profile, setProfile, service, setService, isSubmitting, isLoading, handleSubmit };
+  const onProfileChange = (key, value) => setProfile((p) => ({ ...p, [key]: value }));
+  const onServiceChange = (key, value) => setService((s) => ({ ...s, [key]: value }));
+
+  return { profile, service, onProfileChange, onServiceChange, isSubmitting, isLoading, handleSubmit };
 };

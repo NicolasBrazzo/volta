@@ -2,8 +2,8 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/Loader";
 import Modal from "@/components/Modal";
-import ServiceCard from "@/components/ServiceCard";
-import ServiceForm from "@/components/ServiceForm";
+import ServiceCard from "@/components/servicePage/ServiceCard";
+import ServiceForm from "@/components/servicePage/ServiceForm";
 import { useServices } from "@/hooks/useServices";
 
 export const Services = () => {

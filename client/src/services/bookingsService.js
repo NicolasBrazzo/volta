@@ -2,13 +2,34 @@ import api from "../api/client";
 
 // Lista prenotazioni (con filtro opzionale per status)
 export const fetchBookings = async (status = null) => {
-  const params = status ? { status } : {};
-  const res = await api.get("/api/bookings", { params });
-  return res.data;
+  try {
+    const params = status ? { status } : {};
+    const res = await api.get("/api/bookings", { params });
+    return res.data;
+  } catch (error) {
+    console.error("Errore durante il recupero delle prenotazioni:", error);
+    throw error;
+  }
+};
+
+// Dettaglio singola prenotazione
+export const fetchBookingById = async (id) => {
+  try {
+    const res = await api.get(`/api/bookings/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Errore durante il recupero della prenotazione:", error);
+    throw error;
+  }
 };
 
 // Cancella prenotazione
 export const deleteBooking = async (id) => {
-  const res = await api.delete(`/api/bookings/${id}`);
-  return res.data;
+  try {
+    const res = await api.delete(`/api/bookings/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Errore durante la cancellazione della prenotazione:", error);
+    throw error;
+  }
 };

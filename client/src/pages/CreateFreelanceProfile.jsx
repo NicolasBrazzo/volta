@@ -11,25 +11,16 @@ import { useCreateFreelanceProfile } from "@/hooks/useCreateFreelanceProfile";
 export const CreateFreelanceProfile = () => {
   const {
     profile,
-    setProfile,
     service,
-    setService,
+    onProfileChange,
+    onServiceChange,
     isSubmitting,
     isLoading,
     handleSubmit,
   } = useCreateFreelanceProfile();
 
-  const handleProfileChange = (key, value) =>
-    setProfile((p) => ({ ...p, [key]: value }));
-  const handleServiceChange = (key, value) =>
-    setService((s) => ({ ...s, [key]: value }));
-
   if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader />
-      </div>
-    );
+    return <Loader fullScreen />;
   }
 
   return (
@@ -58,9 +49,7 @@ export const CreateFreelanceProfile = () => {
                 id="business_name"
                 placeholder="Es. Studio Mario Rossi"
                 value={profile.business_name}
-                onChange={(e) =>
-                  handleProfileChange("business_name", e.target.value)
-                }
+                onChange={(e) => onProfileChange("business_name", e.target.value)}
               />
             </div>
 
@@ -71,9 +60,7 @@ export const CreateFreelanceProfile = () => {
                 placeholder="Descrivi brevemente la tua attività..."
                 rows={3}
                 value={profile.description}
-                onChange={(e) =>
-                  handleProfileChange("description", e.target.value)
-                }
+                onChange={(e) => onProfileChange("description", e.target.value)}
               />
             </div>
 
@@ -82,9 +69,7 @@ export const CreateFreelanceProfile = () => {
               <Select
                 id="business_type"
                 value={profile.business_type}
-                onChange={(e) =>
-                  handleProfileChange("business_type", e.target.value)
-                }
+                onChange={(e) => onProfileChange("business_type", e.target.value)}
               >
                 <option value="">Seleziona una tipologia</option>
                 {BUSINESS_TYPES.map((type) => (
@@ -111,7 +96,7 @@ export const CreateFreelanceProfile = () => {
                 id="service_name"
                 placeholder="Es. Consulenza base"
                 value={service.name}
-                onChange={(e) => handleServiceChange("name", e.target.value)}
+                onChange={(e) => onServiceChange("name", e.target.value)}
               />
             </div>
 
@@ -122,9 +107,7 @@ export const CreateFreelanceProfile = () => {
                 placeholder="Descrivi il servizio offerto..."
                 rows={2}
                 value={service.description}
-                onChange={(e) =>
-                  handleServiceChange("description", e.target.value)
-                }
+                onChange={(e) => onServiceChange("description", e.target.value)}
               />
             </div>
 
@@ -140,9 +123,7 @@ export const CreateFreelanceProfile = () => {
                   step="5"
                   placeholder="30"
                   value={service.duration_minutes}
-                  onChange={(e) =>
-                    handleServiceChange("duration_minutes", e.target.value)
-                  }
+                  onChange={(e) => onServiceChange("duration_minutes", e.target.value)}
                 />
               </div>
 
@@ -157,7 +138,7 @@ export const CreateFreelanceProfile = () => {
                   step="0.01"
                   placeholder="50.00"
                   value={service.price}
-                  onChange={(e) => handleServiceChange("price", e.target.value)}
+                  onChange={(e) => onServiceChange("price", e.target.value)}
                 />
               </div>
             </div>
@@ -169,9 +150,7 @@ export const CreateFreelanceProfile = () => {
             size="lg"
             disabled={isSubmitting}
           >
-            {isSubmitting ?
-              <Loader size="sm" />
-            : "Completa configurazione"}
+            {isSubmitting ? <Loader size="sm" /> : "Completa configurazione"}
           </Button>
         </form>
       </div>

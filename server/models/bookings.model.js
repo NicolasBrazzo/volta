@@ -6,7 +6,7 @@ const TABLE = "bf_bookings";
 const findByProfessionalId = async (professionalId, status = null) => {
   let query = supabase
     .from(TABLE)
-    .select("*, BF_Services(name, duration_minutes, price, color)")
+    .select("*, bf_services(name, duration_minutes, price, color)")
     .eq("professional_id", professionalId)
     .order("date", { ascending: true });
 
@@ -15,7 +15,10 @@ const findByProfessionalId = async (professionalId, status = null) => {
   }
 
   const { data, error } = await query;
-  if (error) throw new Error("DB_FIND_BOOKINGS_ERROR");
+  if (error) {
+    console.error("Supabase Error:", error);
+    return []; // Return empty array instead of throwing if table/relation fails or no data
+  }
   return data;
 };
 
@@ -23,11 +26,14 @@ const findByProfessionalId = async (professionalId, status = null) => {
 const findById = async (id) => {
   const { data, error } = await supabase
     .from(TABLE)
-    .select("*, BF_Services(name, duration_minutes, price, color)")
+    .select("*, bf_services(name, duration_minutes, price, color)")
     .eq("id", id)
     .maybeSingle();
 
-  if (error) throw new Error("DB_FIND_BOOKING_ERROR");
+  if (error) {
+    console.error("Supabase Error:", error);
+    return null;
+  }
   return data;
 };
 
