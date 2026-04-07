@@ -1,49 +1,9 @@
 import { motion } from 'framer-motion'
-import { LogIn, CalendarCheck, Link2, Briefcase, Clock, BarChart2 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { fadeInUp, stagger } from '@/constants/animations'
+import { features } from '@/constants/homePage'
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-}
-
-const features = [
-  {
-    icon: LogIn,
-    title: 'Login con Google',
-    desc: 'Registrati in un click. Il tuo workspace viene creato automaticamente.',
-  },
-  {
-    icon: CalendarCheck,
-    title: 'Sync Google Calendar',
-    desc: 'Appuntamenti sincronizzati in tempo reale, solo nel tuo tenant.',
-  },
-  {
-    icon: Link2,
-    title: 'Link di prenotazione',
-    desc: 'Un URL unico. I clienti vedono solo te, non gli altri utenti.',
-  },
-  {
-    icon: Briefcase,
-    title: 'Gestione Servizi',
-    desc: 'Aggiungi servizi con durata e prezzo nel tuo spazio personale.',
-  },
-  {
-    icon: Clock,
-    title: 'Gestione Disponibilità',
-    desc: 'Orari, pause e giorni di chiusura. Ogni tenant indipendente.',
-  },
-  {
-    icon: BarChart2,
-    title: 'Reportistica',
-    desc: 'Grafici e dati esclusivi del tuo workspace. Decidi con i numeri.',
-  },
-]
+const sectionStagger = stagger(0.08)
 
 export default function Features() {
   return (
@@ -65,7 +25,7 @@ export default function Features() {
         </motion.div>
 
         <motion.div
-          variants={stagger}
+          variants={sectionStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

@@ -1,32 +1,8 @@
 import { motion } from 'framer-motion'
+import { fadeInUp, stagger } from '@/constants/animations'
+import { steps } from '@/constants/homePage'
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-}
-
-const steps = [
-  {
-    number: '1',
-    title: 'Registrati con Google',
-    desc: 'Un click con il tuo account Google e il tuo workspace personale viene creato istantaneamente. Nessun form, nessuna configurazione tecnica.',
-  },
-  {
-    number: '2',
-    title: 'Configura il tuo spazio',
-    desc: 'Inserisci i tuoi servizi, imposta gli orari e personalizza la pagina di prenotazione nel tuo ambiente isolato.',
-  },
-  {
-    number: '3',
-    title: 'Condividi il tuo link',
-    desc: 'Invia bookingfreelance.app/tuonome via WhatsApp o email. I clienti prenotano, tu ricevi la notifica su Google Calendar.',
-  },
-]
+const sectionStagger = stagger(0.15)
 
 export default function HowItWorks() {
   return (
@@ -46,7 +22,7 @@ export default function HowItWorks() {
         </motion.div>
 
         <motion.div
-          variants={stagger}
+          variants={sectionStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

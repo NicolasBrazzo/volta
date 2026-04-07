@@ -8,34 +8,11 @@ const protect = require("../middleware/auth");
 
 const { JWT_SECRET, JWT_EXPIRES_IN } = require("../config/jwt");
 const { createOAuth2Client, SCOPES } = require("../config/google");
+const { generateUniqueSlug } = require("../utils/slug");
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 const router = express.Router();
-
-// ── Utility: genera slug unico dal nome ──────────────────────────
-async function generateUniqueSlug(firstName, lastName) {
-  const base = `${firstName}-${lastName}`
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9-]/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-
-  let slug = base;
-  let existing = await Freelancer.findBySlug(slug);
-
-  let attempts = 0;
-  while (existing && attempts < 5) {
-    const suffix = Math.random().toString(36).substring(2, 6);
-    slug = `${base}-${suffix}`;
-    existing = await Freelancer.findBySlug(slug);
-    attempts++;
-  }
-
-  return slug;
-}
 
 // ── GET /auth/google — Redirect a Google OAuth ───────────────────
 router.get("/google", (req, res) => {
@@ -86,6 +63,7 @@ router.get("/google/callback", async (req, res) => {
       const slug = await generateUniqueSlug(
         given_name || "user",
         family_name || "new",
+        Freelancer.findBySlug,
       );
 
       freelancer = await Freelancer.create({

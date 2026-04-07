@@ -8,6 +8,7 @@ const servicesRoutes = require("./controllers/services.controller");
 const availabilityRoutes = require("./controllers/availability.controller");
 const bookingsRoutes = require("./controllers/bookings.controller");
 const publicRoutes = require("./controllers/public.controller");
+const freelancersRoutes = require("./controllers/freelancers.controller");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +27,7 @@ app.use("/auth", authRoutes);
 app.use("/api/services", servicesRoutes);
 app.use("/api/availability", availabilityRoutes);
 app.use("/api/bookings", bookingsRoutes);
+app.use("/api/freelancers", freelancersRoutes);
 
 // Rotte pubbliche (no auth)
 app.use("/api/public", publicRoutes);

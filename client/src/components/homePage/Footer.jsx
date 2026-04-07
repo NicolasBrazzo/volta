@@ -1,16 +1,5 @@
 import { CalendarDays, Github, Linkedin, Twitter } from 'lucide-react'
-
-const productLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Prezzi', href: '#prezzi' },
-  { label: 'Dashboard', href: '#dashboard' },
-]
-
-const legalLinks = [
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Termini', href: '#' },
-  { label: 'GDPR', href: '#' },
-]
+import { productLinks, legalLinks } from '@/constants/homePage'
 
 export default function Footer() {
   return (

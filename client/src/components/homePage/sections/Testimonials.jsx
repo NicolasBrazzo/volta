@@ -1,40 +1,10 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { fadeInUp, stagger } from '@/constants/animations'
+import { testimonials } from '@/constants/homePage'
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-}
-
-const testimonials = [
-  {
-    initials: 'MR',
-    name: 'Marco R.',
-    profession: 'Parrucchiere',
-    quote:
-      'Ho il mio spazio tutto mio. I clienti prenotano dal mio link e io li trovo direttamente in Google Calendar. Ho azzerato i messaggi su WhatsApp.',
-  },
-  {
-    initials: 'LT',
-    name: 'Laura T.',
-    profession: 'Personal Trainer',
-    quote:
-      'In 5 minuti avevo già il workspace attivo e il link da mandare. Zero configurazioni tecniche.',
-  },
-  {
-    initials: 'DM',
-    name: 'Davide M.',
-    profession: 'Consulente IT',
-    quote:
-      'Apprezzo molto che ogni professionista abbia il proprio ambiente separato. Professionale e sicuro.',
-  },
-]
+const sectionStagger = stagger(0.12)
 
 export default function Testimonials() {
   return (
@@ -54,7 +24,7 @@ export default function Testimonials() {
         </motion.div>
 
         <motion.div
-          variants={stagger}
+          variants={sectionStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

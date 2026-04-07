@@ -1,34 +1,9 @@
 import { motion } from 'framer-motion'
-import { Home, Link, Settings } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { fadeInUp, stagger } from '@/constants/animations'
+import { multiTenantCards } from '@/constants/homePage'
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-}
-
-const cards = [
-  {
-    icon: Home,
-    title: 'Workspace isolato',
-    desc: 'Ogni professionista ha il proprio ambiente dedicato. I tuoi dati, i tuoi clienti, le tue prenotazioni — solo tuoi.',
-  },
-  {
-    icon: Link,
-    title: 'Link personale unico',
-    desc: 'Ottieni un URL del tipo bookingfreelance.app/tuonome da condividere ovunque.',
-  },
-  {
-    icon: Settings,
-    title: 'Configurazione indipendente',
-    desc: 'Servizi, orari, disponibilità e report completamente autonomi. Nessuna interferenza con altri utenti.',
-  },
-]
+const sectionStagger = stagger(0.12)
 
 export default function MultiTenantExplainer() {
   return (
@@ -50,13 +25,13 @@ export default function MultiTenantExplainer() {
         </motion.div>
 
         <motion.div
-          variants={stagger}
+          variants={sectionStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12"
         >
-          {cards.map(({ icon: Icon, title, desc }) => (
+          {multiTenantCards.map(({ icon: Icon, title, desc }) => (
             <motion.div key={title} variants={fadeInUp}>
               <Card className="p-8 h-full hover:shadow-md transition-shadow">
                 <CardContent className="p-0">

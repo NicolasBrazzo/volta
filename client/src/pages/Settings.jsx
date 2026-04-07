@@ -1,3 +1,4 @@
+import { CodeCreator } from "@/components/settingsPage/CodeCreator";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useThemeContext } from "@/context/ThemeContext";
@@ -5,7 +6,7 @@ import { Sun, Moon, Laptop } from "lucide-react";
 
 export const Settings = () => {
   const { logout } = useAuth();
-  const { theme, setTheme } = useThemeContext()
+  const { theme, setTheme } = useThemeContext();
 
   return (
     <div className="p-6 space-y-8 max-w-4xl">
@@ -15,6 +16,8 @@ export const Settings = () => {
           Gestisci il tuo profilo e le impostazioni del tuo account.
         </p>
       </div>
+
+      <CodeCreator />
 
       <div className="space-y-6">
         <div>
@@ -26,9 +29,9 @@ export const Settings = () => {
             <button
               onClick={() => setTheme("light")}
               className={`flex flex-col items-center justify-center p-4 border-2 rounded-xl transition-all duration-200 ${
-                theme === "light"
-                  ? "border-primary bg-primary/5 text-primary"
-                  : "border-border hover:border-primary/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                theme === "light" ?
+                  "border-primary bg-primary/5 text-primary"
+                : "border-border hover:border-primary/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
               <Sun className="w-6 h-6 mb-3" />
@@ -37,9 +40,9 @@ export const Settings = () => {
             <button
               onClick={() => setTheme("dark")}
               className={`flex flex-col items-center justify-center p-4 border-2 rounded-xl transition-all duration-200 ${
-                theme === "dark"
-                  ? "border-primary bg-primary/5 text-primary"
-                  : "border-border hover:border-primary/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                theme === "dark" ?
+                  "border-primary bg-primary/5 text-primary"
+                : "border-border hover:border-primary/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
               <Moon className="w-6 h-6 mb-3" />
@@ -48,9 +51,9 @@ export const Settings = () => {
             <button
               onClick={() => setTheme("system")}
               className={`flex flex-col items-center justify-center p-4 border-2 rounded-xl transition-all duration-200 ${
-                theme === "system"
-                  ? "border-primary bg-primary/5 text-primary"
-                  : "border-border hover:border-primary/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                theme === "system" ?
+                  "border-primary bg-primary/5 text-primary"
+                : "border-border hover:border-primary/50 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
               <Laptop className="w-6 h-6 mb-3" />
