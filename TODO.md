@@ -7,11 +7,14 @@
 
 ## 1. Flusso di Prenotazione Pubblica `[BLOCKER]`
 
-Questo è il cuore del prodotto: un cliente trova il freelancer, vede la disponibilità e prenota.
+Questo è il cuore del prodotto: un cliente riceve dal freelancer un link con codice univoco, vede la disponibilità e prenota.
 
-- [ ] **Implementare `GET /api/public/:slug`** — Restituire profilo freelancer + servizi attivi
-- [ ] **Implementare `GET /api/public/:slug/slots`** — Calcolare e restituire slot disponibili per data e servizio
-- [ ] **Implementare `POST /api/public/:slug/book`** — Creare una prenotazione dal form pubblico
+**Contesto**: ogni freelancer genera il proprio codice condivisibile dalla pagina **Settings** (`CodeCreator`). Il codice ha formato `slug-random` (es. `mario-rossi-a3f8k2`) ed è salvato nel campo `unique_freelance_code` della tabella `bf_freelancers`. Il codice è già parzialmente implementato nel branch `dev` (`POST /api/freelancers/code`).
+
+- [ ] **Completare generazione codice** — Il flusso `Settings.jsx → CodeCreator → POST /api/freelancers/code` esiste nel branch `dev`; verificare che gestisca correttamente la rigenerazione e la collision di codici duplicati
+- [ ] **Implementare `GET /api/public/:code`** — Cercare il freelancer tramite `unique_freelance_code`, restituire profilo + servizi attivi
+- [ ] **Implementare `GET /api/public/:code/slots`** — Calcolare e restituire slot disponibili per data e servizio
+- [ ] **Implementare `POST /api/public/:code/book`** — Creare una prenotazione dal form pubblico
 - [ ] **Implementare `calculateAvailableSlots()` in `server/utils/slots.js`**
   - Leggere disponibilità settimanale del professionista per il giorno richiesto
   - Generare tutti gli slot possibili in base alla durata del servizio
@@ -53,7 +56,7 @@ Senza validazione, qualsiasi utente può inviare dati arbitrari al database.
 - [ ] **Validare tutti gli endpoint**:
   - `POST /api/services` — name (string, max 100), duration_minutes (int > 0), price (number >= 0)
   - `PUT /api/services/:id` — stessi vincoli
-  - `POST /api/public/:slug/book` — client_name, client_email (email valida), date (ISO string), service_id (UUID)
+  - `POST /api/public/:code/book` — client_name, client_email (email valida), date (ISO string), service_id (UUID)
   - `PUT /api/availability` — day_of_week (0-6), start_time/end_time (formato HH:MM), coerenza orari
   - `PUT /api/freelancers/profile` — business_name (max 100), description (max 1000)
 - [ ] **Aggiungere `helmet`** per security headers HTTP
@@ -102,7 +105,7 @@ Non serve coverage al 100%, ma i flussi critici devono essere testati.
 
 - [ ] **Setup test runner** (`vitest` per client, `jest` o `vitest` per server)
 - [ ] **Test unitari `calculateAvailableSlots()`** — Casi: giorno lavorativo, giorno non lavorativo, slot occupati, slot nel passato
-- [ ] **Test integrazione flusso prenotazione** — `POST /api/public/:slug/book` con dati validi e invalidi
+- [ ] **Test integrazione flusso prenotazione** — `POST /api/public/:code/book` con dati validi e invalidi
 - [ ] **Test validazione input** — Verificare che dati malformati vengano rifiutati
 
 ---
