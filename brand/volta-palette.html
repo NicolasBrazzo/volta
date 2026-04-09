@@ -350,6 +350,900 @@
       padding-top: 40px;
       border-top: 1px solid #27272A;
     }
+
+    /* ========== MOCKUPS ========== */
+
+    .mockups-divider {
+      text-align: center;
+      margin: 100px 0 80px;
+      position: relative;
+    }
+
+    .mockups-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #27272A, transparent);
+    }
+
+    .mockups-divider span {
+      background: #09090B;
+      padding: 0 24px;
+      position: relative;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #71717A;
+    }
+
+    /* Hero mockup */
+    .hero-mockup {
+      background: #09090B;
+      border: 1px solid #27272A;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .browser-bar {
+      background: #18181B;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #27272A;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .browser-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #27272A;
+    }
+
+    .browser-dots span:first-child { background: #EF4444; }
+    .browser-dots span:nth-child(2) { background: #EAB308; }
+    .browser-dots span:nth-child(3) { background: #22C55E; }
+
+    .browser-url {
+      flex: 1;
+      background: #27272A;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: #71717A;
+    }
+
+    /* Landing hero content */
+    .landing-hero {
+      padding: 80px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .landing-hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .landing-hero .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(99, 102, 241, 0.15);
+      color: #818CF8;
+      margin-bottom: 24px;
+    }
+
+    .landing-hero h1 {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .landing-hero h1 .gradient {
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .landing-hero .hero-sub {
+      font-size: 18px;
+      color: #71717A;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .landing-hero .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .btn-lg {
+      padding: 14px 32px;
+      font-size: 15px;
+      border-radius: 12px;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #6366F1, #4F46E5);
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #A1A1AA;
+      border: 1px solid #27272A;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid #1E1B4B;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #52525B;
+      margin-top: 4px;
+    }
+
+    /* Dashboard mockup */
+    .dashboard-mockup {
+      background: #09090B;
+      border: 1px solid #27272A;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .dashboard-layout {
+      display: flex;
+      min-height: 520px;
+    }
+
+    .dash-sidebar {
+      width: 220px;
+      background: #0F0F12;
+      border-right: 1px solid #27272A;
+      padding: 24px 16px;
+      flex-shrink: 0;
+    }
+
+    .dash-sidebar-logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+      padding-left: 8px;
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .dash-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #71717A;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+
+    .dash-nav-item.active {
+      background: rgba(99, 102, 241, 0.12);
+      color: #818CF8;
+    }
+
+    .dash-nav-item svg { width: 18px; height: 18px; opacity: 0.7; }
+    .dash-nav-item.active svg { opacity: 1; }
+
+    .dash-content {
+      flex: 1;
+      padding: 32px;
+    }
+
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .dash-greeting h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .dash-greeting p {
+      font-size: 13px;
+      color: #52525B;
+      margin-top: 4px;
+    }
+
+    .dash-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .dash-stats {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .dash-stat-card {
+      flex: 1;
+      background: #18181B;
+      border: 1px solid #27272A;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .dash-stat-card .stat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .dash-stat-card .val {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .dash-stat-card .lbl {
+      font-size: 12px;
+      color: #52525B;
+      margin-top: 2px;
+    }
+
+    .dash-bookings-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .dash-booking-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #18181B;
+      border: 1px solid #27272A;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .dash-booking-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .booking-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .booking-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .booking-service {
+      font-size: 11px;
+      color: #52525B;
+      margin-top: 1px;
+    }
+
+    .booking-time {
+      font-size: 12px;
+      font-weight: 500;
+      color: #A1A1AA;
+    }
+
+    .booking-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* Phone mockup */
+    .phone-section {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .phone-frame {
+      width: 320px;
+      min-width: 320px;
+      background: #18181B;
+      border-radius: 40px;
+      border: 3px solid #27272A;
+      padding: 16px;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+    }
+
+    .phone-notch {
+      width: 100px;
+      height: 24px;
+      background: #09090B;
+      border-radius: 100px;
+      margin: 0 auto 16px;
+    }
+
+    .phone-screen {
+      background: #09090B;
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 540px;
+    }
+
+    .phone-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .phone-info h3 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    .phone-info p {
+      font-size: 16px;
+      color: #71717A;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #A1A1AA;
+      line-height: 1.5;
+    }
+
+    .feature-list li .check {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    /* Booking public page mockup */
+    .booking-page-screen {
+      padding: 32px 24px;
+    }
+
+    .bp-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .bp-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .bp-name {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .bp-role {
+      font-size: 12px;
+      color: #52525B;
+      margin-top: 2px;
+    }
+
+    .bp-stars {
+      color: #EAB308;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .bp-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #52525B;
+      margin-bottom: 10px;
+    }
+
+    .bp-service {
+      background: #18181B;
+      border: 1px solid #27272A;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .bp-service.selected {
+      border-color: #6366F1;
+      background: rgba(99, 102, 241, 0.08);
+    }
+
+    .bp-service-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .bp-service-meta {
+      font-size: 11px;
+      color: #52525B;
+      margin-top: 2px;
+    }
+
+    .bp-service-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #818CF8;
+    }
+
+    .bp-slots {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      margin-bottom: 20px;
+    }
+
+    .bp-slot {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #18181B;
+      border: 1px solid #27272A;
+      color: #A1A1AA;
+    }
+
+    .bp-slot.selected {
+      background: #6366F1;
+      border-color: #6366F1;
+      color: white;
+    }
+
+    .bp-cta {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366F1, #4F46E5);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .bp-powered {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 11px;
+      color: #3F3F46;
+    }
+
+    .bp-powered span {
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    /* AI Follow-up mockup */
+    .followup-mockup {
+      background: #18181B;
+      border: 1px solid #27272A;
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .followup-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .followup-info .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(34, 211, 238, 0.12);
+      color: #22D3EE;
+      margin-bottom: 16px;
+    }
+
+    .followup-info h3 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .followup-info p {
+      font-size: 14px;
+      color: #71717A;
+      line-height: 1.6;
+    }
+
+    .followup-preview {
+      width: 340px;
+      min-width: 300px;
+    }
+
+    .msg-bubble {
+      background: #09090B;
+      border: 1px solid #27272A;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .msg-bubble .msg-from {
+      font-size: 11px;
+      font-weight: 600;
+      color: #818CF8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .msg-bubble .msg-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #D4D4D8;
+    }
+
+    .msg-bubble .msg-cta-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #6366F1;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .msg-bubble .msg-time {
+      font-size: 10px;
+      color: #3F3F46;
+      margin-top: 8px;
+    }
+
+    .msg-bubble.ai-gen::after {
+      content: 'Generato con AI';
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 10px;
+      font-weight: 500;
+      color: #22D3EE;
+      opacity: 0.7;
+    }
+
+    /* Pricing mockup */
+    .pricing-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .pricing-card {
+      flex: 1;
+      min-width: 280px;
+      background: #18181B;
+      border: 1px solid #27272A;
+      border-radius: 20px;
+      padding: 36px;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border-color: #6366F1;
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, #18181B 50%);
+    }
+
+    .pricing-card.featured::before {
+      content: 'Popolare';
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #6366F1;
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 14px;
+      border-radius: 100px;
+    }
+
+    .pricing-card .plan-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #71717A;
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .plan-price {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .pricing-card .plan-price span {
+      font-size: 16px;
+      font-weight: 500;
+      color: #52525B;
+    }
+
+    .pricing-card .plan-desc {
+      font-size: 13px;
+      color: #52525B;
+      margin-top: 4px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .pricing-card .plan-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 28px;
+    }
+
+    .pricing-card .plan-features li {
+      font-size: 13px;
+      color: #A1A1AA;
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pricing-card .plan-features li .ico {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .pricing-card .plan-features li .ico.yes {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10B981;
+    }
+
+    .pricing-card .plan-features li .ico.no {
+      background: rgba(113, 113, 122, 0.15);
+      color: #52525B;
+    }
+
+    .pricing-card .plan-btn {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      border: none;
+    }
+
+    .pricing-card .plan-btn.primary {
+      background: #6366F1;
+      color: white;
+    }
+
+    .pricing-card .plan-btn.outline {
+      background: transparent;
+      color: #A1A1AA;
+      border: 1px solid #27272A;
+    }
+
+    /* Social ad mockup */
+    .social-ad {
+      background: linear-gradient(160deg, #1E1B4B, #09090B 60%);
+      border: 1px solid #27272A;
+      border-radius: 20px;
+      padding: 60px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-ad::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .social-ad::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .social-ad h2 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .social-ad p {
+      font-size: 16px;
+      color: #71717A;
+      max-width: 420px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .social-ad .ad-cta {
+      display: inline-block;
+      padding: 16px 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366F1, #4F46E5);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+
+    .social-ad .ad-sub {
+      font-size: 12px;
+      color: #3F3F46;
+      margin-top: 16px;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 32px 16px; }
+      .landing-hero { padding: 48px 24px; }
+      .landing-hero h1 { font-size: 32px; }
+      .stats-row { flex-direction: column; gap: 20px; }
+      .dash-sidebar { display: none; }
+      .dash-stats { flex-direction: column; }
+      .phone-section { flex-direction: column; align-items: center; }
+      .followup-mockup { flex-direction: column; }
+      .followup-preview { width: 100%; min-width: unset; }
+      .social-ad { padding: 40px 24px; }
+      .social-ad h2 { font-size: 26px; }
+    }
   </style>
 </head>
 <body>
@@ -564,6 +1458,323 @@
         <div style="color: #52525B; font-size: 13px; margin-left: 8px;">
           "V" bold come marca iconica &mdash; riconoscibile anche a 16x16px
         </div>
+      </div>
+    </div>
+
+    <!-- ==================== MOCKUPS ==================== -->
+
+    <div class="mockups-divider">
+      <span>Mockup Advertising</span>
+    </div>
+
+    <!-- 1. LANDING PAGE HERO -->
+    <div class="section">
+      <div class="section-title">Landing Page — Hero</div>
+      <div class="hero-mockup">
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">volta.app</div>
+        </div>
+        <div class="landing-hero">
+          <div class="hero-badge">Nuovo &mdash; Follow-up AI automatici</div>
+          <h1>Prenotazioni intelligenti.<br><span class="gradient">Zero pensieri.</span></h1>
+          <div class="hero-sub">I tuoi clienti prenotano in 30 secondi. Tu li ritrovi su Google Calendar. Il follow-up parte in automatico.</div>
+          <div class="hero-cta">
+            <button class="btn btn-lg btn-gradient">Inizia gratis</button>
+            <button class="btn btn-lg btn-ghost">Guarda come funziona</button>
+          </div>
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-number">30s</div>
+              <div class="stat-label">Per prenotare</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Sempre attivo</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">0&euro;</div>
+              <div class="stat-label">Per iniziare</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">+40%</div>
+              <div class="stat-label">Retention clienti</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. DASHBOARD -->
+    <div class="section">
+      <div class="section-title">Dashboard — Vista Freelancer</div>
+      <div class="dashboard-mockup">
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">volta.app/dashboard</div>
+        </div>
+        <div class="dashboard-layout">
+          <div class="dash-sidebar">
+            <div class="dash-sidebar-logo">volta</div>
+            <div class="dash-nav-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Dashboard
+            </div>
+            <div class="dash-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Prenotazioni
+            </div>
+            <div class="dash-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              Servizi
+            </div>
+            <div class="dash-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+              Disponibilit&agrave;
+            </div>
+            <div class="dash-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m16.66-5.66l-4.24 4.24m-4.24-4.24L4.34 4.34m12.02 12.02l-4.24-4.24m-4.24 4.24l-4.24-4.24"/></svg>
+              Impostazioni
+            </div>
+          </div>
+          <div class="dash-content">
+            <div class="dash-header">
+              <div class="dash-greeting">
+                <h2>Buongiorno, Marco</h2>
+                <p>Hai 4 appuntamenti oggi</p>
+              </div>
+              <div class="dash-avatar">MR</div>
+            </div>
+            <div class="dash-stats">
+              <div class="dash-stat-card">
+                <div class="stat-icon" style="background: rgba(99, 102, 241, 0.12); color: #818CF8;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div class="val">24</div>
+                <div class="lbl">Prenotazioni questo mese</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="stat-icon" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                </div>
+                <div class="val">&euro;1.280</div>
+                <div class="lbl">Fatturato stimato</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="stat-icon" style="background: rgba(34, 211, 238, 0.12); color: #22D3EE;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <div class="val">18</div>
+                <div class="lbl">Clienti unici</div>
+              </div>
+            </div>
+            <div class="dash-bookings-title">Prossimi appuntamenti</div>
+            <div class="dash-booking-row">
+              <div class="dash-booking-left">
+                <div class="booking-avatar" style="background: #4F46E5;">LB</div>
+                <div>
+                  <div class="booking-name">Laura Bianchi</div>
+                  <div class="booking-service">Consulenza UX &middot; 60 min</div>
+                </div>
+              </div>
+              <div class="booking-time">10:00</div>
+              <div class="booking-badge" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">Confermato</div>
+            </div>
+            <div class="dash-booking-row">
+              <div class="dash-booking-left">
+                <div class="booking-avatar" style="background: #0891B2;">GR</div>
+                <div>
+                  <div class="booking-name">Giuseppe Rossi</div>
+                  <div class="booking-service">Review Portfolio &middot; 30 min</div>
+                </div>
+              </div>
+              <div class="booking-time">11:30</div>
+              <div class="booking-badge" style="background: rgba(16, 185, 129, 0.12); color: #10B981;">Confermato</div>
+            </div>
+            <div class="dash-booking-row">
+              <div class="dash-booking-left">
+                <div class="booking-avatar" style="background: #7C3AED;">AF</div>
+                <div>
+                  <div class="booking-name">Anna Ferrari</div>
+                  <div class="booking-service">Sessione Strategia &middot; 90 min</div>
+                </div>
+              </div>
+              <div class="booking-time">14:00</div>
+              <div class="booking-badge" style="background: rgba(234, 179, 8, 0.12); color: #EAB308;">In attesa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PUBLIC BOOKING PAGE (Phone) -->
+    <div class="section">
+      <div class="section-title">Pagina Prenotazione Pubblica — Vista Cliente</div>
+      <div class="phone-section">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="booking-page-screen">
+              <div class="bp-header">
+                <div class="bp-avatar">MR</div>
+                <div class="bp-name">Marco Rossi</div>
+                <div class="bp-role">UX Designer & Consulente</div>
+                <div class="bp-stars">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 (47 recensioni)</div>
+              </div>
+
+              <div class="bp-section-title">Scegli un servizio</div>
+              <div class="bp-service selected">
+                <div>
+                  <div class="bp-service-name">Consulenza UX</div>
+                  <div class="bp-service-meta">60 min &middot; Online</div>
+                </div>
+                <div class="bp-service-price">&euro;80</div>
+              </div>
+              <div class="bp-service">
+                <div>
+                  <div class="bp-service-name">Review Portfolio</div>
+                  <div class="bp-service-meta">30 min &middot; Online</div>
+                </div>
+                <div class="bp-service-price">&euro;45</div>
+              </div>
+              <div class="bp-service">
+                <div>
+                  <div class="bp-service-name">Sessione Strategia</div>
+                  <div class="bp-service-meta">90 min &middot; In sede</div>
+                </div>
+                <div class="bp-service-price">&euro;120</div>
+              </div>
+
+              <div style="margin-top: 20px;">
+                <div class="bp-section-title">Gioved&igrave; 10 Aprile</div>
+                <div class="bp-slots">
+                  <div class="bp-slot">09:00</div>
+                  <div class="bp-slot selected">10:30</div>
+                  <div class="bp-slot">14:00</div>
+                  <div class="bp-slot">15:30</div>
+                  <div class="bp-slot">17:00</div>
+                </div>
+              </div>
+
+              <button class="bp-cta">Prenota &mdash; Giov 10 Apr, 10:30</button>
+
+              <div class="bp-powered">Prenotazioni gestite da <span>volta</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone-info">
+          <h3>Il tuo link.<br>La tua <span style="background: linear-gradient(135deg, #6366F1, #22D3EE); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">identit&agrave; digitale.</span></h3>
+          <p>Ogni professionista ha la sua pagina personale. Non serve un sito web &mdash; condividi il tuo link e i clienti prenotano in autonomia, 24/7.</p>
+          <ul class="feature-list">
+            <li>
+              <span class="check">&#10003;</span>
+              Link personalizzato volta.app/il-tuo-nome
+            </li>
+            <li>
+              <span class="check">&#10003;</span>
+              Foto, servizi, prezzi e recensioni in un'unica pagina
+            </li>
+            <li>
+              <span class="check">&#10003;</span>
+              Slot disponibili calcolati in tempo reale
+            </li>
+            <li>
+              <span class="check">&#10003;</span>
+              Funziona come biglietto da visita digitale
+            </li>
+            <li>
+              <span class="check">&#10003;</span>
+              Sincronizzazione automatica con Google Calendar
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. AI FOLLOW-UP -->
+    <div class="section">
+      <div class="section-title">Follow-up Intelligenti — AI Powered</div>
+      <div class="followup-mockup">
+        <div class="followup-info">
+          <div class="ai-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 014 4v2a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M16 14H8a4 4 0 00-4 4v2h16v-2a4 4 0 00-4-4z"/></svg>
+            AI Powered
+          </div>
+          <h3>Messaggi che non<br>sembrano messaggi<br><span style="color: #22D3EE;">automatici.</span></h3>
+          <p>Dopo ogni appuntamento, Volta genera un follow-up personalizzato basato sul tipo di servizio. Il cliente si sente seguito, tu alzi la retention senza fare nulla.</p>
+        </div>
+        <div class="followup-preview">
+          <div class="msg-bubble ai-gen">
+            <div class="msg-from">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Volta per Marco Rossi
+            </div>
+            <div class="msg-text">
+              Ciao Laura, come &egrave; andata dopo la sessione di gioved&igrave;? Spero che i suggerimenti sulla user research ti stiano tornando utili. Se hai domande, sono qui.
+            </div>
+            <a class="msg-cta-link">Prenota di nuovo con un tap &rarr;</a>
+            <div class="msg-time">Inviato automaticamente &middot; 2 giorni dopo l'appuntamento</div>
+          </div>
+          <div class="msg-bubble">
+            <div class="msg-from" style="color: #10B981;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+              Risultato
+            </div>
+            <div class="msg-text" style="color: #10B981;">
+              Laura ha riprenotato una Consulenza UX per il 18 Aprile.
+            </div>
+            <div class="msg-time">Conversion rate follow-up: 38%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. PRICING -->
+    <div class="section">
+      <div class="section-title">Pricing — Modello Freemium</div>
+      <div class="pricing-row">
+        <div class="pricing-card">
+          <div class="plan-name">Free</div>
+          <div class="plan-price">&euro;0 <span>/ mese</span></div>
+          <div class="plan-desc">Perfetto per iniziare. Tutto quello che serve per accettare prenotazioni.</div>
+          <ul class="plan-features">
+            <li><span class="ico yes">&#10003;</span> Pagina di prenotazione pubblica</li>
+            <li><span class="ico yes">&#10003;</span> Fino a 3 servizi</li>
+            <li><span class="ico yes">&#10003;</span> Google Calendar sync</li>
+            <li><span class="ico yes">&#10003;</span> 30 prenotazioni / mese</li>
+            <li><span class="ico no">&mdash;</span> <span style="color: #52525B;">Follow-up AI</span></li>
+            <li><span class="ico no">&mdash;</span> <span style="color: #52525B;">Branding personalizzato</span></li>
+            <li><span class="ico no">&mdash;</span> <span style="color: #52525B;">Analytics avanzati</span></li>
+          </ul>
+          <button class="plan-btn outline">Inizia gratis</button>
+        </div>
+        <div class="pricing-card featured">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">&euro;9 <span>/ mese</span></div>
+          <div class="plan-desc">Per chi vuole crescere. AI, branding e zero limiti.</div>
+          <ul class="plan-features">
+            <li><span class="ico yes">&#10003;</span> Tutto di Free</li>
+            <li><span class="ico yes">&#10003;</span> Servizi illimitati</li>
+            <li><span class="ico yes">&#10003;</span> Prenotazioni illimitate</li>
+            <li><span class="ico yes">&#10003;</span> Follow-up AI automatici</li>
+            <li><span class="ico yes">&#10003;</span> Pagina brandizzata custom</li>
+            <li><span class="ico yes">&#10003;</span> Analytics e report</li>
+            <li><span class="ico yes">&#10003;</span> Priorit&agrave; nel supporto</li>
+          </ul>
+          <button class="plan-btn primary">Prova Pro &mdash; 14 giorni gratis</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. SOCIAL AD -->
+    <div class="section">
+      <div class="section-title">Social Media Ad — Concept</div>
+      <div class="social-ad">
+        <h2>Smetti di perdere<br>clienti al telefono.</h2>
+        <p>Con Volta i tuoi clienti prenotano da soli, 24/7. Tu li ritrovi su Google Calendar. Il follow-up parte in automatico.</p>
+        <button class="ad-cta">Inizia gratis &rarr;</button>
+        <div class="ad-sub">Nessuna carta richiesta &middot; Setup in 2 minuti</div>
       </div>
     </div>
 
