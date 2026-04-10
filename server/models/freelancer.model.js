@@ -50,6 +50,18 @@ const create = async (freelancerData) => {
   return data;
 };
 
+// Trova freelancer per codice univoco
+const findByCode = async (code) => {
+  const { data, error } = await supabase
+    .from(TABLE)
+    .select("id, first_name, last_name, slug, business_name, description, profile_image, unique_freelance_code")
+    .eq("unique_freelance_code", code)
+    .maybeSingle();
+
+  if (error) throw new Error("DB_FIND_FREELANCER_BY_CODE_ERROR");
+  return data;
+};
+
 // Aggiorna freelancer
 const updateById = async (id, updates) => {
   const { data, error } = await supabase
@@ -74,6 +86,7 @@ module.exports = {
   findByEmail,
   findById,
   findBySlug,
+  findByCode,
   create,
   updateById,
 };

@@ -27,7 +27,7 @@ router.post("/code", protect, async (req, res) => {
     const freelancer = await Freelancer.findById(freelancerId);
 
     const firstPart = freelancer.slug;
-    const secondPart = Math.random().toString(36).substring(2, 8);
+    const secondPart = (Math.random().toString(36) + Math.random().toString(36)).substring(2, 12);
     const unique_freelance_code = `${firstPart}-${secondPart}`;
 
     const updated = await Freelancer.updateById(freelancerId, {

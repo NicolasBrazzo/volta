@@ -1,4 +1,5 @@
 import { Copy } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
 import { useCreateCode } from "@/hooks/useCreateCode";
 import { showSuccess } from "@/utils/toast";
@@ -7,8 +8,8 @@ export const CodeCreator = () => {
   const { code, isCreating, generateCode } = useCreateCode();
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code);
-    showSuccess("Codice copiato!");
+    navigator.clipboard.writeText(`${window.location.origin}/book/${code}`);
+    showSuccess("Link copiato!");
   };
 
   return (
@@ -30,9 +31,12 @@ export const CodeCreator = () => {
 
         {code && (
           <div className="flex items-center justify-center gap-5">
-            <div>
-              Codice: <span className="font-mono">{code}</span>
-            </div>
+            <Link
+              to={`/book/${code}`}
+              className="font-mono text-primary underline-offset-4 hover:underline"
+            >
+              {code}
+            </Link>
             <Copy className="cursor-pointer" onClick={handleCopy} />
           </div>
         )}
