@@ -71,3 +71,4 @@ yarn.lock
 
 /*.md
 !TODO.md
+!CLAUDE.md
