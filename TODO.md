@@ -5,6 +5,10 @@
 
 ---
 
+## 0. NON OPZIONABILI -> sa fare il prima possibile 
+- [ ] Aggiungi regole riguardo al db nel CLAUDE.md 
+- [ ] Regole per utilizzare il componente loader per le pagine 
+
 ## 1. Flusso di Prenotazione Pubblica `[BLOCKER]`
 
 Questo è il cuore del prodotto: un cliente riceve dal freelancer un link con codice univoco, vede la disponibilità e prenota.
@@ -115,7 +119,7 @@ Senza validazione, qualsiasi utente può inviare dati arbitrari al database.
 
 ## 7. Funzione `seedDefaults` `[BLOCKER]`
 
-La funzione `seedDefaults()` e **gia chiamata** in `server/controllers/auth.controller.js` alla riga 102 (al termine del callback OAuth), ma **non e mai stata definita**, causando un errore runtime al primo accesso di ogni nuovo freelancer.
+La funzione `seedDefaults()` e **gia chiamata** in `server/controllers/auth.controller.js` al termine del callback OAuth, ma **non e mai stata definita**, causando un errore runtime al primo accesso di ogni nuovo freelancer.
 
 - [ ] **Definire e implementare `seedDefaults(freelancerId)`** — La funzione deve creare la disponibilita settimanale di default per il freelancer appena registrato
   - Inserire record in `bf_availability` per i giorni Lunedi-Venerdi (day_of_week: 1-5) con orario `09:00 - 18:00`
@@ -158,3 +162,45 @@ Queste feature NON servono per il Day 1 ma saranno importanti per crescere.
 - [ ] Dashboard analytics per il freelancer
 - [ ] CI/CD pipeline (GitHub Actions)
 - [ ] Docker + docker-compose per deploy
+
+---
+
+## BRANDING — Rebrand "Volta"
+
+> Roadmap per trasformare "Booking Freelance" in **Volta** — un brand con identità vera.
+> Palette, tono di voce e direzione visiva sono definiti in `brand/volta-palette.html`.
+
+### Fase 1 — Fondamenta Brand
+- [x] Definire strategia di brand (posizionamento, archetipo, target)
+- [x] Scegliere il nome: **Volta**
+- [x] Definire palette colori e direzione visiva
+- [x] Creare visualizzazione palette (`brand/volta-palette.html`)
+- [ ] Validare disponibilità dominio (volta.app, getvolta.app, volta.it)
+- [ ] Validare disponibilità handle social (@volta su IG, X, LinkedIn)
+- [ ] Creare Brand Guidelines v1 (documento PDF/Notion con regole d'uso)
+
+### Fase 2 — Visual Identity
+- [ ] Design logo definitivo (wordmark "volta" + simbolo "V")
+- [ ] Creare varianti logo (dark, light, monochrome, favicon)
+- [ ] Aggiornare design tokens CSS nell'app con la nuova palette Volta
+- [ ] Aggiornare componenti Shadcn (bottoni, card, badge) con nuovi colori
+- [ ] Redesign sidebar e layout con la nuova identità
+- [ ] Creare dark mode come esperienza primaria
+
+### Fase 3 — Verbal Identity & Copy
+- [ ] Definire tagline definitiva
+- [ ] Riscrivere copy della landing page (Hero, Features, HowItWorks, Pricing)
+- [ ] Riscrivere microcopy dell'app (labels, tooltip, stati vuoti, errori)
+- [ ] Riscrivere copy onboarding (CreateFreelanceProfile)
+- [ ] Rinominare il progetto: titoli, meta tag, manifest, package.json
+
+### Fase 4 — Presenza Digitale
+- [ ] Creare social media kit (template post, stories, cover)
+- [ ] Applicare brand alla pagina di prenotazione pubblica (`/book/:slug`)
+- [ ] Creare template email coerenti con il brand (conferma, cancellazione, follow-up)
+- [ ] Creare OG image e meta tag social per la landing page
+
+### Fase 5 — Differenziazione (post-MVP)
+- [ ] Pagina di prenotazione "brandizzabile" per ogni professionista (mini landing page)
+- [ ] Follow-up automatici intelligenti con AI (messaggi personalizzati post-appuntamento)
+- [ ] Integrazione WhatsApp per notifiche e follow-up
