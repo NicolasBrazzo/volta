@@ -5,6 +5,10 @@
 
 ---
 
+## 0. NON OPZIONABILI -> sa fare il prima possibile 
+- [ ] Aggiungi regole riguardo al db nel CLAUDE.md 
+- [ ] Regole per utilizzare il componente loader per le pagine 
+
 ## 1. Flusso di Prenotazione Pubblica `[BLOCKER]`
 
 Questo è il cuore del prodotto: un cliente riceve dal freelancer un link con codice univoco, vede la disponibilità e prenota.
