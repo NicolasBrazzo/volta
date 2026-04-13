@@ -5,17 +5,13 @@
 
 ---
 
-## 0. NON OPZIONABILI -> sa fare il prima possibile 
-- [ ] Aggiungi regole riguardo al db nel CLAUDE.md 
-- [ ] Regole per utilizzare il componente loader per le pagine 
-
 ## 1. Flusso di Prenotazione Pubblica `[BLOCKER]`
 
 Questo è il cuore del prodotto: un cliente riceve dal freelancer un link con codice univoco, vede la disponibilità e prenota.
 
 **Contesto**: ogni freelancer genera il proprio codice condivisibile dalla pagina **Settings** (`CodeCreator`). Il codice ha formato `slug-random` (es. `mario-rossi-a3f8k2`) ed è salvato nel campo `unique_freelance_code` della tabella `bf_freelancers`. Il codice è già parzialmente implementato nel branch `dev` (`POST /api/freelancers/code`).
 
-- [ ] **Completare generazione codice** — Il flusso `Settings.jsx → CodeCreator → POST /api/freelancers/code` esiste nel branch `dev`; verificare che gestisca correttamente la rigenerazione e la collision di codici duplicati
+- [x] **Completare generazione codice** — Il flusso `Settings.jsx → CodeCreator → POST /api/freelancers/code` esiste nel branch `dev`; verificare che gestisca correttamente la rigenerazione e la collision di codici duplicati
 - [ ] **Implementare `GET /api/public/:code`** — Cercare il freelancer in `bf_freelancers` tramite `unique_freelance_code`; restituire `business_name`, `description`, `slug` e lista dei servizi attivi (`bf_services` dove `is_active = true`); rispondere 404 se il codice non esiste
 - [ ] **Implementare `GET /api/public/:code/slots`** — Ricevere query params `date` (YYYY-MM-DD) e `serviceId` (UUID); validare entrambi; chiamare `calculateAvailableSlots()`; restituire array di slot liberi in formato `"HH:MM"`; rispondere 400 se i parametri sono mancanti o invalidi
 - [ ] **Implementare `POST /api/public/:code/book`** — Ricevere body con `service_id`, `date`, `time`, `client_name`, `client_email`, `client_phone` (opzionale), `notes` (opzionale); validare tutti i campi obbligatori; creare il record in `bf_bookings`; chiamare `createCalendarEvent()` e salvare il `google_event_id`; rispondere 201 con i dettagli della prenotazione creata
@@ -43,7 +39,7 @@ Senza calendario sincronizzato, il freelancer gestisce tutto a mano e rischia do
 
 L'autenticazione OAuth 2.0 e lo storage dei token (`google_access_token`, `google_refresh_token`) sono **gia implementati** in `server/controllers/auth.controller.js` e `server/config/google.js`. Il refresh automatico dei token e **gia gestito** in `getAuthenticatedClient()` tramite l'evento `'tokens'` dell'OAuth2 client. Mancano solo le operazioni CRUD sul calendario.
 
-- [ ] **Implementare `createCalendarEvent(professional, booking, service)`** in `server/services/googleCalendar.js`
+- [x] **Implementare `createCalendarEvent(professional, booking, service)`** in `server/services/googleCalendar.js`
   - Ottenere client OAuth autenticato tramite `getAuthenticatedClient(professional)`
   - Creare evento con `calendar.events.insert()` sul `professional.calendar_id` (default: `"primary"`)
   - Impostare `summary` = nome del servizio, `description` con nome e contatti del cliente, `start`/`end` in base a data e durata servizio
@@ -51,21 +47,21 @@ L'autenticazione OAuth 2.0 e lo storage dei token (`google_access_token`, `googl
   - Configurare un reminder via email a 60 minuti dall'appuntamento (`reminders.overrides`)
   - Salvare il `google_event_id` restituito dall'API nel campo `google_event_id` della tabella `bf_bookings`
 
-- [ ] **Implementare `deleteCalendarEvent(professional, google_event_id)`** in `server/services/googleCalendar.js`
+- [x] **Implementare `deleteCalendarEvent(professional, google_event_id)`** in `server/services/googleCalendar.js`
   - Ottenere client OAuth autenticato tramite `getAuthenticatedClient(professional)`
   - Chiamare `calendar.events.delete()` con il `google_event_id` salvato nella prenotazione
   - Gestire il caso in cui l'evento non esista piu sul calendario (errore 404 da ignorare silenziosamente)
   - Chiamare questa funzione dal controller `DELETE /api/bookings/:id` prima di eliminare il record dal DB
 
-- [ ] **Implementare `getCalendarEvents(professional, timeMin, timeMax)`** in `server/services/googleCalendar.js`
+- [x] **Implementare `getCalendarEvents(professional, timeMin, timeMax)`** in `server/services/googleCalendar.js`
   - Chiamare `calendar.events.list()` con `timeMin` e `timeMax` in formato ISO 8601
   - Filtrare eventi con `singleEvents: true` e `orderBy: 'startTime'`
   - Restituire array di oggetti `{ start, end }` per il confronto con gli slot disponibili
   - Usare questa funzione dentro `calculateAvailableSlots()` per escludere slot occupati da eventi Google Calendar non generati dall'app
 
-- [ ] **Collegare `createCalendarEvent()` al controller prenotazioni** — In `POST /api/public/:code/book`, dopo aver creato il record in `bf_bookings`, chiamare `createCalendarEvent()` e aggiornare il record con il `google_event_id` ottenuto
+- [x] **Collegare `createCalendarEvent()` al controller prenotazioni** — In `POST /api/public/:code/book`, dopo aver creato il record in `bf_bookings`, chiamare `createCalendarEvent()` e aggiornare il record con il `google_event_id` ottenuto
 
-- [ ] **Collegare `deleteCalendarEvent()` al controller prenotazioni** — In `DELETE /api/bookings/:id`, leggere prima il `google_event_id` dalla prenotazione, chiamare `deleteCalendarEvent()`, poi eliminare il record dal DB
+- [x] **Collegare `deleteCalendarEvent()` al controller prenotazioni** — In `DELETE /api/bookings/:id`, leggere prima il `google_event_id` dalla prenotazione, chiamare `deleteCalendarEvent()`, poi eliminare il record dal DB
 
 ---
 
@@ -74,9 +70,9 @@ L'autenticazione OAuth 2.0 e lo storage dei token (`google_access_token`, `googl
 Il cliente e il freelancer devono sapere che una prenotazione è stata creata/modificata.
 
 - [ ] **Integrare un servizio email** — Aggiungere `resend` (consigliato per semplicita) o `nodemailer` con SMTP; configurare le credenziali nelle variabili d'ambiente (`RESEND_API_KEY` o `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`)
-- [ ] **Email di conferma al cliente** — Inviata subito dopo `POST /api/public/:code/book`; contenuto: nome freelancer, nome servizio, data e ora appuntamento, indirizzo/link (se configurato), contatti del freelancer
+- [x] **Email di conferma al cliente** — Inviata subito dopo `POST /api/public/:code/book`; contenuto: nome freelancer, nome servizio, data e ora appuntamento, indirizzo/link (se configurato), contatti del freelancer
 - [ ] **Email di notifica al freelancer** — Inviata in parallelo all'email cliente; contenuto: nome e contatti del cliente, servizio prenotato, data e ora
-- [ ] **Email di cancellazione** — Inviata a entrambi (cliente e freelancer) quando viene chiamato `DELETE /api/bookings/:id`; includere breve motivazione se disponibile
+- [x] **Email di cancellazione** — Inviata a entrambi (cliente e freelancer) quando viene chiamato `DELETE /api/bookings/:id`; includere breve motivazione se disponibile
 
 ---
 

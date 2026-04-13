@@ -3,6 +3,7 @@ const Freelancer = require("../models/freelancer.model");
 const Service = require("../models/services.model");
 const Booking = require("../models/bookings.model");
 const { calculateAvailableSlots } = require("../utils/slots");
+const { createCalendarEvent } = require("../services/googleCalendar");
 
 const router = express.Router();
 
@@ -108,7 +109,19 @@ router.post("/:code/book", async (req, res) => {
       client_phone: client_phone?.trim() || null,
       notes: notes?.trim() || null,
       status: "confirmed",
+      price_booking: service.price,
     });
+
+    // Sincronizza su Google Calendar (non blocca la prenotazione in caso di errore)
+    try {
+      const fullFreelancer = await Freelancer.findById(freelancer.id);
+      if (fullFreelancer?.google_access_token && fullFreelancer?.google_refresh_token) {
+        const eventId = await createCalendarEvent(fullFreelancer, booking, service);
+        booking.google_event_id = eventId;
+      }
+    } catch (calErr) {
+      console.error("CREATE CALENDAR EVENT ERROR:", calErr);
+    }
 
     res.status(201).json({ ok: true, data: booking });
   } catch (err) {

@@ -22,17 +22,32 @@ router.put("/:id", protect, async (req, res) => {
 
 // POST /freelancers/code — Genera e salva un codice univoco per il freelancer
 router.post("/code", protect, async (req, res) => {
+  const MAX_ATTEMPTS = 5;
+
   try {
     const freelancerId = req.user.sub;
     const freelancer = await Freelancer.findById(freelancerId);
 
-    const firstPart = freelancer.slug;
-    const secondPart = (Math.random().toString(36) + Math.random().toString(36)).substring(2, 12);
-    const unique_freelance_code = `${firstPart}-${secondPart}`;
+    let unique_freelance_code = null;
+    let attempts = 0;
 
-    const updated = await Freelancer.updateById(freelancerId, {
-      unique_freelance_code,
-    });
+    while (attempts < MAX_ATTEMPTS) {
+      const secondPart = (Math.random().toString(36) + Math.random().toString(36)).substring(2, 12);
+      const candidate = `${freelancer.slug}-${secondPart}`;
+
+      const existing = await Freelancer.findByCode(candidate);
+      if (!existing) {
+        unique_freelance_code = candidate;
+        break;
+      }
+      attempts++;
+    }
+
+    if (!unique_freelance_code) {
+      return res.status(500).json({ ok: false, error: "Impossibile generare un codice univoco, riprova." });
+    }
+
+    const updated = await Freelancer.updateById(freelancerId, { unique_freelance_code });
 
     res.json({ ok: true, code: updated.unique_freelance_code });
   } catch (err) {
