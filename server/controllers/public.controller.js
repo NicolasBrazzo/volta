@@ -54,7 +54,9 @@ router.get("/:code/slots", async (req, res) => {
       return res.status(404).json({ ok: false, error: "Servizio non trovato" });
     }
 
-    const slots = await calculateAvailableSlots(freelancer.id, date, service);
+    // Fetch full freelancer (with Google tokens) for Calendar integration
+    const fullFreelancer = await Freelancer.findById(freelancer.id);
+    const slots = await calculateAvailableSlots(fullFreelancer, date, service);
 
     res.json({ ok: true, data: slots });
   } catch (err) {
@@ -83,6 +85,9 @@ router.post("/:code/book", async (req, res) => {
       return res.status(404).json({ ok: false, error: "Servizio non trovato" });
     }
 
+    // Fetch full freelancer (with Google tokens) for Calendar integration
+    const fullFreelancer = await Freelancer.findById(freelancer.id);
+
     // Build timestamptz values for date (start) and end_date (end)
     const [h, m] = start_time.split(":").map(Number);
     const endMinutes = h * 60 + m + service.duration_minutes;
@@ -92,8 +97,8 @@ router.post("/:code/book", async (req, res) => {
     const dateTimestamp = `${date}T${start_time}:00`;
     const endDateTimestamp = `${date}T${endH}:${endM}:00`;
 
-    // Re-verify slot is still available
-    const availableSlots = await calculateAvailableSlots(freelancer.id, date, service);
+    // Re-verify slot is still available (includes Google Calendar check)
+    const availableSlots = await calculateAvailableSlots(fullFreelancer, date, service);
     const slotExists = availableSlots.some((s) => s.start_time === start_time);
     if (!slotExists) {
       return res.status(409).json({ ok: false, error: "Slot non più disponibile" });
@@ -114,7 +119,6 @@ router.post("/:code/book", async (req, res) => {
 
     // Sincronizza su Google Calendar (non blocca la prenotazione in caso di errore)
     try {
-      const fullFreelancer = await Freelancer.findById(freelancer.id);
       if (fullFreelancer?.google_access_token && fullFreelancer?.google_refresh_token) {
         const eventId = await createCalendarEvent(fullFreelancer, booking, service);
         booking.google_event_id = eventId;

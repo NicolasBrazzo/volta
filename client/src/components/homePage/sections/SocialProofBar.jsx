@@ -13,7 +13,7 @@ export default function SocialProofBar() {
           viewport={{ once: true }}
           className="text-sm text-neutral-500 dark:text-neutral-400 text-center mb-4"
         >
-          Una piattaforma multi-tenant. Un workspace dedicato per ogni professionista.
+          Pensato per chi lavora in prima persona, ogni giorno.
         </motion.p>
         <motion.div
           variants={fadeInUp}

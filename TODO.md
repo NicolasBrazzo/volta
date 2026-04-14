@@ -12,24 +12,24 @@ Questo è il cuore del prodotto: un cliente riceve dal freelancer un link con co
 **Contesto**: ogni freelancer genera il proprio codice condivisibile dalla pagina **Settings** (`CodeCreator`). Il codice ha formato `slug-random` (es. `mario-rossi-a3f8k2`) ed è salvato nel campo `unique_freelance_code` della tabella `bf_freelancers`. Il codice è già parzialmente implementato nel branch `dev` (`POST /api/freelancers/code`).
 
 - [x] **Completare generazione codice** — Il flusso `Settings.jsx → CodeCreator → POST /api/freelancers/code` esiste nel branch `dev`; verificare che gestisca correttamente la rigenerazione e la collision di codici duplicati
-- [ ] **Implementare `GET /api/public/:code`** — Cercare il freelancer in `bf_freelancers` tramite `unique_freelance_code`; restituire `business_name`, `description`, `slug` e lista dei servizi attivi (`bf_services` dove `is_active = true`); rispondere 404 se il codice non esiste
-- [ ] **Implementare `GET /api/public/:code/slots`** — Ricevere query params `date` (YYYY-MM-DD) e `serviceId` (UUID); validare entrambi; chiamare `calculateAvailableSlots()`; restituire array di slot liberi in formato `"HH:MM"`; rispondere 400 se i parametri sono mancanti o invalidi
-- [ ] **Implementare `POST /api/public/:code/book`** — Ricevere body con `service_id`, `date`, `time`, `client_name`, `client_email`, `client_phone` (opzionale), `notes` (opzionale); validare tutti i campi obbligatori; creare il record in `bf_bookings`; chiamare `createCalendarEvent()` e salvare il `google_event_id`; rispondere 201 con i dettagli della prenotazione creata
-- [ ] **Implementare `calculateAvailableSlots(professional, date, service)`** in `server/utils/slots.js`
-  - Recuperare la disponibilita settimanale del freelancer per il `day_of_week` corrispondente alla data richiesta (0=Dom, 1=Lun, …); se non configurata, restituire array vuoto
-  - Generare tutti gli slot possibili nell'orario di disponibilita, suddivisi in blocchi di `service.duration_minutes` minuti
-  - Caricare le prenotazioni esistenti del freelancer per quella data da `bf_bookings` e rimuovere i slot che si sovrappongono
-  - Chiamare `getCalendarEvents()` per la stessa data e rimuovere i slot che si sovrappongono con eventi Google Calendar esistenti (utile per blocchi fuori-app: riunioni, impegni personali)
-  - Se la data e oggi, rimuovere tutti gli slot con orario gia passato
-  - Restituire array di stringhe in formato `"HH:MM"` degli slot ancora liberi
-- [ ] **Completare la pagina `BookingPublic.jsx`** — Attualmente e uno stub che mostra solo il titolo; va implementata come form multi-step:
+- [x] **Implementare `GET /api/public/:code`** — Cercare il freelancer in `bf_freelancers` tramite `unique_freelance_code`; restituire `business_name`, `description`, `slug` e lista dei servizi attivi (`bf_services` dove `is_active = true`); rispondere 404 se il codice non esiste
+- [x] **Implementare `GET /api/public/:code/slots`** — Ricevere query params `date` (YYYY-MM-DD) e `serviceId` (UUID); validare entrambi; chiamare `calculateAvailableSlots()`; restituire array di slot liberi in formato `"HH:MM"`; rispondere 400 se i parametri sono mancanti o invalidi
+- [x] **Implementare `POST /api/public/:code/book`** — Ricevere body con `service_id`, `date`, `time`, `client_name`, `client_email`, `client_phone` (opzionale), `notes` (opzionale); validare tutti i campi obbligatori; creare il record in `bf_bookings`; chiamare `createCalendarEvent()` e salvare il `google_event_id`; rispondere 201 con i dettagli della prenotazione creata
+- [x] **Implementare `calculateAvailableSlots(professional, date, service)`** in `server/utils/slots.js`
+  - [x] Recuperare la disponibilita settimanale del freelancer per il `day_of_week` corrispondente alla data richiesta (0=Dom, 1=Lun, …); se non configurata, restituire array vuoto
+  - [x] Generare tutti gli slot possibili nell'orario di disponibilita, suddivisi in blocchi di `service.duration_minutes` minuti
+  - [x] Caricare le prenotazioni esistenti del freelancer per quella data da `bf_bookings` e rimuovere i slot che si sovrappongono
+  - [x] Chiamare `getCalendarEvents()` per la stessa data e rimuovere i slot che si sovrappongono con eventi Google Calendar esistenti (utile per blocchi fuori-app: riunioni, impegni personali)
+  - [x] Se la data e oggi, rimuovere tutti gli slot con orario gia passato
+  - [x] Restituire array di stringhe in formato `"HH:MM"` degli slot ancora liberi
+- [x] **Completare la pagina `BookingPublic.jsx`** — Attualmente e uno stub che mostra solo il titolo; va implementata come form multi-step:
   1. Mostrare profilo freelancer e lista servizi attivi (fetch da `GET /api/public/:code`)
   2. Selezione servizio → selezione data (date picker, no giorni nel passato)
   3. Fetch slot disponibili da `GET /api/public/:code/slots?date=YYYY-MM-DD&serviceId=xxx`
   4. Selezione slot orario tra quelli disponibili
   5. Form dati cliente: nome, email, telefono (opzionale), note (opzionale)
   6. Submit verso `POST /api/public/:code/book`
-- [ ] **Pagina di conferma post-prenotazione** — Riepilogo con dettagli: nome freelancer, servizio prenotato, data/ora, dati cliente inseriti; mostrata dopo il submit riuscito
+- [x] **Pagina di conferma post-prenotazione** — Riepilogo con dettagli: nome freelancer, servizio prenotato, data/ora, dati cliente inseriti; mostrata dopo il submit riuscito
 
 ---
 
@@ -178,17 +178,17 @@ Queste feature NON servono per il Day 1 ma saranno importanti per crescere.
 ### Fase 2 — Visual Identity
 - [ ] Design logo definitivo (wordmark "volta" + simbolo "V")
 - [ ] Creare varianti logo (dark, light, monochrome, favicon)
-- [ ] Aggiornare design tokens CSS nell'app con la nuova palette Volta
-- [ ] Aggiornare componenti Shadcn (bottoni, card, badge) con nuovi colori
-- [ ] Redesign sidebar e layout con la nuova identità
-- [ ] Creare dark mode come esperienza primaria
+- [x] Aggiornare design tokens CSS nell'app con la nuova palette Volta
+- [x] Aggiornare componenti Shadcn (bottoni, card, badge) con nuovi colori
+- [x] Redesign sidebar e layout con la nuova identità
+- [x] Creare dark mode come esperienza primaria
 
 ### Fase 3 — Verbal Identity & Copy
-- [ ] Definire tagline definitiva
-- [ ] Riscrivere copy della landing page (Hero, Features, HowItWorks, Pricing)
-- [ ] Riscrivere microcopy dell'app (labels, tooltip, stati vuoti, errori)
-- [ ] Riscrivere copy onboarding (CreateFreelanceProfile)
-- [ ] Rinominare il progetto: titoli, meta tag, manifest, package.json
+- [x] Definire tagline definitiva
+- [x] Riscrivere copy della landing page (Hero, Features, HowItWorks, Pricing)
+- [x] Riscrivere microcopy dell'app (labels, tooltip, stati vuoti, errori)
+- [x] Riscrivere copy onboarding (CreateFreelanceProfile)
+- [x] Rinominare il progetto: titoli, meta tag, manifest, package.json
 
 ### Fase 4 — Presenza Digitale
 - [ ] Creare social media kit (template post, stories, cover)

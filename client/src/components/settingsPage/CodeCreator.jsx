@@ -9,14 +9,14 @@ export const CodeCreator = () => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`${window.location.origin}/book/${code}`);
-    showSuccess("Link copiato!");
+    showSuccess("Link copiato. Incollalo dove vuoi.");
   };
 
   return (
     <div className="pt-6 border-t border-border">
-      <h2 className="text-lg font-medium mb-1">Creazione codice</h2>
+      <h2 className="text-lg font-medium mb-1">Il tuo link personale</h2>
       <p className="text-sm text-muted-foreground mb-4">
-        Crea un codice per condividere la tua disponibilità con i clienti.
+        Generalo una volta, condividilo ovunque. È così che i clienti ti trovano.
       </p>
 
       <div className="flex items-center gap-10">
@@ -26,7 +26,7 @@ export const CodeCreator = () => {
           onClick={generateCode}
           disabled={isCreating}
         >
-          {isCreating ? "Generazione..." : code ? "Rigenera codice" : "Crea il codice"}
+          {isCreating ? "Un momento..." : code ? "Rigenera link" : "Crea il mio link"}
         </Button>
 
         {code && (

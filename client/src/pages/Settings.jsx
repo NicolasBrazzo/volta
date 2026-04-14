@@ -13,7 +13,7 @@ export const Settings = () => {
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">Impostazioni</h1>
         <p className="text-muted-foreground mt-2">
-          Gestisci il tuo profilo e le impostazioni del tuo account.
+          Il tuo link, il tuo tema, il tuo account. Tutto al posto giusto.
         </p>
       </div>
 
@@ -21,9 +21,9 @@ export const Settings = () => {
 
       <div className="space-y-6">
         <div>
-          <h2 className="text-lg font-medium mb-1">Aspetto</h2>
+          <h2 className="text-lg font-medium mb-1">Tema</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Personalizza l'aspetto dell'applicazione secondo le tue preferenze.
+            Scuro di default, chiaro quando vuoi. Volta si adatta a te.
           </p>
           <div className="grid grid-cols-3 gap-3 w-full max-w-lg">
             <button
@@ -63,16 +63,16 @@ export const Settings = () => {
         </div>
 
         <div className="pt-6 border-t border-border">
-          <h2 className="text-lg font-medium mb-1">Sessione</h2>
+          <h2 className="text-lg font-medium mb-1">Account</h2>
           <p className="text-sm text-muted-foreground mb-4">
-            Disconnettiti su questo dispositivo.
+            Esci da Volta su questo dispositivo. Tutto resta salvo.
           </p>
           <Button
             variant="outline"
             onClick={() => logout()}
             className="w-full sm:w-auto h-11 gap-3 text-sm font-medium text-destructive hover:text-destructive hover:bg-destructive/10"
           >
-            Logout dall'account
+            Esci
           </Button>
         </div>
       </div>

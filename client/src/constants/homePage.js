@@ -1,9 +1,9 @@
-import { LogIn, CalendarCheck, Link2, Briefcase, Clock, BarChart2 } from 'lucide-react'
+import { LogIn, CalendarCheck, Link2, Briefcase, Clock, Sparkles } from 'lucide-react'
 import { Home, Link, Settings } from 'lucide-react'
 
 // Navbar
 export const navLinks = [
-  { label: 'Features', href: '#features' },
+  { label: 'Funzionalità', href: '#features' },
   { label: 'Come funziona', href: '#come-funziona' },
   { label: 'Prezzi', href: '#prezzi' },
 ]
@@ -11,32 +11,32 @@ export const navLinks = [
 // SocialProofBar
 export const categories = [
   { emoji: '✂️', label: 'Parrucchieri' },
-  { emoji: '🔧', label: 'Meccanici' },
-  { emoji: '💻', label: 'Sviluppatori' },
+  { emoji: '💅', label: 'Estetiste' },
+  { emoji: '💻', label: 'Consulenti' },
   { emoji: '🎨', label: 'Designer' },
   { emoji: '📚', label: 'Tutor' },
   { emoji: '🏋️', label: 'Personal Trainer' },
   { emoji: '📸', label: 'Fotografi' },
   { emoji: '🧘', label: 'Coach' },
-  { emoji: '✨', label: '+ altri' },
+  { emoji: '✨', label: 'e molti altri' },
 ]
 
 // MultiTenantExplainer
 export const multiTenantCards = [
   {
     icon: Home,
-    title: 'Workspace isolato',
-    desc: 'Ogni professionista ha il proprio ambiente dedicato. I tuoi dati, i tuoi clienti, le tue prenotazioni — solo tuoi.',
+    title: 'Il tuo spazio',
+    desc: 'Un workspace pensato solo per te. I tuoi clienti, i tuoi appuntamenti, le tue regole.',
   },
   {
     icon: Link,
-    title: 'Link personale unico',
-    desc: 'Ottieni un URL del tipo bookingfreelance.app/tuonome da condividere ovunque.',
+    title: 'Un link, ovunque',
+    desc: 'Un URL personale da mettere in bio, nelle email, su WhatsApp. I clienti prenotano in un tap.',
   },
   {
     icon: Settings,
-    title: 'Configurazione indipendente',
-    desc: 'Servizi, orari, disponibilità e report completamente autonomi. Nessuna interferenza con altri utenti.',
+    title: 'Configurazione in libertà',
+    desc: 'Servizi, orari, pause, disponibilità. Cambi quando vuoi, senza chiedere permesso a nessuno.',
   },
 ]
 
@@ -44,33 +44,33 @@ export const multiTenantCards = [
 export const features = [
   {
     icon: LogIn,
-    title: 'Login con Google',
-    desc: 'Registrati in un click. Il tuo workspace viene creato automaticamente.',
+    title: 'Accesso con Google',
+    desc: 'Un click e sei dentro. Nessuna password da ricordare, nessun form infinito.',
   },
   {
     icon: CalendarCheck,
-    title: 'Sync Google Calendar',
-    desc: 'Appuntamenti sincronizzati in tempo reale, solo nel tuo tenant.',
+    title: 'Google Calendar, sincronizzato',
+    desc: 'Ogni prenotazione finisce dritta nel tuo calendario. Niente doppie prenotazioni, mai più.',
   },
   {
     icon: Link2,
-    title: 'Link di prenotazione',
-    desc: 'Un URL unico. I clienti vedono solo te, non gli altri utenti.',
+    title: 'Il tuo link personale',
+    desc: 'Un URL solo tuo da condividere con chi vuoi. Lo aprono, scelgono, prenotano.',
   },
   {
     icon: Briefcase,
-    title: 'Gestione Servizi',
-    desc: 'Aggiungi servizi con durata e prezzo nel tuo spazio personale.',
+    title: 'Servizi su misura',
+    desc: 'Aggiungi, modifica, metti in pausa. Durata e prezzo li decidi tu, in qualsiasi momento.',
   },
   {
     icon: Clock,
-    title: 'Gestione Disponibilità',
-    desc: 'Orari, pause e giorni di chiusura. Ogni tenant indipendente.',
+    title: 'Disponibilità intelligente',
+    desc: 'Dici quando lavori, noi facciamo il resto. Slot calcolati in automatico, niente sovrapposizioni.',
   },
   {
-    icon: BarChart2,
-    title: 'Reportistica',
-    desc: 'Grafici e dati esclusivi del tuo workspace. Decidi con i numeri.',
+    icon: Sparkles,
+    title: 'Zero pensieri',
+    desc: 'Promemoria, conferme, follow-up. Tu fai il tuo lavoro, a tutto il resto pensa Volta.',
   },
 ]
 
@@ -78,29 +78,29 @@ export const features = [
 export const steps = [
   {
     number: '1',
-    title: 'Registrati con Google',
-    desc: 'Un click con il tuo account Google e il tuo workspace personale viene creato istantaneamente. Nessun form, nessuna configurazione tecnica.',
+    title: 'Accedi con Google',
+    desc: 'Un tap e il tuo workspace è pronto. Niente setup tecnico, niente carte di credito, niente attese.',
   },
   {
     number: '2',
-    title: 'Configura il tuo spazio',
-    desc: 'Inserisci i tuoi servizi, imposta gli orari e personalizza la pagina di prenotazione nel tuo ambiente isolato.',
+    title: 'Disegna la tua agenda',
+    desc: 'Aggiungi i tuoi servizi, imposta gli orari. Due minuti e sei online, con stile.',
   },
   {
     number: '3',
-    title: 'Condividi il tuo link',
-    desc: 'Invia bookingfreelance.app/tuonome via WhatsApp o email. I clienti prenotano, tu ricevi la notifica su Google Calendar.',
+    title: 'Condividi il link',
+    desc: 'Il tuo URL personale va dove vai tu. I clienti prenotano, Volta aggiorna il calendario, tu respiri.',
   },
 ]
 
 // DashboardMockup
 export const checkItems = [
-  'Workspace personale creato automaticamente al login',
-  'Vista calendario con tutti i tuoi appuntamenti',
-  'Gestione servizi con prezzi e durate',
-  'Disponibilità personalizzabile giorno per giorno',
-  'Report e grafici del tuo andamento',
-  'Link booking: bookingfreelance.app/tuonome',
+  'Workspace pronto al primo accesso',
+  'Calendario con tutti i tuoi appuntamenti',
+  'Servizi con prezzi e durate personalizzabili',
+  'Disponibilità giorno per giorno',
+  'Sincronizzazione Google Calendar',
+  'Link personale da condividere ovunque',
 ]
 
 // Testimonials
@@ -110,51 +110,51 @@ export const testimonials = [
     name: 'Marco R.',
     profession: 'Parrucchiere',
     quote:
-      'Ho il mio spazio tutto mio. I clienti prenotano dal mio link e io li trovo direttamente in Google Calendar. Ho azzerato i messaggi su WhatsApp.',
+      'Prima passavo le serate a rispondere a WhatsApp per fissare appuntamenti. Ora condivido il mio link e me ne dimentico. È un altro lavoro.',
   },
   {
     initials: 'LT',
     name: 'Laura T.',
     profession: 'Personal Trainer',
     quote:
-      'In 5 minuti avevo già il workspace attivo e il link da mandare. Zero configurazioni tecniche.',
+      'In cinque minuti ero online. Il link gira sui miei social, le prenotazioni arrivano da sole. Mi sembra magia.',
   },
   {
     initials: 'DM',
     name: 'Davide M.',
-    profession: 'Consulente IT',
+    profession: 'Consulente',
     quote:
-      'Apprezzo molto che ogni professionista abbia il proprio ambiente separato. Professionale e sicuro.',
+      'Finalmente un tool che sembra fatto per me, non per aziende con team di venti persone. Semplice, diretto, bello da usare.',
   },
 ]
 
 // Pricing
 export const freeFeatures = [
-  '1 workspace personale',
-  '1 servizio',
-  'Fino a 20 appuntamenti/mese',
-  'Link bookingfreelance.app/tuonome',
-  'Sync Google Calendar',
+  'Il tuo workspace personale',
+  '1 servizio attivo',
+  'Fino a 20 appuntamenti al mese',
+  'Link personale condivisibile',
+  'Sincronizzazione Google Calendar',
 ]
 
 export const proFeatures = [
-  'Workspace dedicato',
   'Servizi illimitati',
-  'Appuntamenti illimitati',
-  'Reportistica avanzata',
+  'Appuntamenti senza limiti',
+  'Promemoria email automatici',
+  'Pagina di prenotazione personalizzata',
+  'Statistiche e insights',
   'Supporto prioritario',
-  'Personalizzazione pagina booking',
 ]
 
 // Footer
 export const productLinks = [
-  { label: 'Features', href: '#features' },
+  { label: 'Funzionalità', href: '#features' },
+  { label: 'Come funziona', href: '#come-funziona' },
   { label: 'Prezzi', href: '#prezzi' },
-  { label: 'Dashboard', href: '#dashboard' },
 ]
 
 export const legalLinks = [
-  { label: 'Privacy Policy', href: '#' },
+  { label: 'Privacy', href: '#' },
   { label: 'Termini', href: '#' },
   { label: 'GDPR', href: '#' },
 ]

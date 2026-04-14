@@ -31,15 +31,14 @@ export default function FinalCTA() {
             variants={fadeInUp}
             className="text-4xl font-bold text-white max-w-2xl leading-tight"
           >
-            Pronto a costruire il tuo spazio di prenotazione online?
+            Il tuo tempo vale troppo per gestirlo a mano.
           </motion.h2>
 
           <motion.p
             variants={fadeInUp}
             className="text-xl text-primary-200 mt-4 max-w-xl leading-relaxed"
           >
-            Registrati con Google e ottieni il tuo workspace in 2 minuti. Il tuo
-            link. I tuoi clienti. I tuoi appuntamenti.
+            Accedi con Google, condividi il tuo link, torna al tuo lavoro. Al resto pensa Volta.
           </motion.p>
 
           <motion.div variants={fadeInUp} className="mt-8">
@@ -49,7 +48,7 @@ export default function FinalCTA() {
               className="px-8 py-4 text-lg gap-2 shadow-lg shadow-accent-DEFAULT/30 hover:shadow-accent-DEFAULT/50 transition-shadow"
             >
               <GoogleIcon className="w-5 h-5" variant="white" />
-              Crea il tuo workspace gratis
+              Inizia gratis con Google
             </Button>
           </motion.div>
 
@@ -57,7 +56,7 @@ export default function FinalCTA() {
             variants={fadeInUp}
             className="text-primary-400 text-sm mt-4"
           >
-            · Setup in 2 minuti ·
+            · Due minuti, nessuna carta ·
           </motion.p>
         </motion.div>
       </div>

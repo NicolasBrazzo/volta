@@ -17,10 +17,10 @@ export default function Features() {
           className="text-center"
         >
           <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">
-            Tutto quello che ti serve, già incluso
+            Tutto quello che ti serve. Niente di più.
           </h2>
           <p className="text-neutral-600 dark:text-neutral-300 mt-3 max-w-xl mx-auto">
-            Ogni funzionalità è progettata per il professionista indipendente. Nessun compromesso, nessuna condivisione.
+            Volta è pensato per chi lavora da solo e vuole sembrare un team di dieci. Pochi strumenti, ben fatti.
           </p>
         </motion.div>
 

@@ -41,10 +41,10 @@ export default function Navbar() {
         >
           <img
             src={isDark ? logoBlack : logoWhite}
-            alt="Booking Freelance"
+            alt="Volta"
             className="h-10 w-auto"
           />
-          <span>Booking Freelance</span>
+          <span className="lowercase">volta</span>
         </a>
 
         {/* Desktop nav links */}
@@ -96,10 +96,10 @@ export default function Navbar() {
                 <SheetTitle className="flex items-center gap-2">
                   <img
                     src={isDark ? logoBlack : logoWhite}
-                    alt="Booking Freelance"
+                    alt="Volta"
                     className="h-6 w-auto"
                   />
-                  Booking Freelance
+                  Volta
                 </SheetTitle>
               </SheetHeader>
               <nav className="mt-8 flex flex-col gap-4">

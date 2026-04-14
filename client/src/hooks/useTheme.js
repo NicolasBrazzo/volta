@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "system"
+    return localStorage.getItem("theme") || "dark"
   })
 
   const [systemTheme, setSystemTheme] = useState(() =>
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
+    window.matchMedia("(prefers-color-scheme: light)").matches
+      ? "light"
+      : "dark"
   )
 
   const resolvedTheme = theme === "system" ? systemTheme : theme

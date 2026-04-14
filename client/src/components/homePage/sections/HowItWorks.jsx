@@ -15,9 +15,9 @@ export default function HowItWorks() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Parti in 3 semplici passi</h2>
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Tre passi. Due minuti. Zero attriti.</h2>
           <p className="text-neutral-600 dark:text-neutral-300 mt-3 max-w-md mx-auto">
-            Dal primo accesso al tuo link di prenotazione in meno di 2 minuti.
+            Dal primo click al tuo link di prenotazione online. Più veloce di un caffè.
           </p>
         </motion.div>
 

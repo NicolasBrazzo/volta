@@ -1,5 +1,6 @@
 const Availability = require("../models/availability.model");
 const Booking = require("../models/bookings.model");
+const { getCalendarEvents } = require("../services/googleCalendar");
 
 const SLOT_STEP_MINUTES = 30;
 
@@ -21,9 +22,11 @@ const minutesToTime = (minutes) => {
  *   - date     (inizio appuntamento)
  *   - end_date (fine appuntamento)
  *
+ * @param {Object} professional - Oggetto freelancer completo (con google_access_token/refresh_token se connesso)
  * @returns {Array<{ start_time: string, end_time: string }>} slot in formato "HH:MM"
  */
-const calculateAvailableSlots = async (professionalId, dateString, service) => {
+const calculateAvailableSlots = async (professional, dateString, service) => {
+  const professionalId = professional.id;
   const date = new Date(dateString + "T00:00:00");
   const dayOfWeek = date.getDay();
 
@@ -56,9 +59,28 @@ const calculateAvailableSlots = async (professionalId, dateString, service) => {
     };
   });
 
-  // Filter out overlapping slots
+  // Fetch Google Calendar events and map to minutes-of-day
+  let calendarRanges = [];
+  if (professional.google_access_token && professional.google_refresh_token) {
+    try {
+      const events = await getCalendarEvents(professional, dayStart, dayEnd);
+      calendarRanges = events.map((e) => {
+        const eStart = new Date(e.start);
+        const eEnd = new Date(e.end);
+        return {
+          start: eStart.getHours() * 60 + eStart.getMinutes(),
+          end: eEnd.getHours() * 60 + eEnd.getMinutes(),
+        };
+      });
+    } catch (err) {
+      console.error("GOOGLE CALENDAR FETCH ERROR in calculateAvailableSlots:", err);
+    }
+  }
+
+  // Filter out slots overlapping with bookings or Google Calendar events
+  const allBlocked = [...bookedRanges, ...calendarRanges];
   const free = candidates.filter((slot) =>
-    !bookedRanges.some((b) => slot.start < b.end && slot.end > b.start)
+    !allBlocked.some((b) => slot.start < b.end && slot.end > b.start)
   );
 
   // If today, filter out past slots

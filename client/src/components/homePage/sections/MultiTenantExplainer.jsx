@@ -17,10 +17,10 @@ export default function MultiTenantExplainer() {
           className="text-center"
         >
           <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">
-            La tua attività. Il tuo spazio. Solo tuo.
+            La tua attività. Il tuo spazio. Le tue regole.
           </h2>
           <p className="text-neutral-600 dark:text-neutral-300 mt-3 max-w-xl mx-auto">
-            Multi-tenant significa che ogni professionista opera in un ambiente completamente separato e indipendente.
+            Ogni professionista su Volta ha un ambiente indipendente, con i propri servizi, orari e clienti. Senza interferenze.
           </p>
         </motion.div>
 

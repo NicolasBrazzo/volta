@@ -21,7 +21,7 @@ function BrowserMockup() {
 
   return (
     <div className="rounded-xl border border-neutral-200 shadow-xl overflow-hidden w-full max-w-lg">
-      <BrowserChrome url="bookingfreelance.app/mario" />
+      <BrowserChrome url="volta.app/mario" />
 
       {/* App content */}
       <div className="flex bg-white" style={{ minHeight: '320px' }}>
@@ -114,7 +114,7 @@ export default function Hero() {
             <motion.div variants={fadeInUp}>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent-DEFAULT bg-accent-DEFAULT/10 rounded-full px-3 py-1 mb-6">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent-DEFAULT animate-pulse" />
-                Piattaforma multi-tenant per professionisti
+                Il tuo tempo, automatizzato
               </span>
             </motion.div>
 
@@ -122,15 +122,15 @@ export default function Hero() {
               variants={fadeInUp}
               className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-white leading-tight"
             >
-              Accetta prenotazioni online.{' '}
-              <span className="text-primary-600">Automaticamente.</span>
+              Prenotazioni intelligenti.{' '}
+              <span className="text-primary-600">Zero pensieri.</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="text-xl text-neutral-600 dark:text-neutral-300 mt-4 max-w-lg leading-relaxed"
             >
-              Crea il tuo workspace su Booking Freelance, collega Google Calendar e condividi il tuo link — ogni professionista ha il suo ambiente dedicato e indipendente.
+              I tuoi clienti prenotano in 30 secondi. Tu li ritrovi su Google Calendar. Il resto? Lo gestisce Volta, mentre tu fai il tuo lavoro.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -145,9 +145,9 @@ export default function Hero() {
 
             <motion.div variants={fadeInUp} className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-500 dark:text-neutral-400">
               {[
-                'Workspace personale e isolato',
-                'Setup in 2 minuti',
-                'Sync automatica con Google Calendar',
+                'Pronto in due minuti',
+                'Nessuna carta richiesta',
+                'Sincronizzato con Google Calendar',
               ].map((badge) => (
                 <span key={badge} className="flex items-center gap-1.5">
                   <Check className="w-4 h-4 text-accent-DEFAULT" />

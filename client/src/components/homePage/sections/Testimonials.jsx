@@ -17,9 +17,9 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Cosa dicono i nostri utenti</h2>
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Chi usa Volta, lavora meglio.</h2>
           <p className="text-neutral-600 dark:text-neutral-300 mt-3 max-w-md mx-auto">
-            Migliaia di professionisti hanno già il loro workspace su Booking Freelance.
+            Professionisti che hanno smesso di rincorrere appuntamenti e hanno ricominciato a godersi il lavoro.
           </p>
         </motion.div>
 
