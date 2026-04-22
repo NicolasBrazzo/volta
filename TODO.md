@@ -103,13 +103,13 @@ Senza validazione, qualsiasi utente può inviare dati arbitrari al database.
 
 ## 6. Configurazione & Deploy
 
-- [ ] **Creare `.env.example`** nella root con tutte le variabili necessarie (server + client)
-- [ ] **Creare `README.md`** nella root del progetto con:
+- [x] **Creare `.env.example`** nella root con tutte le variabili necessarie (server + client)
+- [x] **Creare `README.md`** nella root del progetto con:
   - Descrizione del progetto
   - Requisiti (Node >= 20, account Supabase, Google Cloud project)
   - Istruzioni setup locale (server + client)
   - Variabili d'ambiente documentate
-- [ ] **Aggiungere endpoint `/api/health`** per monitoring base
+- [x] **Aggiungere endpoint `/api/health`** per monitoring base
 
 ---
 
