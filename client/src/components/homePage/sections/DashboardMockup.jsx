@@ -1,37 +1,16 @@
 import { motion } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
+import { cn } from '@/utils/cnFunc'
+import { fadeInUp, stagger } from '@/constants/animations'
+import { checkItems } from '@/constants/homePage'
+import BrowserChrome from '@/components/homePage/BrowserChrome'
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-}
-
-const checkItems = [
-  'Workspace personale creato automaticamente al login',
-  'Vista calendario con tutti i tuoi appuntamenti',
-  'Gestione servizi con prezzi e durate',
-  'Disponibilità personalizzabile giorno per giorno',
-  'Report e grafici del tuo andamento',
-  'Link booking: bookingfreelance.app/tuonome',
-]
+const sectionStagger = stagger()
 
 function DashboardMockupPreview() {
   return (
     <div className="rounded-xl border border-neutral-200 shadow-xl overflow-hidden w-full max-w-lg">
-      {/* Browser chrome */}
-      <div className="bg-neutral-100 h-8 flex items-center px-3 gap-2">
-        <span className="w-3 h-3 rounded-full bg-red-400" />
-        <span className="w-3 h-3 rounded-full bg-yellow-400" />
-        <span className="w-3 h-3 rounded-full bg-green-400" />
-        <div className="ml-2 flex-1 bg-white rounded text-xs text-neutral-400 px-2 py-0.5 max-w-52">
-          bookingfreelance.app/dashboard
-        </div>
-      </div>
+      <BrowserChrome url="bookingfreelance.app/dashboard" />
 
       {/* App content */}
       <div className="flex bg-white" style={{ minHeight: '300px' }}>
@@ -40,11 +19,12 @@ function DashboardMockupPreview() {
           {['Dashboard', 'Servizi', 'Disponibilità', 'Reportistica'].map((item, i) => (
             <div
               key={item}
-              className={`px-4 py-2 text-xs cursor-pointer ${
+              className={cn(
+                'px-4 py-2 text-xs cursor-pointer',
                 i === 3
                   ? 'bg-primary-700 text-white rounded-r-lg'
                   : 'text-primary-300 hover:text-white'
-              }`}
+              )}
             >
               {item}
             </div>
@@ -98,7 +78,7 @@ export default function DashboardMockup() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: text */}
           <motion.div
-            variants={stagger}
+            variants={sectionStagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -115,7 +95,7 @@ export default function DashboardMockup() {
               Ogni professionista accede al proprio workspace indipendente.
             </motion.p>
 
-            <motion.ul variants={stagger} className="mt-8 flex flex-col gap-4">
+            <motion.ul variants={sectionStagger} className="mt-8 flex flex-col gap-4">
               {checkItems.map((item) => (
                 <motion.li key={item} variants={fadeInUp} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 mt-0.5 shrink-0 text-accent-DEFAULT" />

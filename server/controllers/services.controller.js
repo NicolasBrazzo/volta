@@ -1,8 +1,24 @@
 const express = require("express");
+const { z } = require("zod");
 const protect = require("../middleware/auth");
+const { validate } = require("../middleware/validate");
 const Services = require("../models/services.model");
 
 const router = express.Router();
+
+const createServiceSchema = z.object({
+  name: z.string().min(1, "Il nome è obbligatorio").max(100),
+  duration_minutes: z.coerce.number().int().positive("La durata deve essere positiva"),
+  price: z.coerce.number().min(0, "Il prezzo non può essere negativo"),
+  description: z.string().max(500).optional(),
+});
+
+const updateServiceSchema = z.object({
+  name: z.string().min(1).max(100).optional(),
+  duration_minutes: z.coerce.number().int().positive().optional(),
+  price: z.coerce.number().min(0).optional(),
+  description: z.string().max(500).optional(),
+}).refine((data) => Object.keys(data).length > 0, { message: "Nessun campo da aggiornare" });
 
 // GET /api/services — Lista servizi del professionista
 router.get("/", protect, async (req, res) => {
@@ -16,7 +32,7 @@ router.get("/", protect, async (req, res) => {
 });
 
 // POST /api/services — Crea servizio
-router.post("/", protect, async (req, res) => {
+router.post("/", protect, validate(createServiceSchema), async (req, res) => {
   try {
     const service = await Services.create({
       ...req.body,
@@ -30,7 +46,7 @@ router.post("/", protect, async (req, res) => {
 });
 
 // PUT /api/services/:id — Modifica servizio
-router.put("/:id", protect, async (req, res) => {
+router.put("/:id", protect, validate(updateServiceSchema), async (req, res) => {
   try {
     const existing = await Services.findById(req.params.id);
     if (!existing || existing.professional_id !== req.user.sub) {

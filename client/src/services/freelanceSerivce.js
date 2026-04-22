@@ -6,7 +6,6 @@ export const firstAccess = async () => {
     const res = await api.get(`/auth/firstAccess`);
     return res.data;
   } catch (error) {
-    console.error("Errore durante la verifica del primo accesso:", error);
     throw error;
   }
 };
@@ -17,7 +16,6 @@ export const getProfile = async () => {
     const res = await api.get("/auth/me");
     return res.data.user;
   } catch (error) {
-    console.error("Errore durante il recupero del profilo:", error);
     throw error;
   }
 };
@@ -28,7 +26,6 @@ export const updateProfile = async (data) => {
     const res = await api.put("/auth/profile", data);
     return res.data;
   } catch (error) {
-    console.error("Errore durante l'aggiornamento del profilo:", error);
     throw error;
   }
 };

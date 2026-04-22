@@ -5,6 +5,8 @@ const {
   findById,
   deleteById,
 } = require("../models/bookings.model");
+const Freelancer = require("../models/freelancer.model");
+const { deleteCalendarEvent } = require("../services/googleCalendar");
 
 const router = express.Router();
 
@@ -62,6 +64,18 @@ router.delete("/:id", protect, async (req, res) => {
 
     if (booking.professional_id !== req.user.sub) {
       return res.status(403).json({ ok: false, error: "Accesso negato" });
+    }
+
+    // Rimuovi l'evento da Google Calendar prima di eliminare il record
+    if (booking.google_event_id) {
+      try {
+        const freelancer = await Freelancer.findById(booking.professional_id);
+        if (freelancer?.google_access_token && freelancer?.google_refresh_token) {
+          await deleteCalendarEvent(freelancer, booking.google_event_id);
+        }
+      } catch (calErr) {
+        console.error("DELETE CALENDAR EVENT ERROR:", calErr);
+      }
     }
 
     await deleteById(req.params.id);

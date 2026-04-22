@@ -7,7 +7,6 @@ import { Navigate } from "react-router-dom";
 
 export const Dashboard = () => {
   const { user } = useAuth();
-  console.log(user);
 
   const { data, isFetching } = useQuery({
     queryKey: ["firstAccess", user?.id],
@@ -23,9 +22,9 @@ export const Dashboard = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+      <h1 className="text-2xl font-semibold tracking-tight">Bentornato.</h1>
       <p className="text-muted-foreground">
-        Panoramica delle tue prenotazioni, servizi e statistiche.
+        Uno sguardo veloce ai tuoi appuntamenti, ai tuoi servizi, al tuo ritmo.
       </p>
     </div>
   );

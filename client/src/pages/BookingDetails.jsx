@@ -73,7 +73,7 @@ export const BookingDetails = () => {
     minute: "2-digit",
   });
 
-  const service = booking.BF_Services || {};
+  const service = booking.bf_services || {};
   const statusInfo = STATUS_MAP[booking.status] || STATUS_MAP.confirmed;
 
   const handleDelete = () => {
@@ -125,7 +125,7 @@ export const BookingDetails = () => {
             
             <div className="pt-4 border-t border-border flex justify-between items-center">
               <span className="font-medium text-muted-foreground">Prezzo pattuito:</span>
-              <span className="text-lg font-semibold">€ {Number(service.price || 0).toFixed(2)}</span>
+              <span className="text-lg font-semibold">€ {Number(booking.price_booking || 0).toFixed(2)}</span>
             </div>
           </div>
         </div>

@@ -1,21 +1,6 @@
 import { motion } from 'framer-motion'
-
-const categories = [
-  { emoji: '✂️', label: 'Parrucchieri' },
-  { emoji: '🔧', label: 'Meccanici' },
-  { emoji: '💻', label: 'Sviluppatori' },
-  { emoji: '🎨', label: 'Designer' },
-  { emoji: '📚', label: 'Tutor' },
-  { emoji: '🏋️', label: 'Personal Trainer' },
-  { emoji: '📸', label: 'Fotografi' },
-  { emoji: '🧘', label: 'Coach' },
-  { emoji: '✨', label: '+ altri' },
-]
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
+import { fadeInUp } from '@/constants/animations'
+import { categories } from '@/constants/homePage'
 
 export default function SocialProofBar() {
   return (
@@ -28,7 +13,7 @@ export default function SocialProofBar() {
           viewport={{ once: true }}
           className="text-sm text-neutral-500 dark:text-neutral-400 text-center mb-4"
         >
-          Una piattaforma multi-tenant. Un workspace dedicato per ogni professionista.
+          Pensato per chi lavora in prima persona, ogni giorno.
         </motion.p>
         <motion.div
           variants={fadeInUp}

@@ -6,7 +6,6 @@ export const fetchAvailability = async () => {
     const res = await api.get("/api/availability");
     return res.data;
   } catch (error) {
-    console.error("Errore durante il recupero della disponibilità:", error);
     throw error;
   }
 };
@@ -17,7 +16,6 @@ export const updateAvailability = async (availabilityData) => {
     const res = await api.put("/api/availability", availabilityData);
     return res.data;
   } catch (error) {
-    console.error("Errore durante l'aggiornamento della disponibilità:", error);
     throw error;
   }
 };

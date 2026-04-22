@@ -132,14 +132,14 @@ export const Bookings = () => {
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">Prenotazioni</h1>
           <p className="text-muted-foreground mt-2">
-            Visualizza e gestisci le prenotazioni dei tuoi clienti.
+            Qui trovi tutti i tuoi appuntamenti. Ordinati, sincronizzati, sempre aggiornati.
           </p>
         </div>
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-20 bg-card/50">
           <CalendarDays className="h-12 w-12 text-muted-foreground/50 mb-4" />
-          <h3 className="text-xl font-medium mb-2">Nessun appuntamento</h3>
+          <h3 className="text-xl font-medium mb-2">Ancora tutto da scrivere</h3>
           <p className="text-muted-foreground text-center max-w-md mb-6">
-            {data?.error || "Non hai ancora ricevuto nessuna prenotazione. Condividi il tuo link pubblico per permettere ai tuoi clienti di impostarne uno!"}
+            {data?.error || "Non ci sono prenotazioni, per ora. Condividi il tuo link personale e lascia che arrivino da sole."}
           </p>
         </div>
       </div>
@@ -161,7 +161,7 @@ export const Bookings = () => {
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">Prenotazioni</h1>
         <p className="text-muted-foreground mt-2">
-          Visualizza e gestisci le prenotazioni dei tuoi clienti.
+          Il tuo calendario, senza doppie prenotazioni e senza WhatsApp a mezzanotte.
         </p>
       </div>
 
@@ -277,7 +277,7 @@ export const Bookings = () => {
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-16 bg-card">
               <CalendarDays className="h-10 w-10 text-muted-foreground/50 mb-3" />
               <p className="text-muted-foreground text-sm">
-                Nessuna prenotazione per questa giornata.
+                Giornata libera. Goditela.
               </p>
             </div>
           ) : (

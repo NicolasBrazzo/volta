@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, Sun, Moon } from "lucide-react";
 import logoWhite from "@/assets/logoWhite.png";
 import logoBlack from "@/assets/logoBlack.png";
-import { useDarkMode } from "@/hooks/useDarkMode";
+import { useThemeContext } from "@/context/ThemeContext";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,16 +13,23 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/utils/cnFunc";
-
-const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Come funziona", href: "#come-funziona" },
-  { label: "Prezzi", href: "#prezzi" },
-];
+import { navLinks } from "@/constants/homePage";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { isDark, toggle } = useDarkMode();
+  const { resolvedTheme, setTheme } = useThemeContext();
+  const isDark = resolvedTheme === "dark";
+  const toggle = () => setTheme(isDark ? "light" : "dark");
+
+  const themeToggle = (
+    <button
+      onClick={toggle}
+      aria-label={isDark ? "Attiva modalità chiara" : "Attiva modalità scura"}
+      className="p-2 rounded-md text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+    >
+      {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+    </button>
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/80 dark:bg-neutral-900/80 border-b border-neutral-100 dark:border-neutral-800">
@@ -34,10 +41,10 @@ export default function Navbar() {
         >
           <img
             src={isDark ? logoBlack : logoWhite}
-            alt="Booking Freelance"
+            alt="Volta"
             className="h-10 w-auto"
           />
-          <span>Booking Freelance</span>
+          <span className="lowercase">volta</span>
         </a>
 
         {/* Desktop nav links */}
@@ -55,17 +62,7 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <button
-            onClick={toggle}
-            aria-label={
-              isDark ? "Attiva modalità chiara" : "Attiva modalità scura"
-            }
-            className="p-2 rounded-md text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-          >
-            {isDark ?
-              <Sun className="w-4 h-4" />
-            : <Moon className="w-4 h-4" />}
-          </button>
+          {themeToggle}
           <Button variant="ghost" size="sm" asChild>
             <Link to="/login">Accedi</Link>
           </Button>
@@ -76,17 +73,7 @@ export default function Navbar() {
 
         {/* Mobile: CTAs + hamburger */}
         <div className="flex md:hidden items-center gap-2">
-          <button
-            onClick={toggle}
-            aria-label={
-              isDark ? "Attiva modalità chiara" : "Attiva modalità scura"
-            }
-            className="p-2 rounded-md text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
-          >
-            {isDark ?
-              <Sun className="w-4 h-4" />
-            : <Moon className="w-4 h-4" />}
-          </button>
+          {themeToggle}
           <Button variant="ghost" size="sm" className="text-xs px-3" asChild>
             <Link to="/dashboard">Accedi</Link>
           </Button>
@@ -109,10 +96,10 @@ export default function Navbar() {
                 <SheetTitle className="flex items-center gap-2">
                   <img
                     src={isDark ? logoBlack : logoWhite}
-                    alt="Booking Freelance"
+                    alt="Volta"
                     className="h-6 w-auto"
                   />
-                  Booking Freelance
+                  Volta
                 </SheetTitle>
               </SheetHeader>
               <nav className="mt-8 flex flex-col gap-4">

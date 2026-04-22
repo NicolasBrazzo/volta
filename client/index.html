@@ -1,10 +1,43 @@
 <!doctype html>
-<html lang="en">
+<html lang="it" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>client</title>
+    <meta name="theme-color" content="#09090B" />
+    <meta name="description" content="Volta — prenotazioni intelligenti, zero pensieri. I tuoi clienti prenotano in 30 secondi, tu li ritrovi su Google Calendar." />
+    <meta property="og:title" content="Volta — Il tuo tempo, automatizzato." />
+    <meta property="og:description" content="Prenotazioni online per chi lavora da solo e vuole sembrare un team di dieci." />
+    <meta property="og:type" content="website" />
+    <title>Volta — Il tuo tempo, automatizzato.</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var theme =
+            stored && stored !== "system"
+              ? stored
+              : stored === "system"
+              ? window.matchMedia("(prefers-color-scheme: light)").matches
+                ? "light"
+                : "dark"
+              : "dark";
+          var root = document.documentElement;
+          root.classList.remove("light", "dark");
+          root.classList.add(theme);
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      html,
+      body {
+        background: #09090b;
+      }
+      html.light,
+      html.light body {
+        background: #fafaf9;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

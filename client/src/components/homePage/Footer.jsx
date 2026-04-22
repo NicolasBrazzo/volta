@@ -1,16 +1,5 @@
 import { CalendarDays, Github, Linkedin, Twitter } from 'lucide-react'
-
-const productLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Prezzi', href: '#prezzi' },
-  { label: 'Dashboard', href: '#dashboard' },
-]
-
-const legalLinks = [
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Termini', href: '#' },
-  { label: 'GDPR', href: '#' },
-]
+import { productLinks, legalLinks } from '@/constants/homePage'
 
 export default function Footer() {
   return (
@@ -19,12 +8,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Logo + tagline */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-2 text-white font-bold text-lg mb-3">
+            <div className="flex items-center gap-2 text-white font-extrabold text-xl tracking-tight mb-3 lowercase">
               <CalendarDays className="w-5 h-5 text-primary-400" />
-              Booking Freelance
+              volta
             </div>
             <p className="text-sm text-neutral-500 leading-relaxed">
-              La piattaforma multi-tenant per prenotazioni online. Un workspace dedicato per ogni professionista.
+              Il tuo tempo, automatizzato. Prenotazioni online per chi lavora da solo e vuole sembrare un team di dieci.
             </p>
           </div>
 
@@ -60,10 +49,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white text-sm font-semibold mb-4">Contatti</h4>
             <a
-              href="mailto:support@bookingfreelance.app"
+              href="mailto:hello@volta.app"
               className="text-sm hover:text-white transition-colors"
             >
-              support@bookingfreelance.app
+              hello@volta.app
             </a>
           </div>
         </div>
@@ -71,7 +60,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-neutral-800 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-500">
-            © 2025 Booking Freelance — Piattaforma multi-tenant per liberi professionisti.
+            © 2026 Volta — Semplice. Efficace. Bella.
           </p>
           <div className="flex items-center gap-4">
             <a href="#" aria-label="GitHub" className="hover:text-white transition-colors">

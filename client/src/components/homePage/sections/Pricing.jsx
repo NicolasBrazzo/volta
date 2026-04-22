@@ -2,33 +2,10 @@ import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { fadeInUp, stagger } from '@/constants/animations'
+import { freeFeatures, proFeatures } from '@/constants/homePage'
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-}
-
-const freeFeatures = [
-  '1 workspace personale',
-  '1 servizio',
-  'Fino a 20 appuntamenti/mese',
-  'Link bookingfreelance.app/tuonome',
-  'Sync Google Calendar',
-]
-
-const proFeatures = [
-  'Workspace dedicato',
-  'Servizi illimitati',
-  'Appuntamenti illimitati',
-  'Reportistica avanzata',
-  'Supporto prioritario',
-  'Personalizzazione pagina booking',
-]
+const sectionStagger = stagger(0.15)
 
 export default function Pricing() {
   return (
@@ -41,12 +18,12 @@ export default function Pricing() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Semplice. Trasparente.</h2>
-          <p className="text-neutral-500 dark:text-neutral-400 mt-3">Ogni piano include un workspace personale e isolato.</p>
+          <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">Un prezzo onesto. Nessuna sorpresa.</h2>
+          <p className="text-neutral-500 dark:text-neutral-400 mt-3">Inizi gratis. Cresci quando vuoi. Paghi solo se ti serve di più.</p>
         </motion.div>
 
         <motion.div
-          variants={stagger}
+          variants={sectionStagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -72,7 +49,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <Button variant="outline" className="w-full mt-8">
-                  Crea il tuo workspace gratis
+                  Inizia gratis
                 </Button>
               </CardContent>
             </Card>
@@ -104,7 +81,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <Button className="w-full mt-8">
-                  Prova gratis 14 giorni
+                  Prova Pro 14 giorni
                 </Button>
               </CardContent>
             </Card>

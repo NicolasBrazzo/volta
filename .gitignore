@@ -70,3 +70,6 @@ pnpm-lock.yaml
 yarn.lock
 
 /*.md
+!TODO.md
+!README.md
+!client/README.md

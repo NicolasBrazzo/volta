@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volta — Brand Palette</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #09090B;
+      color: #FAFAF9;
+      padding: 60px 40px;
+      min-height: 100vh;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* Header */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .brand-logo {
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tagline {
+      font-size: 18px;
+      color: #71717A;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* Section titles */
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #71717A;
+      margin-bottom: 24px;
+    }
+
+    .section { margin-bottom: 64px; }
+
+    /* Primary palette */
+    .palette-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .color-card {
+      flex: 1;
+      min-width: 200px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #18181B;
+      border: 1px solid #27272A;
+    }
+
+    .color-swatch {
+      height: 140px;
+      position: relative;
+    }
+
+    .color-swatch.large { height: 180px; }
+
+    .color-info {
+      padding: 16px 20px;
+    }
+
+    .color-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .color-hex {
+      font-size: 13px;
+      color: #71717A;
+      font-family: 'Inter', monospace;
+    }
+
+    .color-role {
+      font-size: 12px;
+      color: #52525B;
+      margin-top: 6px;
+    }
+
+    /* Gradient strip */
+    .gradient-strip {
+      height: 80px;
+      border-radius: 16px;
+      margin-bottom: 12px;
+    }
+
+    .gradient-label {
+      font-size: 13px;
+      color: #52525B;
+      text-align: center;
+    }
+
+    /* Scale */
+    .scale-row {
+      display: flex;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 80px;
+    }
+
+    .scale-step {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'Inter', monospace;
+    }
+
+    /* UI Preview */
+    .ui-preview {
+      background: #09090B;
+      border: 1px solid #27272A;
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .preview-card {
+      flex: 1;
+      min-width: 280px;
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .preview-card.dark {
+      background: #18181B;
+      border: 1px solid #27272A;
+    }
+
+    .preview-card.light {
+      background: #FAFAF9;
+      color: #18181B;
+    }
+
+    .preview-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .preview-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .preview-card.dark p { color: #A1A1AA; }
+    .preview-card.light p { color: #52525B; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-primary {
+      background: #6366F1;
+      color: white;
+    }
+
+    .btn-primary:hover { background: #4F46E5; }
+
+    .btn-outline {
+      background: transparent;
+      color: #6366F1;
+      border: 1.5px solid #6366F1;
+    }
+
+    .btn-dark {
+      background: #18181B;
+      color: #FAFAF9;
+      border: 1px solid #27272A;
+    }
+
+    .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Typography preview */
+    .type-sample {
+      margin-bottom: 20px;
+    }
+
+    .type-sample .label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #52525B;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .type-h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .type-h2 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .type-body {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #A1A1AA;
+    }
+
+    .type-ui {
+      font-size: 14px;
+      font-weight: 500;
+      color: #71717A;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-indigo { background: rgba(99, 102, 241, 0.15); color: #818CF8; }
+    .badge-cyan { background: rgba(34, 211, 238, 0.15); color: #22D3EE; }
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+
+    /* Combo row */
+    .combo-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .combo-card {
+      flex: 1;
+      min-width: 160px;
+      height: 120px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    /* Logo variations */
+    .logo-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .logo-variant {
+      flex: 1;
+      min-width: 240px;
+      height: 160px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-variant.on-dark {
+      background: #09090B;
+      border: 1px solid #27272A;
+      color: #FAFAF9;
+    }
+
+    .logo-variant.on-light {
+      background: #FAFAF9;
+      border: 1px solid #E4E4E7;
+      color: #09090B;
+    }
+
+    .logo-variant.on-indigo {
+      background: #6366F1;
+      color: #FAFAF9;
+    }
+
+    .logo-variant.gradient-text {
+      background: #09090B;
+      border: 1px solid #27272A;
+    }
+
+    .logo-variant.gradient-text span {
+      background: linear-gradient(135deg, #6366F1, #22D3EE);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Icon mark */
+    .icon-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      margin-right: 12px;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #3F3F46;
+      font-size: 13px;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #27272A;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="brand-header">
+      <div class="brand-logo">volta</div>
+      <div class="brand-tagline">Il tuo tempo, automatizzato.</div>
+    </div>
+
+    <!-- Primary Colors -->
+    <div class="section">
+      <div class="section-title">Colori Primari</div>
+      <div class="palette-row">
+        <div class="color-card">
+          <div class="color-swatch large" style="background: #6366F1;"></div>
+          <div class="color-info">
+            <div class="color-name">Indigo Elettrico</div>
+            <div class="color-hex">#6366F1</div>
+            <div class="color-role">Primary — CTA, link, brand</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch large" style="background: #4F46E5;"></div>
+          <div class="color-info">
+            <div class="color-name">Indigo Profondo</div>
+            <div class="color-hex">#4F46E5</div>
+            <div class="color-role">Primary hover & active state</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch large" style="background: #22D3EE;"></div>
+          <div class="color-info">
+            <div class="color-name">Cyan Accent</div>
+            <div class="color-hex">#22D3EE</div>
+            <div class="color-role">Accent — highlight, badge, AI features</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch large" style="background: #10B981;"></div>
+          <div class="color-info">
+            <div class="color-name">Verde Menta</div>
+            <div class="color-hex">#10B981</div>
+            <div class="color-role">Success — conferme, disponibilit&agrave;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Base Colors -->
+    <div class="section">
+      <div class="section-title">Base & Neutrali</div>
+      <div class="palette-row">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #09090B;"></div>
+          <div class="color-info">
+            <div class="color-name">Nero Profondo</div>
+            <div class="color-hex">#09090B</div>
+            <div class="color-role">Background principale (dark mode)</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #18181B;"></div>
+          <div class="color-info">
+            <div class="color-name">Zinc 900</div>
+            <div class="color-hex">#18181B</div>
+            <div class="color-role">Card, superfici elevate</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #27272A;"></div>
+          <div class="color-info">
+            <div class="color-name">Zinc 800</div>
+            <div class="color-hex">#27272A</div>
+            <div class="color-role">Bordi, separatori</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #71717A;"></div>
+          <div class="color-info">
+            <div class="color-name">Zinc 500</div>
+            <div class="color-hex">#71717A</div>
+            <div class="color-role">Testo secondario</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #FAFAF9; border-bottom: 1px solid #27272A;"></div>
+          <div class="color-info">
+            <div class="color-name">Bianco Caldo</div>
+            <div class="color-hex">#FAFAF9</div>
+            <div class="color-role">Background light / testo su dark</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indigo Scale -->
+    <div class="section">
+      <div class="section-title">Scala Indigo — dalla UI ai background</div>
+      <div class="scale-row">
+        <div class="scale-step" style="background: #EEF2FF; color: #3730A3;">50</div>
+        <div class="scale-step" style="background: #E0E7FF; color: #3730A3;">100</div>
+        <div class="scale-step" style="background: #C7D2FE; color: #3730A3;">200</div>
+        <div class="scale-step" style="background: #A5B4FC; color: #312E81;">300</div>
+        <div class="scale-step" style="background: #818CF8; color: white;">400</div>
+        <div class="scale-step" style="background: #6366F1; color: white;">500</div>
+        <div class="scale-step" style="background: #4F46E5; color: white;">600</div>
+        <div class="scale-step" style="background: #4338CA; color: white;">700</div>
+        <div class="scale-step" style="background: #3730A3; color: white;">800</div>
+        <div class="scale-step" style="background: #312E81; color: white;">900</div>
+        <div class="scale-step" style="background: #1E1B4B; color: #818CF8;">950</div>
+      </div>
+    </div>
+
+    <!-- Brand Gradient -->
+    <div class="section">
+      <div class="section-title">Gradiente Brand</div>
+      <div class="gradient-strip" style="background: linear-gradient(135deg, #6366F1, #22D3EE);"></div>
+      <div class="gradient-label">Indigo #6366F1 → Cyan #22D3EE — usato per logo, hero, elementi premium</div>
+    </div>
+
+    <!-- Logo Variations -->
+    <div class="section">
+      <div class="section-title">Logo — Variazioni</div>
+      <div class="logo-row">
+        <div class="logo-variant on-dark">volta</div>
+        <div class="logo-variant on-light">volta</div>
+        <div class="logo-variant on-indigo">volta</div>
+        <div class="logo-variant gradient-text"><span>volta</span></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="section">
+      <div class="section-title">Tipografia — Inter</div>
+      <div style="background: #18181B; border: 1px solid #27272A; border-radius: 16px; padding: 40px;">
+        <div class="type-sample">
+          <div class="label">H1 — 48px / 800 / -0.03em</div>
+          <div class="type-h1">Prenotazioni intelligenti.<br>Zero pensieri.</div>
+        </div>
+        <div class="type-sample">
+          <div class="label">H2 — 30px / 700 / -0.02em</div>
+          <div class="type-h2">Il tuo ufficio digitale che non dorme mai</div>
+        </div>
+        <div class="type-sample">
+          <div class="label">Body — 16px / 400 / 1.6</div>
+          <div class="type-body">I tuoi clienti prenotano in 30 secondi. Tu li ritrovi su Google Calendar. Il follow-up parte in automatico. Tu fai il tuo lavoro, al resto pensa Volta.</div>
+        </div>
+        <div class="type-sample" style="margin-bottom: 0;">
+          <div class="label">UI — 14px / 500</div>
+          <div class="type-ui">Prossimi appuntamenti &middot; Gestisci servizi &middot; Impostazioni</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UI Components Preview -->
+    <div class="section">
+      <div class="section-title">Componenti UI — Preview</div>
+      <div class="ui-preview">
+        <!-- Dark card -->
+        <div class="preview-card dark">
+          <h3>Dark Mode</h3>
+          <p>L'esperienza primaria. Elegante, moderna, zero distrazioni. Come Revolut.</p>
+          <div class="btn-group" style="margin-bottom: 20px;">
+            <button class="btn btn-primary">Prenota ora</button>
+            <button class="btn btn-outline">Scopri di pi&ugrave;</button>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="badge badge-indigo">Pro</span>
+            <span class="badge badge-cyan">AI Powered</span>
+            <span class="badge badge-green">Disponibile</span>
+          </div>
+        </div>
+        <!-- Light card -->
+        <div class="preview-card light">
+          <h3 style="color: #09090B;">Light Mode</h3>
+          <p>Per chi preferisce la luminosit&agrave;. Pulito, arioso, Apple-style.</p>
+          <div class="btn-group" style="margin-bottom: 20px;">
+            <button class="btn btn-primary">Prenota ora</button>
+            <button class="btn btn-dark">Scopri di pi&ugrave;</button>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="badge" style="background: rgba(99, 102, 241, 0.1); color: #4F46E5;">Pro</span>
+            <span class="badge" style="background: rgba(6, 182, 212, 0.1); color: #0891B2;">AI Powered</span>
+            <span class="badge" style="background: rgba(16, 185, 129, 0.1); color: #059669;">Disponibile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Combos -->
+    <div class="section">
+      <div class="section-title">Combinazioni Colore</div>
+      <div class="combo-row">
+        <div class="combo-card" style="background: #6366F1; color: white;">volta</div>
+        <div class="combo-card" style="background: #09090B; color: #6366F1; border: 1px solid #27272A;">volta</div>
+        <div class="combo-card" style="background: #FAFAF9; color: #09090B; border: 1px solid #E4E4E7;">volta</div>
+        <div class="combo-card" style="background: linear-gradient(135deg, #6366F1, #22D3EE); color: white;">volta</div>
+        <div class="combo-card" style="background: #1E1B4B; color: #818CF8;">volta</div>
+      </div>
+    </div>
+
+    <!-- Favicon/App Icon -->
+    <div class="section">
+      <div class="section-title">App Icon / Favicon</div>
+      <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+        <div class="icon-mark" style="background: #6366F1; color: white; width: 64px; height: 64px; border-radius: 16px; font-size: 28px;">V</div>
+        <div class="icon-mark" style="background: linear-gradient(135deg, #6366F1, #22D3EE); color: white; width: 64px; height: 64px; border-radius: 16px; font-size: 28px;">V</div>
+        <div class="icon-mark" style="background: #09090B; color: #6366F1; border: 1px solid #27272A; width: 64px; height: 64px; border-radius: 16px; font-size: 28px;">V</div>
+        <div class="icon-mark" style="background: #FAFAF9; color: #09090B; border: 1px solid #E4E4E7; width: 64px; height: 64px; border-radius: 16px; font-size: 28px;">V</div>
+        <div style="color: #52525B; font-size: 13px; margin-left: 8px;">
+          "V" bold come marca iconica &mdash; riconoscibile anche a 16x16px
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      Volta Brand Palette v1.0 &mdash; Semplice. Efficace. Bella.
+    </div>
+
+  </div>
+</body>
+</html>

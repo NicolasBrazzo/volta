@@ -30,7 +30,7 @@ export const Services = () => {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Servizi</h1>
           <p className="text-muted-foreground">
-            Gestisci i servizi che offri ai tuoi clienti.
+            Cosa offri, quanto dura, quanto costa. Tu decidi, i clienti prenotano.
           </p>
         </div>
         <Button onClick={openCreate}>
@@ -42,7 +42,7 @@ export const Services = () => {
       {services.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-16">
           <p className="text-muted-foreground mb-4">
-            Non hai ancora creato nessun servizio.
+            Ancora niente da offrire. Aggiungi il tuo primo servizio e sei online.
           </p>
           <Button variant="outline" onClick={openCreate}>
             <Plus className="h-4 w-4" />

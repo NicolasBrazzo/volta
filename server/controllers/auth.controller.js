@@ -8,34 +8,13 @@ const protect = require("../middleware/auth");
 
 const { JWT_SECRET, JWT_EXPIRES_IN } = require("../config/jwt");
 const { createOAuth2Client, SCOPES } = require("../config/google");
+const { generateUniqueSlug } = require("../utils/slug");
+const { seedDefaults } = require("../utils/seedDefaults");
+const { encrypt } = require("../utils/tokenEncryption");
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
 const router = express.Router();
-
-// ── Utility: genera slug unico dal nome ──────────────────────────
-async function generateUniqueSlug(firstName, lastName) {
-  const base = `${firstName}-${lastName}`
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9-]/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-
-  let slug = base;
-  let existing = await Freelancer.findBySlug(slug);
-
-  let attempts = 0;
-  while (existing && attempts < 5) {
-    const suffix = Math.random().toString(36).substring(2, 6);
-    slug = `${base}-${suffix}`;
-    existing = await Freelancer.findBySlug(slug);
-    attempts++;
-  }
-
-  return slug;
-}
 
 // ── GET /auth/google — Redirect a Google OAuth ───────────────────
 router.get("/google", (req, res) => {
@@ -76,9 +55,9 @@ router.get("/google/callback", async (req, res) => {
 
     if (freelancer) {
       // LOGIN: aggiorna i token Google
-      const updates = { google_access_token: tokens.access_token };
+      const updates = { google_access_token: encrypt(tokens.access_token) };
       if (tokens.refresh_token) {
-        updates.google_refresh_token = tokens.refresh_token;
+        updates.google_refresh_token = encrypt(tokens.refresh_token);
       }
       await Freelancer.updateById(freelancer.id, updates);
     } else {
@@ -86,6 +65,7 @@ router.get("/google/callback", async (req, res) => {
       const slug = await generateUniqueSlug(
         given_name || "user",
         family_name || "new",
+        Freelancer.findBySlug,
       );
 
       freelancer = await Freelancer.create({
@@ -94,8 +74,8 @@ router.get("/google/callback", async (req, res) => {
         last_name: family_name || "",
         slug,
         profile_image: picture || null,
-        google_access_token: tokens.access_token,
-        google_refresh_token: tokens.refresh_token || null,
+        google_access_token: encrypt(tokens.access_token),
+        google_refresh_token: tokens.refresh_token ? encrypt(tokens.refresh_token) : null,
         calendar_id: "primary",
       });
 

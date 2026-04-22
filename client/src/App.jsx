@@ -8,13 +8,17 @@ import { Availability } from "./pages/Availability.jsx";
 import { Bookings } from "./pages/Bookings.jsx";
 import { BookingDetails } from "./pages/BookingDetails.jsx";
 import { Settings } from "./pages/Settings.jsx";
-import { BookingPublic } from "./pages/BookingPublic.jsx";
+import { BookingPublic } from "./pages/publicBooking.jsx/BookingPublic.jsx";
+import { BookingDateTime } from "./pages/publicBooking.jsx/BookingDateTime.jsx";
+import { BookingDetails as PublicBookingDetails } from "./pages/publicBooking.jsx/BookingDetails.jsx";
+import { BookingConfirmation } from "./pages/publicBooking.jsx/BookingConfirmation.jsx";
 import { AppLayout } from "./layouts/AppLayout.jsx";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CreateFreelanceProfile } from "./pages/CreateFreelanceProfile.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 
 const queryClient = new QueryClient();
 
@@ -24,18 +28,22 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ThemeProvider>
+            <ErrorBoundary>
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/book/:slug" element={<BookingPublic />} />
+                <Route path="/book/:code" element={<BookingPublic />} />
+                <Route path="/book/:code/date" element={<BookingDateTime />} />
+                <Route path="/book/:code/details" element={<PublicBookingDetails />} />
+                <Route path="/book/:code/confirmation" element={<BookingConfirmation />} />
                 <Route element={<PrivateRoute />}>
+                  <Route
+                    path="/first-access"
+                    element={<CreateFreelanceProfile />}
+                  />
                   <Route element={<AppLayout />}>
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route
-                      path="/first-access"
-                      element={<CreateFreelanceProfile />}
-                    />
                     <Route path="/services" element={<Services />} />
                     <Route path="/availability" element={<Availability />} />
                     <Route path="/bookings" element={<Bookings />} />
@@ -45,6 +53,7 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>
+            </ErrorBoundary>
           </ThemeProvider>
         </AuthProvider>
       </QueryClientProvider>

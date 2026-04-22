@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       const res = await api.get("/auth/me");
       if (res.data.user) {
         const u = res.data.user;
-        setUser({ id: u.id, email: u.email, slug: u.slug });
+        setUser({ id: u.id, email: u.email, slug: u.slug, unique_freelance_code: u.unique_freelance_code });
       } else {
         localStorage.removeItem("token");
         setUser(null);

@@ -24,26 +24,31 @@ export const CreateFreelanceProfile = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-6">
-      <div className="w-full max-w-2xl space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight">
-            Configura il tuo profilo
-          </h1>
-          <p className="mt-2 text-muted-foreground">
-            Inserisci le informazioni della tua attività e crea il tuo primo
-            servizio.
+    <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4 py-10">
+      <div className="w-full max-w-xl space-y-6">
+        <div className="text-center space-y-2">
+          <div
+            className="inline-flex h-12 w-12 items-center justify-center rounded-xl shadow-sm shadow-primary-500/30"
+            style={{ background: "var(--volta-gradient)" }}
+          >
+            <span className="text-white font-extrabold text-xl tracking-tight">V</span>
+          </div>
+          <h1 className="text-2xl font-semibold tracking-tight">Benvenuto su Volta.</h1>
+          <p className="text-sm text-muted-foreground">
+            Due minuti e sei online. Parti dalle basi: chi sei e cosa offri.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Sezione Profilo */}
-          <div className="rounded-lg border bg-card p-6 shadow-sm space-y-4">
-            <h2 className="text-lg font-semibold">Informazioni attività</h2>
+          <div className="rounded-xl border bg-card p-6 shadow-sm space-y-4">
+            <div>
+              <h2 className="text-lg font-medium">La tua attività</h2>
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="business_name">
-                Nome attività <span className="text-destructive">*</span>
+                Come ti presenti <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="business_name"
@@ -54,10 +59,10 @@ export const CreateFreelanceProfile = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">Descrizione</Label>
+              <Label htmlFor="description">Due righe su di te</Label>
               <Textarea
                 id="description"
-                placeholder="Descrivi brevemente la tua attività..."
+                placeholder="Raccontami cosa fai, come lo fai, e perché ti scelgono."
                 rows={3}
                 value={profile.description}
                 onChange={(e) => onProfileChange("description", e.target.value)}
@@ -65,13 +70,13 @@ export const CreateFreelanceProfile = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="business_type">Tipologia di attività</Label>
+              <Label htmlFor="business_type">Che lavoro fai</Label>
               <Select
                 id="business_type"
                 value={profile.business_type}
                 onChange={(e) => onProfileChange("business_type", e.target.value)}
               >
-                <option value="">Seleziona una tipologia</option>
+                <option value="">Scegli la tua categoria</option>
                 {BUSINESS_TYPES.map((type) => (
                   <option key={type} value={type}>
                     {type}
@@ -82,29 +87,31 @@ export const CreateFreelanceProfile = () => {
           </div>
 
           {/* Sezione Servizio */}
-          <div className="rounded-lg border bg-card p-6 shadow-sm space-y-4">
-            <h2 className="text-lg font-semibold">Il tuo primo servizio</h2>
-            <p className="text-sm text-muted-foreground">
-              Crea almeno un servizio che i tuoi clienti potranno prenotare.
-            </p>
+          <div className="rounded-xl border bg-card p-6 shadow-sm space-y-4">
+            <div>
+              <h2 className="text-lg font-medium">Il tuo primo servizio</h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Aggiungi almeno un servizio prenotabile. Potrai crearne altri quando vuoi.
+              </p>
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="service_name">
-                Nome servizio <span className="text-destructive">*</span>
+                Nome del servizio <span className="text-destructive">*</span>
               </Label>
               <Input
                 id="service_name"
-                placeholder="Es. Consulenza base"
+                placeholder="Es. Consulenza iniziale"
                 value={service.name}
                 onChange={(e) => onServiceChange("name", e.target.value)}
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="service_description">Descrizione servizio</Label>
+              <Label htmlFor="service_description">Cosa include</Label>
               <Textarea
                 id="service_description"
-                placeholder="Descrivi il servizio offerto..."
+                placeholder="Cosa trova il cliente quando prenota questo servizio?"
                 rows={2}
                 value={service.description}
                 onChange={(e) => onServiceChange("description", e.target.value)}
@@ -146,11 +153,10 @@ export const CreateFreelanceProfile = () => {
 
           <Button
             type="submit"
-            className="w-full"
-            size="lg"
+            className="w-full h-11 text-sm font-medium"
             disabled={isSubmitting}
           >
-            {isSubmitting ? <Loader size="sm" /> : "Completa configurazione"}
+            {isSubmitting ? <Loader size="sm" /> : "Entra in Volta"}
           </Button>
         </form>
       </div>

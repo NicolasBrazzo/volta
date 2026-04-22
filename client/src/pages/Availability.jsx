@@ -32,11 +32,11 @@ export const Availability = () => {
   const mutation = useMutation({
     mutationFn: updateAvailability,
     onSuccess: () => {
-      showSuccess("Disponibilità aggiornata con successo");
+      showSuccess("Orari aggiornati.");
       queryClient.invalidateQueries(["availability"]);
     },
     onError: () => {
-      showError("Errore durante l'aggiornamento della disponibilità");
+      showError("Qualcosa è andato storto. Riprova tra un istante.");
     },
   });
 
@@ -65,7 +65,7 @@ export const Availability = () => {
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">Disponibilità</h1>
         <p className="text-muted-foreground mt-2">
-          Imposta i tuoi orari di apertura per ogni giorno della settimana.
+          Dicci quando lavori. Al resto — slot, conflitti, pause — pensiamo noi.
         </p>
       </div>
 
