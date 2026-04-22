@@ -36,6 +36,8 @@ logs-*.txt
 Thumbs.db
 ehthumbs.db
 Icon?
+!**/icons/*.jsx
+!**/icons/*.tsx
 
 ### Editor / IDE
 .vscode/
