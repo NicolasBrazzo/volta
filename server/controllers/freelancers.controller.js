@@ -1,10 +1,18 @@
 const express = require("express");
+const { z } = require("zod");
 const router = express.Router();
 const protect = require("../middleware/auth");
+const { validate } = require("../middleware/validate");
 const Freelancer = require("../models/freelancer.model");
 
+const profileSchema = z.object({
+  business_name: z.string().min(1).max(100).optional(),
+  description: z.string().max(1000).optional(),
+  business_type: z.string().max(50).optional(),
+});
+
 // PUT /freelancers/:id — Aggiorna profilo freelancer
-router.put("/:id", protect, async (req, res) => {
+router.put("/:id", protect, validate(profileSchema), async (req, res) => {
   try {
     const freelancerId = req.params.id;
     if (freelancerId !== req.user.sub) {

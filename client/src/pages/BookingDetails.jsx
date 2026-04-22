@@ -53,7 +53,6 @@ export const BookingDetails = () => {
   }
 
   const booking = data.data;
-  console.log("BOOKING", booking);
   const startDate = new Date(booking.date);
   const endDate = new Date(booking.end_date);
   
@@ -75,7 +74,6 @@ export const BookingDetails = () => {
   });
 
   const service = booking.bf_services || {};
-  console.log("SERVICE", service);
   const statusInfo = STATUS_MAP[booking.status] || STATUS_MAP.confirmed;
 
   const handleDelete = () => {

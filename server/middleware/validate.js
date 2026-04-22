@@ -1,0 +1,11 @@
+const validate = (schema) => (req, res, next) => {
+  const result = schema.safeParse(req.body);
+  if (!result.success) {
+    const message = result.error.errors[0]?.message || "Dati non validi";
+    return res.status(400).json({ ok: false, error: message });
+  }
+  req.body = result.data;
+  next();
+};
+
+module.exports = { validate };

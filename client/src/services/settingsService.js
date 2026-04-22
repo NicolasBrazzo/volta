@@ -6,7 +6,6 @@ export const createFreelanceCode = async () => {
     const res = await api.post("/api/freelancers/code");
     return res.data;
   } catch (error) {
-    console.error("Errore durante la creazione del codice:", error);
     throw error;
   }
 };

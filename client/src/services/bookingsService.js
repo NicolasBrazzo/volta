@@ -7,7 +7,6 @@ export const fetchBookings = async (status = null) => {
     const res = await api.get("/api/bookings", { params });
     return res.data;
   } catch (error) {
-    console.error("Errore durante il recupero delle prenotazioni:", error);
     throw error;
   }
 };
@@ -18,7 +17,6 @@ export const fetchBookingById = async (id) => {
     const res = await api.get(`/api/bookings/${id}`);
     return res.data;
   } catch (error) {
-    console.error("Errore durante il recupero della prenotazione:", error);
     throw error;
   }
 };
@@ -29,7 +27,6 @@ export const deleteBooking = async (id) => {
     const res = await api.delete(`/api/bookings/${id}`);
     return res.data;
   } catch (error) {
-    console.error("Errore durante la cancellazione della prenotazione:", error);
     throw error;
   }
 };

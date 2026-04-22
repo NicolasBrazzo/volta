@@ -80,24 +80,24 @@ Il cliente e il freelancer devono sapere che una prenotazione è stata creata/mo
 
 Senza validazione, qualsiasi utente può inviare dati arbitrari al database.
 
-- [ ] **Aggiungere `zod` come libreria di validazione**
-- [ ] **Validare tutti gli endpoint**:
+- [x] **Aggiungere `zod` come libreria di validazione**
+- [x] **Validare tutti gli endpoint**:
   - `POST /api/services` — name (string, max 100), duration_minutes (int > 0), price (number >= 0)
   - `PUT /api/services/:id` — stessi vincoli
   - `POST /api/public/:code/book` — client_name, client_email (email valida), date (ISO string), service_id (UUID)
   - `PUT /api/availability` — day_of_week (0-6), start_time/end_time (formato HH:MM), coerenza orari
   - `PUT /api/freelancers/profile` — business_name (max 100), description (max 1000)
-- [ ] **Aggiungere `helmet`** per security headers HTTP
-- [ ] **Aggiungere `express-rate-limit`** — Limitare richieste per IP (es. 100/min globale, 10/min su `/book`)
-- [ ] **Sanitizzare output errori** — Non esporre dettagli interni del database nelle risposte
+- [x] **Aggiungere `helmet`** per security headers HTTP
+- [x] **Aggiungere `express-rate-limit`** — Limitare richieste per IP (es. 100/min globale, 10/min su `/book`)
+- [x] **Sanitizzare output errori** — Non esporre dettagli interni del database nelle risposte
 
 ---
 
 ## 5. Stabilità Frontend
 
-- [ ] **Aggiungere un componente `ErrorBoundary`** globale che catturi errori React e mostri un fallback
-- [ ] **Rimuovere tutti i `console.log` di debug** (es. `Dashboard.jsx:10` logga l'intero oggetto user)
-- [ ] **Sostituire `console.error` con gestione silenziosa o toast** nei service files
+- [x] **Aggiungere un componente `ErrorBoundary`** globale che catturi errori React e mostri un fallback
+- [x] **Rimuovere tutti i `console.log` di debug** (es. `Dashboard.jsx:10` logga l'intero oggetto user)
+- [x] **Sostituire `console.error` con gestione silenziosa o toast** nei service files
 
 ---
 

@@ -2,6 +2,8 @@ require('dotenv').config();
 
 const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 const authRoutes = require("./controllers/auth.controller");
 const servicesRoutes = require("./controllers/services.controller");
@@ -15,9 +17,11 @@ const PORT = process.env.PORT || 3000;
 
 app.set("trust proxy", 1);
 
+app.use(helmet());
 app.use(cors({
   origin: process.env.FRONTEND_URL
 }));
+app.use(rateLimit({ windowMs: 60_000, max: 100, standardHeaders: true, legacyHeaders: false }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,8 +33,9 @@ app.use("/api/availability", availabilityRoutes);
 app.use("/api/bookings", bookingsRoutes);
 app.use("/api/freelancers", freelancersRoutes);
 
-// Rotte pubbliche (no auth)
-app.use("/api/public", publicRoutes);
+// Rotte pubbliche (no auth) — rate limit più stretto su /book
+const publicLimiter = rateLimit({ windowMs: 60_000, max: 10, standardHeaders: true, legacyHeaders: false });
+app.use("/api/public", publicLimiter, publicRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });

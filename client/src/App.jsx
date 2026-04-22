@@ -18,6 +18,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CreateFreelanceProfile } from "./pages/CreateFreelanceProfile.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ThemeProvider>
+            <ErrorBoundary>
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -51,6 +53,7 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>
+            </ErrorBoundary>
           </ThemeProvider>
         </AuthProvider>
       </QueryClientProvider>
