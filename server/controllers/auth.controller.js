@@ -9,6 +9,7 @@ const protect = require("../middleware/auth");
 const { JWT_SECRET, JWT_EXPIRES_IN } = require("../config/jwt");
 const { createOAuth2Client, SCOPES } = require("../config/google");
 const { generateUniqueSlug } = require("../utils/slug");
+const { seedDefaults } = require("../utils/seedDefaults");
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 

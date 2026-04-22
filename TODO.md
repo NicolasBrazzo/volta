@@ -69,9 +69,9 @@ L'autenticazione OAuth 2.0 e lo storage dei token (`google_access_token`, `googl
 
 Il cliente e il freelancer devono sapere che una prenotazione è stata creata/modificata.
 
-- [ ] **Integrare un servizio email** — Aggiungere `resend` (consigliato per semplicita) o `nodemailer` con SMTP; configurare le credenziali nelle variabili d'ambiente (`RESEND_API_KEY` o `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`)
+- [x] **Integrare un servizio email** — Aggiungere `resend` (consigliato per semplicita) o `nodemailer` con SMTP; configurare le credenziali nelle variabili d'ambiente (`RESEND_API_KEY` o `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`)
 - [x] **Email di conferma al cliente** — Inviata subito dopo `POST /api/public/:code/book`; contenuto: nome freelancer, nome servizio, data e ora appuntamento, indirizzo/link (se configurato), contatti del freelancer
-- [ ] **Email di notifica al freelancer** — Inviata in parallelo all'email cliente; contenuto: nome e contatti del cliente, servizio prenotato, data e ora
+- [x] **Email di notifica al freelancer** — Inviata in parallelo all'email cliente; contenuto: nome e contatti del cliente, servizio prenotato, data e ora
 - [x] **Email di cancellazione** — Inviata a entrambi (cliente e freelancer) quando viene chiamato `DELETE /api/bookings/:id`; includere breve motivazione se disponibile
 
 ---
@@ -117,7 +117,7 @@ Senza validazione, qualsiasi utente può inviare dati arbitrari al database.
 
 La funzione `seedDefaults()` e **gia chiamata** in `server/controllers/auth.controller.js` al termine del callback OAuth, ma **non e mai stata definita**, causando un errore runtime al primo accesso di ogni nuovo freelancer.
 
-- [ ] **Definire e implementare `seedDefaults(freelancerId)`** — La funzione deve creare la disponibilita settimanale di default per il freelancer appena registrato
+- [x] **Definire e implementare `seedDefaults(freelancerId)`** — La funzione deve creare la disponibilita settimanale di default per il freelancer appena registrato
   - Inserire record in `bf_availability` per i giorni Lunedi-Venerdi (day_of_week: 1-5) con orario `09:00 - 18:00`
   - Usare `upsert` (non `insert`) per evitare errori se la funzione viene chiamata piu volte per lo stesso utente
   - Importare la funzione nel file `auth.controller.js` e assicurarsi che venga chiamata solo alla **prima registrazione** (non ai login successivi), verificando tramite `GET /auth/firstAccess`
@@ -157,7 +157,7 @@ Queste feature NON servono per il Day 1 ma saranno importanti per crescere.
 - [ ] Email di promemoria pre-appuntamento
 - [ ] Dashboard analytics per il freelancer
 - [ ] CI/CD pipeline (GitHub Actions)
-- [ ] Docker + docker-compose per deploy
+- [ ] Quando atterro sulla pagina /client/src/pages/CreateFreelanceProfile.jsx tutte le rotte devono essere chiuse finché non inserisce i dati descritti 
 
 ---
 

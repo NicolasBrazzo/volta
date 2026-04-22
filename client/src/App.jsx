@@ -36,12 +36,12 @@ function App() {
                 <Route path="/book/:code/details" element={<PublicBookingDetails />} />
                 <Route path="/book/:code/confirmation" element={<BookingConfirmation />} />
                 <Route element={<PrivateRoute />}>
+                  <Route
+                    path="/first-access"
+                    element={<CreateFreelanceProfile />}
+                  />
                   <Route element={<AppLayout />}>
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route
-                      path="/first-access"
-                      element={<CreateFreelanceProfile />}
-                    />
                     <Route path="/services" element={<Services />} />
                     <Route path="/availability" element={<Availability />} />
                     <Route path="/bookings" element={<Bookings />} />
