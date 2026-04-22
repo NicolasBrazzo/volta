@@ -4,6 +4,7 @@ const { google } = require("googleapis");
 const { createOAuth2Client } = require("../config/google");
 const Freelancer = require("../models/freelancer.model");
 const Booking = require("../models/bookings.model");
+const { encrypt, decrypt } = require("../utils/tokenEncryption");
 
 // Crea un client OAuth2 autenticato con i token del freelancer.
 // Gestisce automaticamente il refresh del token.
@@ -11,8 +12,8 @@ function getAuthenticatedClient(freelancer) {
   const oauth2Client = createOAuth2Client();
 
   oauth2Client.setCredentials({
-    access_token: freelancer.google_access_token,
-    refresh_token: freelancer.google_refresh_token,
+    access_token: decrypt(freelancer.google_access_token),
+    refresh_token: decrypt(freelancer.google_refresh_token),
   });
 
   // Quando Google rinnova automaticamente l'access_token, lo salviamo in DB
@@ -20,7 +21,7 @@ function getAuthenticatedClient(freelancer) {
     if (tokens.access_token) {
       try {
         await Freelancer.updateById(freelancer.id, {
-          google_access_token: tokens.access_token,
+          google_access_token: encrypt(tokens.access_token),
         });
       } catch (err) {
         console.error("Failed to persist refreshed access token:", err);

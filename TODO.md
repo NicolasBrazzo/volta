@@ -126,7 +126,7 @@ La funzione `seedDefaults()` e **gia chiamata** in `server/controllers/auth.cont
 
 ## 8. Pulizia Codice per Produzione
 
-- [ ] **Rimuovere/sostituire i 50+ `console.log/error`** nel server con un logger (`pino` o `winston`)
+- [ ] **Rimuovere/sostituire i 50+ `console.log/error`** nel server con un logger (`pino`)
 - [ ] **Criptare `google_access_token` e `google_refresh_token`** nel database — Attualmente i token sono salvati in plaintext nella tabella `bf_freelancers`; usare Supabase Vault o cifrare i valori con `crypto` (AES-256) prima di scriverli, con chiave di cifratura in variabile d'ambiente
 - [ ] **Aggiungere gestione errori nel middleware globale** di Express con risposte uniformi
 

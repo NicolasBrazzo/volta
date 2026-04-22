@@ -10,6 +10,7 @@ const { JWT_SECRET, JWT_EXPIRES_IN } = require("../config/jwt");
 const { createOAuth2Client, SCOPES } = require("../config/google");
 const { generateUniqueSlug } = require("../utils/slug");
 const { seedDefaults } = require("../utils/seedDefaults");
+const { encrypt } = require("../utils/tokenEncryption");
 
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
@@ -54,9 +55,9 @@ router.get("/google/callback", async (req, res) => {
 
     if (freelancer) {
       // LOGIN: aggiorna i token Google
-      const updates = { google_access_token: tokens.access_token };
+      const updates = { google_access_token: encrypt(tokens.access_token) };
       if (tokens.refresh_token) {
-        updates.google_refresh_token = tokens.refresh_token;
+        updates.google_refresh_token = encrypt(tokens.refresh_token);
       }
       await Freelancer.updateById(freelancer.id, updates);
     } else {
@@ -73,8 +74,8 @@ router.get("/google/callback", async (req, res) => {
         last_name: family_name || "",
         slug,
         profile_image: picture || null,
-        google_access_token: tokens.access_token,
-        google_refresh_token: tokens.refresh_token || null,
+        google_access_token: encrypt(tokens.access_token),
+        google_refresh_token: tokens.refresh_token ? encrypt(tokens.refresh_token) : null,
         calendar_id: "primary",
       });
 
