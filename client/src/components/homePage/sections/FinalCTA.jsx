@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { CalendarDays } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, stagger } from '@/constants/animations'
 import GoogleIcon from '@/components/icons/GoogleIcon'
@@ -7,6 +8,7 @@ import GoogleIcon from '@/components/icons/GoogleIcon'
 const sectionStagger = stagger(0.12)
 
 export default function FinalCTA() {
+  const navigate = useNavigate()
   return (
     <section className="py-24 bg-primary-900 relative overflow-hidden">
       {/* Decorative blobs */}
@@ -46,6 +48,7 @@ export default function FinalCTA() {
               variant="accent"
               size="lg"
               className="px-8 py-4 text-lg gap-2 shadow-lg shadow-accent-DEFAULT/30 hover:shadow-accent-DEFAULT/50 transition-shadow"
+              onClick={() => navigate('/early-access')}
             >
               <GoogleIcon className="w-5 h-5" variant="white" />
               Inizia gratis con Google

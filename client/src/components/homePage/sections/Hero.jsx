@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/utils/cnFunc'
 import { fadeInUp, stagger } from '@/constants/animations'
@@ -101,6 +102,7 @@ function BrowserMockup() {
 }
 
 export default function Hero() {
+  const navigate = useNavigate()
   return (
     <section className="py-20 lg:py-28 bg-white dark:bg-neutral-950 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -134,7 +136,7 @@ export default function Hero() {
             </motion.p>
 
             <motion.div variants={fadeInUp} className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={() => navigate('/early-access')}>
                 <GoogleIcon className="w-5 h-5" />
                 Inizia gratis con Google
               </Button>

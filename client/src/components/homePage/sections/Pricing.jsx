@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { fadeInUp, stagger } from '@/constants/animations'
@@ -8,6 +9,7 @@ import { freeFeatures, proFeatures } from '@/constants/homePage'
 const sectionStagger = stagger(0.15)
 
 export default function Pricing() {
+  const navigate = useNavigate()
   return (
     <section id="prezzi" className="py-24 bg-white dark:bg-neutral-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,7 +50,7 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <Button variant="outline" className="w-full mt-8">
+                <Button variant="outline" className="w-full mt-8" onClick={() => navigate('/early-access')}>
                   Inizia gratis
                 </Button>
               </CardContent>

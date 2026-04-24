@@ -67,7 +67,7 @@ export default function Navbar() {
             <Link to="/login">Accedi</Link>
           </Button>
           <Button size="sm" asChild>
-            <Link to="/login">Inizia gratis</Link>
+            <Link to="/early-access">Inizia gratis</Link>
           </Button>
         </div>
 
@@ -75,10 +75,10 @@ export default function Navbar() {
         <div className="flex md:hidden items-center gap-2">
           {themeToggle}
           <Button variant="ghost" size="sm" className="text-xs px-3" asChild>
-            <Link to="/dashboard">Accedi</Link>
+            <Link to="/login">Accedi</Link>
           </Button>
           <Button size="sm" className="text-xs px-3" asChild>
-            <Link to="/login">Inizia gratis</Link>
+            <Link to="/early-access">Inizia gratis</Link>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
