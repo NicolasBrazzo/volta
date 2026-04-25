@@ -4,6 +4,7 @@ import { fetchAvailability, updateAvailability } from "../services/availabilityS
 import { Button } from "@/components/ui/button";
 import { showError, showSuccess } from "@/utils/toast";
 import { cn } from "@/utils/cnFunc";
+import { useReveal } from "@/hooks/Home2/useReveal";
 
 import { DAYS_OF_WEEK, DEFAULT_AVAILABILITY } from "@/constants/availability";
 import { Loader } from "@/components/Loader";
@@ -14,6 +15,7 @@ const timeInputClass =
 export const Availability = () => {
   const queryClient = useQueryClient();
   const [localAvailability, setLocalAvailability] = useState([]);
+  useReveal();
 
   const { data, isLoading } = useQuery({
     queryKey: ["availability"],
@@ -62,14 +64,15 @@ export const Availability = () => {
 
   return (
     <div className="p-6 space-y-8 max-w-3xl">
-      <div>
-        <h1 className="text-3xl font-semibold tracking-tight">Disponibilità</h1>
+      <div className="h2-reveal">
+        <p className="text-[11px] font-bold text-primary-300 uppercase tracking-[0.08em] mb-2">Orari di lavoro</p>
+        <h1><span className="volta-gradient-text">Disponibilità</span></h1>
         <p className="text-muted-foreground mt-2">
           Dicci quando lavori. Al resto — slot, conflitti, pause — pensiamo noi.
         </p>
       </div>
 
-      <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden h2-reveal h2-reveal-delay-1">
         <div className="divide-y divide-border">
           {localAvailability.map((dayAvailability, index) => {
             const dayLabel = DAYS_OF_WEEK.find((d) => d.id === dayAvailability.day_of_week)?.label;

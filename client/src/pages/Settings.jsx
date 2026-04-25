@@ -3,23 +3,28 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useThemeContext } from "@/context/ThemeContext";
 import { Sun, Moon, Laptop } from "lucide-react";
+import { useReveal } from "@/hooks/Home2/useReveal";
 
 export const Settings = () => {
   const { logout } = useAuth();
   const { theme, setTheme } = useThemeContext();
+  useReveal();
 
   return (
     <div className="p-6 space-y-8 max-w-4xl">
-      <div>
-        <h1 className="text-3xl font-semibold tracking-tight">Impostazioni</h1>
+      <div className="h2-reveal">
+        <p className="text-[11px] font-bold text-primary-300 uppercase tracking-[0.08em] mb-2">Preferenze</p>
+        <h1><span className="volta-gradient-text">Impostazioni</span></h1>
         <p className="text-muted-foreground mt-2">
           Il tuo link, il tuo tema, il tuo account. Tutto al posto giusto.
         </p>
       </div>
 
-      <CodeCreator />
+      <div className="h2-reveal h2-reveal-delay-1">
+        <CodeCreator />
+      </div>
 
-      <div className="space-y-6">
+      <div className="space-y-6 h2-reveal h2-reveal-delay-2">
         <div>
           <h2 className="text-lg font-medium mb-1">Tema</h2>
           <p className="text-sm text-muted-foreground mb-4">
