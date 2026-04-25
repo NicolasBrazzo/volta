@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CreateFreelanceProfile } from "./pages/CreateFreelanceProfile.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
+import Home2 from "./pages/Home2.jsx";
 import { EarlyAccess } from "./pages/EarlyAccess.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
@@ -32,9 +33,10 @@ function App() {
             <ErrorBoundary>
             <BrowserRouter>
               <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<Home2 />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/early-access" element={<EarlyAccess />} />
+                <Route path="/home-v1" element={<HomePage />} />
                 <Route path="/book/:code" element={<BookingPublic />} />
                 <Route path="/book/:code/date" element={<BookingDateTime />} />
                 <Route path="/book/:code/details" element={<PublicBookingDetails />} />

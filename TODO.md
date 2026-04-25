@@ -5,63 +5,40 @@
 
 ---
 
-## 1. Flusso di Prenotazione Pubblica `[BLOCKER]`
+## 🚀 PRE-LANCIO — Checklist Finale
 
-Questo è il cuore del prodotto: un cliente riceve dal freelancer un link con codice univoco, vede la disponibilità e prenota.
+> Tutto quello che manca per passare dalla raccolta email al lancio reale.
+> Ordinato per priorità. Completare dall'alto verso il basso.
 
-**Contesto**: ogni freelancer genera il proprio codice condivisibile dalla pagina **Settings** (`CodeCreator`). Il codice ha formato `slug-random` (es. `mario-rossi-a3f8k2`) ed è salvato nel campo `unique_freelance_code` della tabella `bf_freelancers`. Il codice è già parzialmente implementato nel branch `dev` (`POST /api/freelancers/code`).
+### Blockers critici (il prodotto non funziona senza questi)
 
-- [x] **Completare generazione codice** — Il flusso `Settings.jsx → CodeCreator → POST /api/freelancers/code` esiste nel branch `dev`; verificare che gestisca correttamente la rigenerazione e la collision di codici duplicati
-- [x] **Implementare `GET /api/public/:code`** — Cercare il freelancer in `bf_freelancers` tramite `unique_freelance_code`; restituire `business_name`, `description`, `slug` e lista dei servizi attivi (`bf_services` dove `is_active = true`); rispondere 404 se il codice non esiste
-- [x] **Implementare `GET /api/public/:code/slots`** — Ricevere query params `date` (YYYY-MM-DD) e `serviceId` (UUID); validare entrambi; chiamare `calculateAvailableSlots()`; restituire array di slot liberi in formato `"HH:MM"`; rispondere 400 se i parametri sono mancanti o invalidi
-- [x] **Implementare `POST /api/public/:code/book`** — Ricevere body con `service_id`, `date`, `time`, `client_name`, `client_email`, `client_phone` (opzionale), `notes` (opzionale); validare tutti i campi obbligatori; creare il record in `bf_bookings`; chiamare `createCalendarEvent()` e salvare il `google_event_id`; rispondere 201 con i dettagli della prenotazione creata
-- [x] **Implementare `calculateAvailableSlots(professional, date, service)`** in `server/utils/slots.js`
-  - [x] Recuperare la disponibilita settimanale del freelancer per il `day_of_week` corrispondente alla data richiesta (0=Dom, 1=Lun, …); se non configurata, restituire array vuoto
-  - [x] Generare tutti gli slot possibili nell'orario di disponibilita, suddivisi in blocchi di `service.duration_minutes` minuti
-  - [x] Caricare le prenotazioni esistenti del freelancer per quella data da `bf_bookings` e rimuovere i slot che si sovrappongono
-  - [x] Chiamare `getCalendarEvents()` per la stessa data e rimuovere i slot che si sovrappongono con eventi Google Calendar esistenti (utile per blocchi fuori-app: riunioni, impegni personali)
-  - [x] Se la data e oggi, rimuovere tutti gli slot con orario gia passato
-  - [x] Restituire array di stringhe in formato `"HH:MM"` degli slot ancora liberi
-- [x] **Completare la pagina `BookingPublic.jsx`** — Attualmente e uno stub che mostra solo il titolo; va implementata come form multi-step:
-  1. Mostrare profilo freelancer e lista servizi attivi (fetch da `GET /api/public/:code`)
-  2. Selezione servizio → selezione data (date picker, no giorni nel passato)
-  3. Fetch slot disponibili da `GET /api/public/:code/slots?date=YYYY-MM-DD&serviceId=xxx`
-  4. Selezione slot orario tra quelli disponibili
-  5. Form dati cliente: nome, email, telefono (opzionale), note (opzionale)
-  6. Submit verso `POST /api/public/:code/book`
-- [x] **Pagina di conferma post-prenotazione** — Riepilogo con dettagli: nome freelancer, servizio prenotato, data/ora, dati cliente inseriti; mostrata dopo il submit riuscito
+- [ ] **Email notifiche prenotazione** `[BLOCKER]` — Nessun servizio email è implementato. Aggiungere `resend` + email di conferma al cliente e al freelancer al momento della prenotazione. Vedere sezione 3 per i dettagli.
+- [ ] **`TOKEN_ENCRYPTION_KEY` nel `.env.example`** `[BLOCKER]` — La variabile è necessaria per cifrare i token Google OAuth ma manca dal file `.env.example`. Il server crasha all'avvio senza di essa. Aggiungere con istruzioni su come generarla (`node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`).
+- [ ] **Smoke test del flusso completo** `[BLOCKER]` — Testare manualmente l'intero percorso in staging/produzione: registrazione freelancer → configurazione disponibilità → generazione codice → apertura link pubblico → prenotazione cliente → comparsa evento su Google Calendar → email ricevuta. Non lanciare senza averlo fatto almeno una volta end-to-end.
 
----
+### Qualità e stabilità
 
-## 2. Google Calendar Integration `[BLOCKER]`
+- [ ] **Rimuovere `console.log/error`** nel server — Ancora presenti in tutti i controller. Sostituire con logger silenzioso o `pino`. Impedisce di capire cosa succede in produzione.
+- [ ] **Test integrazione flusso prenotazione** — Almeno un test `POST /api/public/:code/book` con dati validi e uno con dati invalidi. Vedere sezione 9.
+- [ ] **`CreateFreelanceProfile` blocca le altre rotte** — Un freelancer appena registrato può navigare il dashboard senza aver completato il profilo. Bloccare tutte le rotte `/dashboard`, `/services`, `/availability` finché `first_access` è false.
 
-Senza calendario sincronizzato, il freelancer gestisce tutto a mano e rischia doppie prenotazioni.
+### Branding minimo per il lancio
 
-L'autenticazione OAuth 2.0 e lo storage dei token (`google_access_token`, `google_refresh_token`) sono **gia implementati** in `server/controllers/auth.controller.js` e `server/config/google.js`. Il refresh automatico dei token e **gia gestito** in `getAuthenticatedClient()` tramite l'evento `'tokens'` dell'OAuth2 client. Mancano solo le operazioni CRUD sul calendario.
+- [ ] **Logo e favicon** — Almeno un wordmark "volta" + favicon SVG. Senza logo il prodotto non sembra serio.
+- [ ] **Applicare brand Volta alla pagina pubblica** (`/book/:code`) — Il cliente la vede per primo: deve riflettere il brand, non un template generico.
+- [ ] **Template email con brand** — Le email di conferma devono avere logo, colori e tono di voce Volta, non essere testo plain.
+- [ ] **OG image e meta tag social** — Quando qualcuno condivide volta.app su WhatsApp/social, deve apparire un'anteprima con brand, titolo e descrizione.
 
-- [x] **Implementare `createCalendarEvent(professional, booking, service)`** in `server/services/googleCalendar.js`
-  - Ottenere client OAuth autenticato tramite `getAuthenticatedClient(professional)`
-  - Creare evento con `calendar.events.insert()` sul `professional.calendar_id` (default: `"primary"`)
-  - Impostare `summary` = nome del servizio, `description` con nome e contatti del cliente, `start`/`end` in base a data e durata servizio
-  - Aggiungere il cliente come attendee (`attendees: [{ email: booking.client_email }]`)
-  - Configurare un reminder via email a 60 minuti dall'appuntamento (`reminders.overrides`)
-  - Salvare il `google_event_id` restituito dall'API nel campo `google_event_id` della tabella `bf_bookings`
+### Legale (obbligatorio per il mercato italiano)
 
-- [x] **Implementare `deleteCalendarEvent(professional, google_event_id)`** in `server/services/googleCalendar.js`
-  - Ottenere client OAuth autenticato tramite `getAuthenticatedClient(professional)`
-  - Chiamare `calendar.events.delete()` con il `google_event_id` salvato nella prenotazione
-  - Gestire il caso in cui l'evento non esista piu sul calendario (errore 404 da ignorare silenziosamente)
-  - Chiamare questa funzione dal controller `DELETE /api/bookings/:id` prima di eliminare il record dal DB
+- [ ] **Pagina Privacy Policy** — Obbligatoria per legge (GDPR). Descrivere quali dati si raccolgono (email cliente, nome, telefono), come vengono trattati, chi è il titolare del trattamento. Usare un generatore se necessario.
+- [ ] **Pagina Termini di Servizio** — Condizioni d'uso per i freelancer che si registrano sulla piattaforma.
+- [ ] **Cookie banner** — Se usi analytics o qualsiasi cookie non tecnico, serve il consenso esplicito prima che siano attivati.
 
-- [x] **Implementare `getCalendarEvents(professional, timeMin, timeMax)`** in `server/services/googleCalendar.js`
-  - Chiamare `calendar.events.list()` con `timeMin` e `timeMax` in formato ISO 8601
-  - Filtrare eventi con `singleEvents: true` e `orderBy: 'startTime'`
-  - Restituire array di oggetti `{ start, end }` per il confronto con gli slot disponibili
-  - Usare questa funzione dentro `calculateAvailableSlots()` per escludere slot occupati da eventi Google Calendar non generati dall'app
+### Deploy e configurazione
 
-- [x] **Collegare `createCalendarEvent()` al controller prenotazioni** — In `POST /api/public/:code/book`, dopo aver creato il record in `bf_bookings`, chiamare `createCalendarEvent()` e aggiornare il record con il `google_event_id` ottenuto
-
-- [x] **Collegare `deleteCalendarEvent()` al controller prenotazioni** — In `DELETE /api/bookings/:id`, leggere prima il `google_event_id` dalla prenotazione, chiamare `deleteCalendarEvent()`, poi eliminare il record dal DB
+- [ ] **Setup ambiente di produzione** — Scegliere hosting (Render/Railway per il server, Vercel per il client), configurare tutte le variabili d'ambiente reali, verificare che `FRONTEND_URL` e `GOOGLE_REDIRECT_URI` puntino ai domini definitivi.
+- [ ] **Dominio definitivo** — Acquistare e configurare il dominio (volta.app, getvolta.app o volta.it). Aggiornare `GOOGLE_REDIRECT_URI` su Google Cloud Console con il dominio di produzione.
 
 ---
 
@@ -69,66 +46,18 @@ L'autenticazione OAuth 2.0 e lo storage dei token (`google_access_token`, `googl
 
 Il cliente e il freelancer devono sapere che una prenotazione è stata creata/modificata.
 
-- [x] **Integrare un servizio email** — Aggiungere `resend` (consigliato per semplicita) o `nodemailer` con SMTP; configurare le credenziali nelle variabili d'ambiente (`RESEND_API_KEY` o `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`)
-- [x] **Email di conferma al cliente** — Inviata subito dopo `POST /api/public/:code/book`; contenuto: nome freelancer, nome servizio, data e ora appuntamento, indirizzo/link (se configurato), contatti del freelancer
-- [x] **Email di notifica al freelancer** — Inviata in parallelo all'email cliente; contenuto: nome e contatti del cliente, servizio prenotato, data e ora
-- [x] **Email di cancellazione** — Inviata a entrambi (cliente e freelancer) quando viene chiamato `DELETE /api/bookings/:id`; includere breve motivazione se disponibile
-
----
-
-## 4. Validazione Input & Sicurezza `[BLOCKER]`
-
-Senza validazione, qualsiasi utente può inviare dati arbitrari al database.
-
-- [x] **Aggiungere `zod` come libreria di validazione**
-- [x] **Validare tutti gli endpoint**:
-  - `POST /api/services` — name (string, max 100), duration_minutes (int > 0), price (number >= 0)
-  - `PUT /api/services/:id` — stessi vincoli
-  - `POST /api/public/:code/book` — client_name, client_email (email valida), date (ISO string), service_id (UUID)
-  - `PUT /api/availability` — day_of_week (0-6), start_time/end_time (formato HH:MM), coerenza orari
-  - `PUT /api/freelancers/profile` — business_name (max 100), description (max 1000)
-- [x] **Aggiungere `helmet`** per security headers HTTP
-- [x] **Aggiungere `express-rate-limit`** — Limitare richieste per IP (es. 100/min globale, 10/min su `/book`)
-- [x] **Sanitizzare output errori** — Non esporre dettagli interni del database nelle risposte
-
----
-
-## 5. Stabilità Frontend
-
-- [x] **Aggiungere un componente `ErrorBoundary`** globale che catturi errori React e mostri un fallback
-- [x] **Rimuovere tutti i `console.log` di debug** (es. `Dashboard.jsx:10` logga l'intero oggetto user)
-- [x] **Sostituire `console.error` con gestione silenziosa o toast** nei service files
-
----
-
-## 6. Configurazione & Deploy
-
-- [x] **Creare `.env.example`** nella root con tutte le variabili necessarie (server + client)
-- [x] **Creare `README.md`** nella root del progetto con:
-  - Descrizione del progetto
-  - Requisiti (Node >= 20, account Supabase, Google Cloud project)
-  - Istruzioni setup locale (server + client)
-  - Variabili d'ambiente documentate
-- [x] **Aggiungere endpoint `/api/health`** per monitoring base
-
----
-
-## 7. Funzione `seedDefaults` `[BLOCKER]`
-
-La funzione `seedDefaults()` e **gia chiamata** in `server/controllers/auth.controller.js` al termine del callback OAuth, ma **non e mai stata definita**, causando un errore runtime al primo accesso di ogni nuovo freelancer.
-
-- [x] **Definire e implementare `seedDefaults(freelancerId)`** — La funzione deve creare la disponibilita settimanale di default per il freelancer appena registrato
-  - Inserire record in `bf_availability` per i giorni Lunedi-Venerdi (day_of_week: 1-5) con orario `09:00 - 18:00`
-  - Usare `upsert` (non `insert`) per evitare errori se la funzione viene chiamata piu volte per lo stesso utente
-  - Importare la funzione nel file `auth.controller.js` e assicurarsi che venga chiamata solo alla **prima registrazione** (non ai login successivi), verificando tramite `GET /auth/firstAccess`
+- [ ] **Integrare un servizio email** — Aggiungere `resend` (consigliato per semplicità) come dipendenza; creare `server/services/email.js`; configurare `RESEND_API_KEY` nelle variabili d'ambiente
+- [ ] **Email di conferma al cliente** — Inviata subito dopo `POST /api/public/:code/book`; contenuto: nome freelancer, nome servizio, data e ora appuntamento, contatti del freelancer
+- [ ] **Email di notifica al freelancer** — Inviata in parallelo all'email cliente; contenuto: nome e contatti del cliente, servizio prenotato, data e ora
+- [ ] **Email di cancellazione** — Inviata a entrambi (cliente e freelancer) quando viene chiamato `DELETE /api/bookings/:id`
 
 ---
 
 ## 8. Pulizia Codice per Produzione
 
-- [ ] **Rimuovere/sostituire i 50+ `console.log/error`** nel server con un logger (`pino`)
-- [ ] **Criptare `google_access_token` e `google_refresh_token`** nel database — Attualmente i token sono salvati in plaintext nella tabella `bf_freelancers`; usare Supabase Vault o cifrare i valori con `crypto` (AES-256) prima di scriverli, con chiave di cifratura in variabile d'ambiente
-- [ ] **Aggiungere gestione errori nel middleware globale** di Express con risposte uniformi
+- [ ] **Rimuovere/sostituire i `console.log/error`** nel server con un logger strutturato (`pino`) — ancora presenti in tutti i controller
+- [x] **Cifrare `google_access_token` e `google_refresh_token`** — Implementato con AES-256-GCM in `server/utils/tokenEncryption.js`; `encrypt`/`decrypt` già usati in `googleCalendar.js`
+- [x] **Gestione errori nel middleware globale** — Implementato in `server/server.js` (righe 50-53) con risposta uniforme `{ ok: false, error }`
 
 ---
 
