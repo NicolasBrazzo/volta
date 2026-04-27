@@ -12,6 +12,7 @@ const bookingsRoutes = require("./controllers/bookings.controller");
 const publicRoutes = require("./controllers/public.controller");
 const freelancersRoutes = require("./controllers/freelancers.controller");
 const waitlistRoutes = require("./controllers/waitlist.controller");
+const statsRoutes = require("./controllers/stats.controller");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,6 +35,7 @@ app.use("/api/availability", availabilityRoutes);
 app.use("/api/bookings", bookingsRoutes);
 app.use("/api/freelancers", freelancersRoutes);
 app.use("/api/waitlist", waitlistRoutes);
+app.use("/api/stats", statsRoutes);
 
 // Rotte pubbliche (no auth) — rate limit più stretto su /book
 const publicLimiter = rateLimit({ windowMs: 60_000, max: 10, standardHeaders: true, legacyHeaders: false });
