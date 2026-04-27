@@ -12,7 +12,7 @@ const INITIAL_FORM = {
   name: "",
   description: "",
   duration_minutes: "",
-  price: "",
+  price: 0,
   color: "#3B82F6",
   is_active: true,
 };
@@ -88,8 +88,8 @@ export const useServices = () => {
   };
 
   const validate = () => {
-    const { name, duration_minutes, price } = formData;
-    return name.trim() && duration_minutes && price;
+    const { name, duration_minutes } = formData;
+    return name.trim() && duration_minutes;
   };
 
   const handleSubmit = (e) => {
@@ -101,6 +101,8 @@ export const useServices = () => {
       duration_minutes: Number(formData.duration_minutes),
       price: Number(formData.price),
     };
+
+    console.log(payload);
 
     if (editingService) {
       updateMutation.mutate({ id: editingService.id, data: payload });

@@ -5,7 +5,6 @@ import Modal from "@/components/Modal";
 import ServiceCard from "@/components/servicePage/ServiceCard";
 import ServiceForm from "@/components/servicePage/ServiceForm";
 import { useServices } from "@/hooks/useServices";
-import { useReveal } from "@/hooks/Home2/useReveal";
 
 export const Services = () => {
   const {
@@ -22,13 +21,12 @@ export const Services = () => {
     handleSubmit,
     handleDelete,
   } = useServices();
-  useReveal();
 
   if (isLoading) return <Loader />;
 
   return (
     <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between h2-reveal">
+      <div className="flex items-center justify-between page-in">
         <div>
           <p className="text-[11px] font-bold text-primary-300 uppercase tracking-[0.08em] mb-2">I tuoi servizi</p>
           <h1><span className="volta-gradient-text">Servizi</span></h1>
@@ -43,7 +41,7 @@ export const Services = () => {
       </div>
 
       {services.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-16 h2-reveal h2-reveal-delay-1">
+        <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-16 page-in-d1">
           <p className="text-muted-foreground mb-4">
             Ancora niente da offrire. Aggiungi il tuo primo servizio e sei online.
           </p>
@@ -53,7 +51,7 @@ export const Services = () => {
           </Button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 h2-reveal h2-reveal-delay-1">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 page-in-d1">
           {services.map((service) => (
             <ServiceCard
               key={service.id}

@@ -1,8 +1,16 @@
 import { useEffect } from 'react'
 
-export function useReveal() {
+export function useReveal({ immediate = true } = {}) {
   useEffect(() => {
     const els = document.querySelectorAll('.h2-reveal')
+
+    if (immediate) {
+      requestAnimationFrame(() => {
+        els.forEach((el) => el.classList.add('h2-visible'))
+      })
+      return
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {

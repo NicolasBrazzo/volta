@@ -294,7 +294,13 @@ body {
   .animate-glow-pulse    { animation: glow-pulse 5s ease-in-out infinite; }
   .animate-fade-up       { animation: fade-up 0.8s cubic-bezier(0.22,1,0.36,1) both; }
 
-  /* Scroll-reveal used by useReveal hook */
+  /* Page-enter animations */
+  .page-in    { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+  .page-in-d1 { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.08s both; }
+  .page-in-d2 { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.16s both; }
+  .page-in-d3 { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) 0.24s both; }
+
+  /* Scroll-reveal used by useReveal hook (landing page only) */
   .h2-reveal {
     opacity: 0;
     transform: translateY(40px);

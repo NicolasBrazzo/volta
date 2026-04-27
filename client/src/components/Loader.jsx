@@ -2,7 +2,7 @@ export const Loader = ({
   size = 'medium', 
   color = '#3b82f6',
   text = '',
-  fullScreen = false 
+  fullScreen = true 
 }) => {
   const sizes = {
     small: 'w-5 h-5',
@@ -11,7 +11,7 @@ export const Loader = ({
   };
 
   const containerClasses = fullScreen
-    ? 'fixed inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 z-50'
+    ? 'fixed inset-0 flex flex-col items-center justify-center bg-opacity-90 z-50'
     : 'flex flex-col items-center justify-center p-4';
 
   return (

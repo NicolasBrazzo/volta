@@ -4,8 +4,6 @@ import { fetchBookings } from "../services/bookingsService";
 import { Loader } from "@/components/Loader";
 import BookingCard from "@/components/booking/BookingCard";
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useReveal } from "@/hooks/Home2/useReveal";
 
 // ---------- helpers ----------
 
@@ -85,7 +83,6 @@ export const Bookings = () => {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [selectedDate, setSelectedDate] = useState(toDateKey(today));
-  useReveal();
 
   const { data, isLoading } = useQuery({
     queryKey: ["bookings"],
@@ -131,14 +128,14 @@ export const Bookings = () => {
   if (bookings.length === 0) {
     return (
       <div className="p-6 space-y-6">
-        <div className="h2-reveal">
+        <div className="page-in">
           <p className="text-[11px] font-bold text-primary-300 uppercase tracking-[0.08em] mb-2">Il tuo calendario</p>
           <h1><span className="volta-gradient-text">Prenotazioni</span></h1>
           <p className="text-muted-foreground mt-2">
             Qui trovi tutti i tuoi appuntamenti. Ordinati, sincronizzati, sempre aggiornati.
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-20 bg-card/50 h2-reveal h2-reveal-delay-1">
+        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-20 bg-card/50 page-in-d1">
           <CalendarDays className="h-12 w-12 text-muted-foreground/50 mb-4" />
           <h3 className="text-xl font-medium mb-2">Ancora tutto da scrivere</h3>
           <p className="text-muted-foreground text-center max-w-md mb-6">
@@ -161,7 +158,7 @@ export const Bookings = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <div className="h2-reveal">
+      <div className="page-in">
         <p className="text-[11px] font-bold text-primary-300 uppercase tracking-[0.08em] mb-2">Il tuo calendario</p>
         <h1><span className="volta-gradient-text">Prenotazioni</span></h1>
         <p className="text-muted-foreground mt-2">
@@ -171,7 +168,7 @@ export const Bookings = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,420px)_1fr] gap-6">
         {/* ==================== LEFT: CALENDAR ==================== */}
-        <div className="bg-card border border-border rounded-xl shadow-sm p-5 h-fit h2-reveal h2-reveal-delay-1">
+        <div className="bg-card border border-border rounded-xl shadow-sm p-5 h-fit page-in-d1">
           {/* Header: month nav */}
           <div className="flex items-center justify-between mb-5">
             <button
@@ -232,7 +229,7 @@ export const Bookings = () => {
                   key={key}
                   onClick={() => setSelectedDate(key)}
                   className={`
-                    aspect-square rounded-lg flex flex-col items-center justify-center 
+                    aspect-square rounded-lg flex flex-col items-center justify-center
                     text-sm font-medium transition-all duration-150 relative
                     ${isSelected
                       ? "bg-primary text-primary-foreground shadow-sm ring-2 ring-primary/30"
@@ -271,7 +268,7 @@ export const Bookings = () => {
         </div>
 
         {/* ==================== RIGHT: DAY LIST ==================== */}
-        <div className="space-y-4 h2-reveal h2-reveal-delay-2">
+        <div className="space-y-4 page-in-d2">
           <div className="flex items-center gap-3">
             <CalendarDays className="h-5 w-5 text-primary" />
             <h2 className="text-lg font-semibold capitalize">{selectedLabel}</h2>

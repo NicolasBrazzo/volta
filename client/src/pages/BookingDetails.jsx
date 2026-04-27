@@ -6,12 +6,7 @@ import { Loader } from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { showSuccess, showError } from "@/utils/toast";
-
-const STATUS_MAP = {
-  confirmed: { label: "Confermato", variant: "success" },
-  cancelled: { label: "Annullato", variant: "destructive" },
-  completed: { label: "Completato", variant: "default" },
-};
+import { STATUS_MAP } from "@/constants/bookingDetails";
 
 export const BookingDetails = () => {
   const { id } = useParams();
@@ -56,6 +51,7 @@ export const BookingDetails = () => {
   const startDate = new Date(booking.date);
   const endDate = new Date(booking.end_date);
   
+  // Si può migliorare 
   const dateFormatted = startDate.toLocaleDateString("it-IT", {
     weekday: "long",
     day: "numeric",

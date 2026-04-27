@@ -11,6 +11,21 @@ const profileSchema = z.object({
   business_type: z.string().max(50).optional(),
 });
 
+// GET /freelancers/image/:id — Ottieni immagine profilo freelancer
+router.get("/image/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const freelancerImage = await Freelancer.findById(id);
+    if (!freelancerImage) {
+      return res.status(404).json({ ok: false, error: "Freelancer non trovato" });
+    }
+    res.json({ ok: true, data: freelancerImage.profile_image });
+  } catch (err) {
+    console.error("GET FREELANCER IMAGE ERROR:", err);
+    res.status(500).json({ ok: false, error: "Errore recupero immagine profilo" });
+  }
+});
+
 // PUT /freelancers/:id — Aggiorna profilo freelancer
 router.put("/:id", protect, validate(profileSchema), async (req, res) => {
   try {

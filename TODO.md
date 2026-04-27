@@ -1,9 +1,5 @@
 # TODO — Booking Freelancer MVP
 
-> Checklist per arrivare al primo MVP lanciabile.
-> Ogni sezione è ordinata per priorità. Le task marcate con `[BLOCKER]` impediscono il lancio.
-
----
 
 ## 🚀 PRE-LANCIO — Checklist Finale
 
@@ -70,6 +66,9 @@ Non serve coverage al 100%, ma i flussi critici devono essere testati.
 - [ ] **Test integrazione flusso prenotazione** — `POST /api/public/:code/book` con dati validi e invalidi
 - [ ] **Test validazione input** — Verificare che dati malformati vengano rifiutati
 
+
+## Pagine da sistemare / miglirare 
+- [ ] Availaility.jsx
 ---
 
 ## POST-MVP (Fase 2 — dopo il lancio)

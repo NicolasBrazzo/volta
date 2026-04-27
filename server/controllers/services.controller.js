@@ -11,6 +11,8 @@ const createServiceSchema = z.object({
   duration_minutes: z.coerce.number().int().positive("La durata deve essere positiva"),
   price: z.coerce.number().min(0, "Il prezzo non può essere negativo"),
   description: z.string().max(500).optional(),
+  color: z.string().optional(),
+  is_active: z.boolean().optional(),
 });
 
 const updateServiceSchema = z.object({
@@ -18,6 +20,8 @@ const updateServiceSchema = z.object({
   duration_minutes: z.coerce.number().int().positive().optional(),
   price: z.coerce.number().min(0).optional(),
   description: z.string().max(500).optional(),
+  color: z.string().optional(),
+  is_active: z.boolean().optional(),
 }).refine((data) => Object.keys(data).length > 0, { message: "Nessun campo da aggiornare" });
 
 // GET /api/services — Lista servizi del professionista
@@ -52,7 +56,7 @@ router.put("/:id", protect, validate(updateServiceSchema), async (req, res) => {
     if (!existing || existing.professional_id !== req.user.sub) {
       return res.status(404).json({ ok: false, error: "Servizio non trovato" });
     }
-    const updated = await Services.updateById(req.params.id, req.body);
+    const  updated= await Services.updateById(req.params.id, req.body);
     res.json({ ok: true, data: updated });
   } catch (err) {
     console.error("UPDATE SERVICE ERROR:", err);

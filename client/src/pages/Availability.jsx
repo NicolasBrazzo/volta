@@ -4,18 +4,17 @@ import { fetchAvailability, updateAvailability } from "../services/availabilityS
 import { Button } from "@/components/ui/button";
 import { showError, showSuccess } from "@/utils/toast";
 import { cn } from "@/utils/cnFunc";
-import { useReveal } from "@/hooks/Home2/useReveal";
 
 import { DAYS_OF_WEEK, DEFAULT_AVAILABILITY } from "@/constants/availability";
 import { Loader } from "@/components/Loader";
 
+// Da capire come migliorare
 const timeInputClass =
   "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
 export const Availability = () => {
   const queryClient = useQueryClient();
   const [localAvailability, setLocalAvailability] = useState([]);
-  useReveal();
 
   const { data, isLoading } = useQuery({
     queryKey: ["availability"],
@@ -35,13 +34,14 @@ export const Availability = () => {
     mutationFn: updateAvailability,
     onSuccess: () => {
       showSuccess("Orari aggiornati.");
-      queryClient.invalidateQueries(["availability"]);
+      queryClient.invalidateQueries({ queryKey: ["availability"] });
     },
     onError: () => {
       showError("Qualcosa è andato storto. Riprova tra un istante.");
     },
   });
 
+  // Migliorabile
   const handleToggleActive = (index) => {
     const updated = [...localAvailability];
     updated[index] = { ...updated[index], is_active: !updated[index].is_active };
@@ -64,7 +64,7 @@ export const Availability = () => {
 
   return (
     <div className="p-6 space-y-8 max-w-3xl">
-      <div className="h2-reveal">
+      <div className="page-in">
         <p className="text-[11px] font-bold text-primary-300 uppercase tracking-[0.08em] mb-2">Orari di lavoro</p>
         <h1><span className="volta-gradient-text">Disponibilità</span></h1>
         <p className="text-muted-foreground mt-2">
@@ -72,7 +72,7 @@ export const Availability = () => {
         </p>
       </div>
 
-      <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden h2-reveal h2-reveal-delay-1">
+      <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden page-in-d1">
         <div className="divide-y divide-border">
           {localAvailability.map((dayAvailability, index) => {
             const dayLabel = DAYS_OF_WEEK.find((d) => d.id === dayAvailability.day_of_week)?.label;
@@ -91,7 +91,7 @@ export const Availability = () => {
                     aria-checked={dayAvailability.is_active}
                     onClick={() => handleToggleActive(index)}
                     className={cn(
-                      "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+                      "relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
                       dayAvailability.is_active ? "bg-primary" : "bg-input"
                     )}
                   >

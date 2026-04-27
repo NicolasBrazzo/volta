@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  LayoutDashboard,
-  Briefcase,
-  Clock,
-  CalendarCheck,
-  Settings,
-} from "lucide-react";
-
-const MENU_ITEMS = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
-  { icon: Briefcase, label: "Servizi", path: "/services" },
-  { icon: Clock, label: "Disponibilità", path: "/availability" },
-  { icon: CalendarCheck, label: "Prenotazioni", path: "/bookings" },
-  { icon: Settings, label: "Impostazioni", path: "/settings" },
-];
+import { User } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/context/AuthContext";
+import { getFreelancerImage } from "@/services/freelanceSerivce";
+import { Loader } from "@/components/Loader";
+import { MENU_ITEMS } from "@/constants/side";
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
+
+  const { data: profileImage, isLoading: imageLoading } = useQuery({
+    queryKey: ["freelancerImage", user?.id],
+    queryFn: () => getFreelancerImage(user.id),
+    enabled: !!user?.id,
+    staleTime: 10 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <aside
@@ -55,9 +55,9 @@ export const Sidebar = () => {
             className={({ isActive }) =>
               [
                 "group relative mx-2 my-0.5 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
-                isActive
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                isActive ?
+                  "bg-sidebar-accent text-sidebar-accent-foreground"
+                : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
               ].join(" ")
             }
           >
@@ -85,6 +85,31 @@ export const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
+
+      <div className="absolute bottom-0 left-0 right-0 flex h-16 items-center border-t border-sidebar-border px-3">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full overflow-hidden bg-sidebar-accent">
+            {imageLoading ?
+              <Loader size="small" fullScreen={false} />
+            : profileImage ?
+              <img
+                src={profileImage}
+                alt="profile"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.style.display = "none";
+                }}
+              />
+            : <User className="w-5 h-5 text-muted-foreground" />}
+          </div>
+          {isOpen && (
+            <span className="text-sidebar-foreground text-sm font-medium tracking-tight whitespace-nowrap overflow-hidden">
+              {user?.email}
+            </span>
+          )}
+        </div>
+      </div>
     </aside>
   );
 };

@@ -51,7 +51,7 @@ const ServiceForm = ({ formData, onChange, onSubmit, isSubmitting }) => {
             id="price"
             type="number"
             min="0"
-            step="0.01"
+            step="1"
             value={formData.price}
             onChange={handleChange("price")}
             placeholder="25.00"
