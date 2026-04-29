@@ -9,6 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(undefined);
   const [loading, setLoading] = useState(true);
+  const [firstAccess, setFirstAccess] = useState(null);
 
   useEffect(() => {
     checkAuth();
@@ -44,16 +45,29 @@ export const AuthProvider = ({ children }) => {
       if (res.data.user) {
         const u = res.data.user;
         setUser({ id: u.id, email: u.email, slug: u.slug, unique_freelance_code: u.unique_freelance_code });
+        const faRes = await api.get("/auth/firstAccess");
+        setFirstAccess(faRes.data.firstAccess);
       } else {
         localStorage.removeItem("token");
         setUser(null);
+        setFirstAccess(null);
       }
     } catch (err) {
       console.error("Auth check failed:", err);
       localStorage.removeItem("token");
       setUser(null);
+      setFirstAccess(null);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const refreshFirstAccess = async () => {
+    try {
+      const res = await api.get("/auth/firstAccess");
+      setFirstAccess(res.data.firstAccess);
+    } catch (err) {
+      console.error("First access refresh failed:", err);
     }
   };
 
@@ -74,7 +88,7 @@ export const AuthProvider = ({ children }) => {
   
 
   return (
-    <AuthContext.Provider value={{ user, loading, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, loading, firstAccess, refreshFirstAccess, loginWithGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );

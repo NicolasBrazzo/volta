@@ -1,7 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { Login } from "./pages/Login.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
 import { PrivateRoute } from "./api/components/PrivateRoute.jsx";
+import { Loader } from "./components/Loader.jsx";
 import { Dashboard } from "./pages/Dashboard.jsx";
 import { Services } from "./pages/Services.jsx";
 import { Availability } from "./pages/Availability.jsx";
@@ -22,6 +24,13 @@ import { ThemeProvider } from "./context/ThemeContext.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 
 const queryClient = new QueryClient();
+
+const ProfileCompleteRoute = () => {
+  const { firstAccess, loading } = useAuth();
+  if (loading) return <Loader />;
+  if (firstAccess === true) return <Navigate to="/first-access" replace />;
+  return <Outlet />;
+};
 
 function App() {
   return (
@@ -45,13 +54,15 @@ function App() {
                     path="/first-access"
                     element={<CreateFreelanceProfile />}
                   />
-                  <Route element={<AppLayout />}>
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/availability" element={<Availability />} />
-                    <Route path="/bookings" element={<Bookings />} />
-                    <Route path="/bookings/:id" element={<BookingDetails />} />
-                    <Route path="/settings" element={<Settings />} />
+                  <Route element={<ProfileCompleteRoute />}>
+                    <Route element={<AppLayout />}>
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/availability" element={<Availability />} />
+                      <Route path="/bookings" element={<Bookings />} />
+                      <Route path="/bookings/:id" element={<BookingDetails />} />
+                      <Route path="/settings" element={<Settings />} />
+                    </Route>
                   </Route>
                 </Route>
               </Routes>

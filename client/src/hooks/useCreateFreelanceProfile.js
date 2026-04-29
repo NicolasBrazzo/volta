@@ -4,12 +4,14 @@ import { showError, showSuccess } from "@/utils/toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 const INITIAL_PROFILE = { business_name: "", description: "", business_type: "" };
 const INITIAL_SERVICE = { name: "", description: "", duration_minutes: "", price: "" };
 
 export const useCreateFreelanceProfile = () => {
   const navigate = useNavigate();
+  const { refreshFirstAccess } = useAuth();
   const [profile, setProfile] = useState(INITIAL_PROFILE);
   const [service, setService] = useState(INITIAL_SERVICE);
 
@@ -75,6 +77,7 @@ export const useCreateFreelanceProfile = () => {
         is_active: true,
         color: "#3B82F6",
       });
+      await refreshFirstAccess();
       showSuccess("Profilo creato con successo!");
       navigate("/dashboard");
     } catch {

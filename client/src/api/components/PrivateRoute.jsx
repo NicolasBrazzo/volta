@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { Loader } from "../../components/Loader";
 
-// Rotta privata per rotte con login obbligatorio
 export const PrivateRoute = () => {
   const { user, loading } = useAuth();
-  if (loading) return <div>Loading...</div>;
-  if (!user) return <Navigate to="/" replace />; // cambia il / se serve
+  if (loading) return <Loader />;
+  if (!user) return <Navigate to="/" replace />;
   return <Outlet />;
 };

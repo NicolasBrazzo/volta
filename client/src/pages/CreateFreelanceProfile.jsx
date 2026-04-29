@@ -7,8 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Loader } from "@/components/Loader";
 import { useCreateFreelanceProfile } from "@/hooks/useCreateFreelanceProfile";
+import { useAuth } from "@/context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 export const CreateFreelanceProfile = () => {
+  const { firstAccess, loading: authLoading } = useAuth();
   const {
     profile,
     service,
@@ -19,9 +22,8 @@ export const CreateFreelanceProfile = () => {
     handleSubmit,
   } = useCreateFreelanceProfile();
 
-  if (isLoading) {
-    return <Loader fullScreen />;
-  }
+  if (authLoading || isLoading) return <Loader />;
+  if (firstAccess === false) return <Navigate to="/dashboard" replace />;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted/30 px-4 py-10">
