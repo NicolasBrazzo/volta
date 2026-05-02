@@ -51,7 +51,6 @@
 
 ## Deploy
 
-- [ ] **Setup ambiente di produzione** — Hosting (Render/Railway per server, Vercel per client); configurare tutte le variabili d'ambiente reali; verificare `FRONTEND_URL` e `GOOGLE_REDIRECT_URI`.
 - [ ] **Dominio definitivo** — Acquistare e configurare il dominio. Aggiornare `GOOGLE_REDIRECT_URI` su Google Cloud Console.
 
 ---
