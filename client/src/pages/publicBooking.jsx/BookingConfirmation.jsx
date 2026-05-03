@@ -4,6 +4,7 @@ import { fetchProfessionalBySlug } from "@/services/publicService";
 import { Loader } from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { CircleCheck, Calendar, Clock3 } from "lucide-react";
+import { COLOR_PRESETS, DEFAULT_COLOR } from "@/constants/appearance";
 
 export const BookingConfirmation = () => {
   const { code } = useParams();
@@ -26,6 +27,8 @@ export const BookingConfirmation = () => {
     ? [freelancer.first_name, freelancer.last_name].filter(Boolean).join(" ")
     : "";
 
+  const primaryColor = COLOR_PRESETS.find(c => c.key === (freelancer?.booking_page_color ?? DEFAULT_COLOR))?.hex ?? COLOR_PRESETS[0].hex;
+
   const formattedDate = date
     ? new Date(date + "T00:00:00").toLocaleDateString("it-IT", {
         weekday: "long",
@@ -36,7 +39,7 @@ export const BookingConfirmation = () => {
     : null;
 
   return (
-    <div className="min-h-screen bg-muted/30 flex items-center justify-center px-4">
+    <div style={{ "--primary": primaryColor, "--ring": primaryColor }} className="min-h-screen bg-muted/30 flex items-center justify-center px-4">
       <div className="w-full max-w-md text-center space-y-6">
         <div className="bg-background border rounded-2xl p-8 shadow-sm space-y-5">
           <div className="flex justify-center">

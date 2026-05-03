@@ -5,10 +5,15 @@ const protect = require("../middleware/auth");
 const { validate } = require("../middleware/validate");
 const Freelancer = require("../models/freelancer.model");
 
+const VALID_COLORS = ["indigo", "violet", "blue", "emerald", "orange", "rose", "red", "slate"];
+const VALID_LAYOUTS = ["sidebar", "centered", "minimal"];
+
 const profileSchema = z.object({
   business_name: z.string().min(1).max(100).optional(),
   description: z.string().max(1000).optional(),
   business_type: z.string().max(50).optional(),
+  booking_page_color: z.enum(VALID_COLORS).optional(),
+  booking_page_layout: z.enum(VALID_LAYOUTS).optional(),
 });
 
 // GET /freelancers/image/:id — Ottieni immagine profilo freelancer

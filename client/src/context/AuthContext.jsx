@@ -44,7 +44,14 @@ export const AuthProvider = ({ children }) => {
       const res = await api.get("/auth/me");
       if (res.data.user) {
         const u = res.data.user;
-        setUser({ id: u.id, email: u.email, slug: u.slug, unique_freelance_code: u.unique_freelance_code });
+        setUser({
+          id: u.id,
+          email: u.email,
+          slug: u.slug,
+          unique_freelance_code: u.unique_freelance_code,
+          booking_page_color: u.booking_page_color ?? "indigo",
+          booking_page_layout: u.booking_page_layout ?? "sidebar",
+        });
         const faRes = await api.get("/auth/firstAccess");
         setFirstAccess(faRes.data.firstAccess);
       } else {
@@ -60,6 +67,10 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const updateUser = (partialUpdate) => {
+    setUser((prev) => prev ? { ...prev, ...partialUpdate } : prev);
   };
 
   const refreshFirstAccess = async () => {
@@ -88,7 +99,7 @@ export const AuthProvider = ({ children }) => {
   
 
   return (
-    <AuthContext.Provider value={{ user, loading, firstAccess, refreshFirstAccess, loginWithGoogle, logout }}>
+    <AuthContext.Provider value={{ user, loading, firstAccess, refreshFirstAccess, loginWithGoogle, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -10,6 +10,7 @@ import { Availability } from "./pages/Availability.jsx";
 import { Bookings } from "./pages/Bookings.jsx";
 import { BookingDetails } from "./pages/BookingDetails.jsx";
 import { Settings } from "./pages/Settings.jsx";
+import { Appearance } from "./pages/Appearance.jsx";
 import { BookingPublic } from "./pages/publicBooking.jsx/BookingPublic.jsx";
 import { BookingDateTime } from "./pages/publicBooking.jsx/BookingDateTime.jsx";
 import { BookingDetails as PublicBookingDetails } from "./pages/publicBooking.jsx/BookingDetails.jsx";
@@ -61,6 +62,7 @@ function App() {
                       <Route path="/availability" element={<Availability />} />
                       <Route path="/bookings" element={<Bookings />} />
                       <Route path="/bookings/:id" element={<BookingDetails />} />
+                      <Route path="/appearance" element={<Appearance />} />
                       <Route path="/settings" element={<Settings />} />
                     </Route>
                   </Route>

@@ -54,7 +54,7 @@ const create = async (freelancerData) => {
 const findByCode = async (code) => {
   const { data, error } = await supabase
     .from(TABLE)
-    .select("id, first_name, last_name, slug, business_name, description, profile_image, unique_freelance_code")
+    .select("id, first_name, last_name, slug, business_name, description, profile_image, unique_freelance_code, booking_page_color, booking_page_layout")
     .eq("unique_freelance_code", code)
     .maybeSingle();
 
